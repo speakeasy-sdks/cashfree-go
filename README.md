@@ -1,4 +1,11 @@
-# github.com/speakeasy-sdks/cashfree-go
+<div align="center">
+    <img src="https://github.com/speakeasy-sdks/cashfree-go/assets/6267663/fcd70572-8452-4083-8a59-32293f2ed8df" width="300">
+    <h1>Go SDK</h1>
+   <p>Payments infrastructure for India</p>
+   <a href="https://docs.cashfree.com/"><img src="https://img.shields.io/static/v1?label=Docs&message=API Ref&color=000&style=for-the-badge" /></a>
+   <a href="https://github.com/speakeasy-sdks/cashfree-go/actions"><img src="https://img.shields.io/github/actions/workflow/status/speakeasy-sdks/cashfree-go/speakeasy_sdk_generation.yml?style=for-the-badge" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" /></a>
+</div>
 
 <!-- Start SDK Installation -->
 ## SDK Installation
