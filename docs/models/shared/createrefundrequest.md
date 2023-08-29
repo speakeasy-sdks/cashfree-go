@@ -1,0 +1,14 @@
+# CreateRefundRequest
+
+Request body to fetch refunds for an order
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `RefundAmount`                                                                                      | *float64*                                                                                           | :heavy_check_mark:                                                                                  | Amount to be refunded. Should be lesser than or equal to the transaction amount. (Decimals allowed) |
+| `RefundID`                                                                                          | *string*                                                                                            | :heavy_check_mark:                                                                                  | An unique ID to associate the refund with. Provie alphanumeric values                               |
+| `RefundNote`                                                                                        | **string*                                                                                           | :heavy_minus_sign:                                                                                  | A refund note for your reference.                                                                   |
+| `RefundSpeed`                                                                                       | [*CreateRefundRequestRefundSpeed](../../models/shared/createrefundrequestrefundspeed.md)            | :heavy_minus_sign:                                                                                  | Speed at which the refund is processed. It's an optional field with default being STANDARD          |
+| `RefundSplits`                                                                                      | [][VendorSplit](../../models/shared/vendorsplit.md)                                                 | :heavy_minus_sign:                                                                                  | N/A                                                                                                 |
