@@ -37,20 +37,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
-        AcceptMedia: cashfree.String("aspernatur"),
+        AcceptMedia: cashfree.String("perferendis"),
         FetchPGReconRequest: &shared.FetchPGReconRequest{
             Filters: shared.FetchPGReconRequestFilters{
-                EndDate: "perferendis",
-                StartDate: "ad",
+                EndDate: "ad",
+                StartDate: "natus",
             },
             Pagination: shared.FetchPGReconRequestPagination{
-                Cursor: cashfree.String("natus"),
-                Limit: 149675,
+                Cursor: cashfree.String("sed"),
+                Limit: 612096,
             },
         },
-        XAPIVersion: "iste",
-        XIdempotencyKey: cashfree.String("dolor"),
-        XRequestID: cashfree.String("natus"),
+        XAPIVersion: "dolor",
+        XIdempotencyKey: cashfree.String("natus"),
+        XRequestID: cashfree.String("laboriosam"),
     })
     if err != nil {
         log.Fatal(err)
@@ -68,6 +68,7 @@ func main() {
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `request`                                                                                      | [operations.GetPGReconciliationRequest](../../models/operations/getpgreconciliationrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
 
 ### Response

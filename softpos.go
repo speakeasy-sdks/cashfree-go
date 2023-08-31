@@ -28,7 +28,23 @@ func newSoftPOS(sdkConfig sdkConfiguration) *softPOS {
 
 // TerminalStatus - Get terminal status using phone number
 // Use this API to view all details of a terminal.
-func (s *softPOS) TerminalStatus(ctx context.Context, request operations.GetTerminalByMobileNumberRequest) (*operations.GetTerminalByMobileNumberResponse, error) {
+func (s *softPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetTerminalByMobileNumberResponse, error) {
+	request := operations.GetTerminalByMobileNumberRequest{
+		TerminalPhoneNo: terminalPhoneNo,
+		XAPIVersion:     xAPIVersion,
+		XRequestID:      xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/terminal/{terminal_phone_no}", request, nil)
 	if err != nil {
@@ -46,7 +62,29 @@ func (s *softPOS) TerminalStatus(ctx context.Context, request operations.GetTerm
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -185,7 +223,24 @@ func (s *softPOS) TerminalStatus(ctx context.Context, request operations.GetTerm
 
 // CreateTerminals - Create Terminal
 // Use this API to create new terminals to use softPOS.
-func (s *softPOS) CreateTerminals(ctx context.Context, request operations.CreateTerminalsRequest) (*operations.CreateTerminalsResponse, error) {
+func (s *softPOS) CreateTerminals(ctx context.Context, xAPIVersion string, createTerminalRequest *shared.CreateTerminalRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateTerminalsResponse, error) {
+	request := operations.CreateTerminalsRequest{
+		XAPIVersion:           xAPIVersion,
+		CreateTerminalRequest: createTerminalRequest,
+		XIdempotencyKey:       xIdempotencyKey,
+		XRequestID:            xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/terminal"
 
@@ -207,7 +262,29 @@ func (s *softPOS) CreateTerminals(ctx context.Context, request operations.Create
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

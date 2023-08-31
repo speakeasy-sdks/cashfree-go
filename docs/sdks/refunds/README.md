@@ -40,32 +40,22 @@ func main() {
     ctx := context.Background()
     res, err := s.Refunds.Create(ctx, operations.CreateRefundRequest{
         CreateRefundRequest: &shared.CreateRefundRequest{
-            RefundAmount: 7783.46,
-            RefundID: "sequi",
-            RefundNote: cashfree.String("tenetur"),
-            RefundSpeed: shared.CreateRefundRequestRefundSpeedStandard.ToPointer(),
+            RefundAmount: 6563.3,
+            RefundID: "enim",
+            RefundNote: cashfree.String("odit"),
+            RefundSpeed: shared.CreateRefundRequestRefundSpeedInstant.ToPointer(),
             RefundSplits: []shared.VendorSplit{
                 shared.VendorSplit{
-                    Amount: cashfree.Float64(8209.94),
-                    Percentage: cashfree.Float64(135.71),
-                    VendorID: cashfree.String("quasi"),
-                },
-                shared.VendorSplit{
-                    Amount: cashfree.Float64(6228.46),
-                    Percentage: cashfree.Float64(8379.45),
-                    VendorID: cashfree.String("laborum"),
-                },
-                shared.VendorSplit{
-                    Amount: cashfree.Float64(960.98),
-                    Percentage: cashfree.Float64(9719.45),
-                    VendorID: cashfree.String("voluptatibus"),
+                    Amount: cashfree.Float64(9495.72),
+                    Percentage: cashfree.Float64(3687.25),
+                    VendorID: cashfree.String("id"),
                 },
             },
         },
-        OrderID: "vero",
-        XAPIVersion: "nihil",
-        XIdempotencyKey: cashfree.String("praesentium"),
-        XRequestID: cashfree.String("voluptatibus"),
+        OrderID: "possimus",
+        XAPIVersion: "aut",
+        XIdempotencyKey: cashfree.String("quasi"),
+        XRequestID: cashfree.String("error"),
     })
     if err != nil {
         log.Fatal(err)
@@ -83,6 +73,7 @@ func main() {
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
 | `request`                                                                        | [operations.CreateRefundRequest](../../models/operations/createrefundrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 
 ### Response
@@ -116,14 +107,13 @@ func main() {
             },
         }),
     )
+    orderID := "temporibus"
+    refundID := "laborum"
+    xAPIVersion := "quasi"
+    xRequestID := "reiciendis"
 
     ctx := context.Background()
-    res, err := s.Refunds.Get(ctx, operations.GetRefundRequest{
-        OrderID: "ipsa",
-        RefundID: "omnis",
-        XAPIVersion: "voluptate",
-        XRequestID: cashfree.String("cum"),
-    })
+    res, err := s.Refunds.Get(ctx, orderID, refundID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -136,10 +126,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
-| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `request`                                                                  | [operations.GetRefundRequest](../../models/operations/getrefundrequest.md) | :heavy_check_mark:                                                         | The request object to use for the request.                                 |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Order or the invoice ID for which you want to view the refund details.                                                     |
+| `refundID`                                                                                                                 | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Refund Id of the refund you want to fetch.                                                                                 |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -173,13 +167,12 @@ func main() {
             },
         }),
     )
+    orderID := "voluptatibus"
+    xAPIVersion := "vero"
+    xRequestID := "nihil"
 
     ctx := context.Background()
-    res, err := s.Refunds.GetAllforOrder(ctx, operations.GetAllRefundsForOrderRequest{
-        OrderID: "perferendis",
-        XAPIVersion: "doloremque",
-        XRequestID: cashfree.String("reprehenderit"),
-    })
+    res, err := s.Refunds.GetAllforOrder(ctx, orderID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -192,10 +185,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `request`                                                                                          | [operations.GetAllRefundsForOrderRequest](../../models/operations/getallrefundsfororderrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Order or the invoice ID for which you want to view the refund details.                                                     |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

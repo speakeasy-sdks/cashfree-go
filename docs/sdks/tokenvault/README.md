@@ -37,14 +37,13 @@ func main() {
             },
         }),
     )
+    customerID := "repudiandae"
+    instrumentID := "sint"
+    xAPIVersion := "veritatis"
+    xRequestID := "itaque"
 
     ctx := context.Background()
-    res, err := s.TokenVault.DeleteSavedInstrument(ctx, operations.DeleteSpecificSavedInstrumentRequest{
-        CustomerID: "deserunt",
-        InstrumentID: "distinctio",
-        XAPIVersion: "quibusdam",
-        XRequestID: cashfree.String("labore"),
-    })
+    res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -57,10 +56,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
-| `request`                                                                                                          | [operations.DeleteSpecificSavedInstrumentRequest](../../models/operations/deletespecificsavedinstrumentrequest.md) | :heavy_check_mark:                                                                                                 | The request object to use for the request.                                                                         |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id for which instrument needs to be deleted                                                                   |
+| `instrumentID`                                                                                                             | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The instrument_id which needs to be deleted                                                                                |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -94,14 +97,13 @@ func main() {
             },
         }),
     )
+    customerID := "incidunt"
+    instrumentID := "enim"
+    xAPIVersion := "consequatur"
+    xRequestID := "est"
 
     ctx := context.Background()
-    res, err := s.TokenVault.FetchSavedInstrument(ctx, operations.FetchSpecificSavedInstrumentRequest{
-        CustomerID: "modi",
-        InstrumentID: "qui",
-        XAPIVersion: "aliquid",
-        XRequestID: cashfree.String("cupiditate"),
-    })
+    res, err := s.TokenVault.FetchSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -114,10 +116,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                        | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                                            | :heavy_check_mark:                                                                                               | The context to use for the request.                                                                              |
-| `request`                                                                                                        | [operations.FetchSpecificSavedInstrumentRequest](../../models/operations/fetchspecificsavedinstrumentrequest.md) | :heavy_check_mark:                                                                                               | The request object to use for the request.                                                                       |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id for which all the saved cards are queried                                                                  |
+| `instrumentID`                                                                                                             | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The instrument_id of the saved instrument which needs to be queried                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -151,14 +157,13 @@ func main() {
             },
         }),
     )
+    customerID := "quibusdam"
+    instrumentID := "explicabo"
+    xAPIVersion := "deserunt"
+    xRequestID := "distinctio"
 
     ctx := context.Background()
-    res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, operations.FetchCryptogramRequest{
-        CustomerID: "quos",
-        InstrumentID: "perferendis",
-        XAPIVersion: "magni",
-        XRequestID: cashfree.String("assumenda"),
-    })
+    res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -171,10 +176,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [operations.FetchCryptogramRequest](../../models/operations/fetchcryptogramrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id of saved instrument                                                                                        |
+| `instrumentID`                                                                                                             | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The instrument_id of the saved instrument which needs to be queried                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -208,14 +217,13 @@ func main() {
             },
         }),
     )
+    customerID := "quibusdam"
+    instrumentType := operations.FetchAllSavedInstrumentsInstrumentTypeCard
+    xAPIVersion := "labore"
+    xRequestID := "modi"
 
     ctx := context.Background()
-    res, err := s.TokenVault.GetAllSavedInstruments(ctx, operations.FetchAllSavedInstrumentsRequest{
-        CustomerID: "ipsam",
-        InstrumentType: operations.FetchAllSavedInstrumentsInstrumentTypeCard,
-        XAPIVersion: "alias",
-        XRequestID: cashfree.String("fugit"),
-    })
+    res, err := s.TokenVault.GetAllSavedInstruments(ctx, customerID, instrumentType, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -228,10 +236,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                | Type                                                                                                     | Required                                                                                                 | Description                                                                                              |
-| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                    | :heavy_check_mark:                                                                                       | The context to use for the request.                                                                      |
-| `request`                                                                                                | [operations.FetchAllSavedInstrumentsRequest](../../models/operations/fetchallsavedinstrumentsrequest.md) | :heavy_check_mark:                                                                                       | The request object to use for the request.                                                               |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id for which all the saved cards are queried                                                                  |
+| `instrumentType`                                                                                                           | [operations.FetchAllSavedInstrumentsInstrumentType](../../models/operations/fetchallsavedinstrumentsinstrumenttype.md)     | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

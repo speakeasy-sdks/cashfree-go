@@ -21,25 +21,24 @@ func main() {
             },
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Eligibility.GetAllOffers(ctx, operations.GetEligibilityOfferRequest{
-        EligibilityOffersRequest: &shared.EligibilityOffersRequest{
-            Filters: &shared.OfferFilters{
-                OfferType: []shared.OfferType{
-                    shared.OfferTypeDiscountAndCashback,
-                    shared.OfferTypeDiscountAndCashback,
-                    shared.OfferTypeNoCostEmi,
-                },
-            },
-            Queries: shared.OfferQueries{
-                Amount: cashfree.Float64(100),
-                OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+    xAPIVersion := "corrupti"
+    eligibilityOffersRequest := &shared.EligibilityOffersRequest{
+        Filters: &shared.OfferFilters{
+            OfferType: []shared.OfferType{
+                shared.OfferTypeDiscountAndCashback,
+                shared.OfferTypeNoCostEmi,
+                shared.OfferTypeDiscountAndCashback,
             },
         },
-        XAPIVersion: "unde",
-        XRequestID: cashfree.String("nulla"),
-    })
+        Queries: shared.OfferQueries{
+            Amount: cashfree.Float64(100),
+            OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+        },
+    }
+    xRequestID := "nulla"
+
+    ctx := context.Background()
+    res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }

@@ -39,31 +39,29 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.Fetch(ctx, operations.GetSettlementReconciliationRequest{
-        AcceptMedia: cashfree.String("ut"),
+        AcceptMedia: cashfree.String("praesentium"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    120196,
-                    359444,
-                    296140,
-                    480894,
+                    55714,
+                    604846,
+                    451159,
+                    739264,
                 },
-                EndDate: cashfree.String("dicta"),
+                EndDate: cashfree.String("perferendis"),
                 SettlementUtrs: []string{
-                    "enim",
-                    "accusamus",
-                    "commodi",
+                    "reprehenderit",
                 },
-                StartDate: cashfree.String("repudiandae"),
+                StartDate: cashfree.String("ut"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfree.String("quae"),
-                Limit: 216822,
+                Cursor: cashfree.String("maiores"),
+                Limit: 120196,
             },
         },
-        XAPIVersion: "quidem",
-        XIdempotencyKey: cashfree.String("molestias"),
-        XRequestID: cashfree.String("excepturi"),
+        XAPIVersion: "corporis",
+        XIdempotencyKey: cashfree.String("dolore"),
+        XRequestID: cashfree.String("iusto"),
     })
     if err != nil {
         log.Fatal(err)
@@ -81,6 +79,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                                          | :heavy_check_mark:                                                                                             | The context to use for the request.                                                                            |
 | `request`                                                                                                      | [operations.GetSettlementReconciliationRequest](../../models/operations/getsettlementreconciliationrequest.md) | :heavy_check_mark:                                                                                             | The request object to use for the request.                                                                     |
+| `opts`                                                                                                         | [][operations.Option](../../models/operations/option.md)                                                       | :heavy_minus_sign:                                                                                             | The options for this request.                                                                                  |
 
 
 ### Response
@@ -117,27 +116,28 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.GetAll(ctx, operations.GetSettlementsRequest{
-        AcceptMedia: cashfree.String("pariatur"),
+        AcceptMedia: cashfree.String("dicta"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    508969,
-                    523248,
+                    317983,
+                    880476,
+                    414263,
                 },
-                EndDate: cashfree.String("voluptates"),
+                EndDate: cashfree.String("repudiandae"),
                 SettlementUtrs: []string{
-                    "repudiandae",
+                    "ipsum",
                 },
-                StartDate: cashfree.String("sint"),
+                StartDate: cashfree.String("quidem"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfree.String("veritatis"),
-                Limit: 929297,
+                Cursor: cashfree.String("molestias"),
+                Limit: 566602,
             },
         },
-        XAPIVersion: "incidunt",
-        XIdempotencyKey: cashfree.String("enim"),
-        XRequestID: cashfree.String("consequatur"),
+        XAPIVersion: "pariatur",
+        XIdempotencyKey: cashfree.String("modi"),
+        XRequestID: cashfree.String("praesentium"),
     })
     if err != nil {
         log.Fatal(err)
@@ -155,6 +155,7 @@ func main() {
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
 | `request`                                                                            | [operations.GetSettlementsRequest](../../models/operations/getsettlementsrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 
 ### Response
@@ -188,13 +189,12 @@ func main() {
             },
         }),
     )
+    orderID := "rem"
+    xAPIVersion := "voluptates"
+    xRequestID := "quasi"
 
     ctx := context.Background()
-    res, err := s.Settlements.GetForOrder(ctx, operations.GetSettlementsByOrderIDRequest{
-        OrderID: "est",
-        XAPIVersion: "quibusdam",
-        XRequestID: cashfree.String("explicabo"),
-    })
+    res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -207,10 +207,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
-| `request`                                                                                              | [operations.GetSettlementsByOrderIDRequest](../../models/operations/getsettlementsbyorderidrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Order ID for which you want to view the settlements.                                                                       |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

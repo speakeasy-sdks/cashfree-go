@@ -28,7 +28,24 @@ func newPaymentLinks(sdkConfig sdkConfiguration) *paymentLinks {
 
 // Cancel - Cancel Payment Link
 // Use this API to cancel a payment link. No further payments can be done against a cancelled link. Only a link in ACTIVE status can be cancelled.
-func (s *paymentLinks) Cancel(ctx context.Context, request operations.CancelPaymentLinkRequest) (*operations.CancelPaymentLinkResponse, error) {
+func (s *paymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion string, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CancelPaymentLinkResponse, error) {
+	request := operations.CancelPaymentLinkRequest{
+		LinkID:          linkID,
+		XAPIVersion:     xAPIVersion,
+		XIdempotencyKey: xIdempotencyKey,
+		XRequestID:      xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/links/{link_id}/cancel", request, nil)
 	if err != nil {
@@ -46,7 +63,29 @@ func (s *paymentLinks) Cancel(ctx context.Context, request operations.CancelPaym
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -185,7 +224,24 @@ func (s *paymentLinks) Cancel(ctx context.Context, request operations.CancelPaym
 
 // Create - Create Payment Link
 // Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.
-func (s *paymentLinks) Create(ctx context.Context, request operations.CreatePaymentLinkRequest) (*operations.CreatePaymentLinkResponse, error) {
+func (s *paymentLinks) Create(ctx context.Context, xAPIVersion string, createLinkRequest *shared.CreateLinkRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreatePaymentLinkResponse, error) {
+	request := operations.CreatePaymentLinkRequest{
+		XAPIVersion:       xAPIVersion,
+		CreateLinkRequest: createLinkRequest,
+		XIdempotencyKey:   xIdempotencyKey,
+		XRequestID:        xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/links"
 
@@ -207,7 +263,29 @@ func (s *paymentLinks) Create(ctx context.Context, request operations.CreatePaym
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -346,7 +424,23 @@ func (s *paymentLinks) Create(ctx context.Context, request operations.CreatePaym
 
 // Fetch - Fetch Payment Link Details
 // Use this API to view all details and status of a payment link.
-func (s *paymentLinks) Fetch(ctx context.Context, request operations.FetchPaymentLinkDetailsRequest) (*operations.FetchPaymentLinkDetailsResponse, error) {
+func (s *paymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchPaymentLinkDetailsResponse, error) {
+	request := operations.FetchPaymentLinkDetailsRequest{
+		LinkID:      linkID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/links/{link_id}", request, nil)
 	if err != nil {
@@ -364,7 +458,29 @@ func (s *paymentLinks) Fetch(ctx context.Context, request operations.FetchPaymen
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -516,7 +632,23 @@ func (s *paymentLinks) Fetch(ctx context.Context, request operations.FetchPaymen
 
 // GetOrders - Get Orders for a Payment Link
 // Use this API to view all order details for a payment link.
-func (s *paymentLinks) GetOrders(ctx context.Context, request operations.GetPaymentLinkOrdersRequest) (*operations.GetPaymentLinkOrdersResponse, error) {
+func (s *paymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentLinkOrdersResponse, error) {
+	request := operations.GetPaymentLinkOrdersRequest{
+		LinkID:      linkID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/links/{link_id}/orders", request, nil)
 	if err != nil {
@@ -534,7 +666,29 @@ func (s *paymentLinks) GetOrders(ctx context.Context, request operations.GetPaym
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

@@ -38,14 +38,13 @@ func main() {
             },
         }),
     )
+    cfPaymentID := 988374
+    orderID := "sapiente"
+    xAPIVersion := "architecto"
+    xRequestID := "mollitia"
 
     ctx := context.Background()
-    res, err := s.Payments.Payment(ctx, operations.GetPaymentbyIDRequest{
-        CfPaymentID: 652790,
-        OrderID: "dolorem",
-        XAPIVersion: "culpa",
-        XRequestID: cashfree.String("consequuntur"),
-    })
+    res, err := s.Payments.Payment(ctx, cfPaymentID, orderID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -58,10 +57,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [operations.GetPaymentbyIDRequest](../../models/operations/getpaymentbyidrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `cfPaymentID`                                                                                                              | *int64*                                                                                                                    | :heavy_check_mark:                                                                                                         | Cashfree payment ID to view the payment details of an order.                                                               |
+| `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The order or invoice ID for which you want to view the payment details.                                                    |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -95,13 +98,12 @@ func main() {
             },
         }),
     )
+    orderID := "dolorem"
+    xAPIVersion := "culpa"
+    xRequestID := "consequuntur"
 
     ctx := context.Background()
-    res, err := s.Payments.GetforOrder(ctx, operations.GetPaymentsforOrderRequest{
-        OrderID: "repellat",
-        XAPIVersion: "mollitia",
-        XRequestID: cashfree.String("occaecati"),
-    })
+    res, err := s.Payments.GetforOrder(ctx, orderID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -114,10 +116,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.GetPaymentsforOrderRequest](../../models/operations/getpaymentsfororderrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Order or the invoice ID for which you want to view the payment details.                                                    |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -156,18 +161,17 @@ func main() {
             },
         }),
     )
+    xAPIVersion := "repellat"
+    orderPayRequest := &shared.OrderPayRequest{
+        OfferID: cashfree.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
+        PaymentMethod: shared.OrderPayRequestPaymentMethod{},
+        PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
+        SaveInstrument: cashfree.Bool(false),
+    }
+    xRequestID := "mollitia"
 
     ctx := context.Background()
-    res, err := s.Payments.PayOrder(ctx, operations.OrderPayRequest{
-        OrderPayRequest: &shared.OrderPayRequest{
-            OfferID: cashfree.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
-            PaymentMethod: shared.OrderPayRequestPaymentMethod{},
-            PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
-            SaveInstrument: cashfree.Bool(false),
-        },
-        XAPIVersion: "numquam",
-        XRequestID: cashfree.String("commodi"),
-    })
+    res, err := s.Payments.PayOrder(ctx, xAPIVersion, orderPayRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -180,10 +184,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [operations.OrderPayRequest](../../models/operations/orderpayrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `orderPayRequest`                                                                                                          | [*shared.OrderPayRequest](../../models/shared/orderpayrequest.md)                                                          | :heavy_minus_sign:                                                                                                         | Request body to create a transaction at cashfree using `payment_session_id`                                                |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -221,13 +228,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.PreauthorizeOrder(ctx, operations.CapturePreauthorizationRequest{
         AuthorizationRequest: &shared.AuthorizationRequest{
-            Action: shared.AuthorizationRequestActionCapture.ToPointer(),
-            Amount: cashfree.Float64(4746.97),
+            Action: shared.AuthorizationRequestActionVoid.ToPointer(),
+            Amount: cashfree.Float64(2532.91),
         },
-        OrderID: "velit",
-        XAPIVersion: "error",
-        XIdempotencyKey: cashfree.String("quia"),
-        XRequestID: cashfree.String("quis"),
+        OrderID: "commodi",
+        XAPIVersion: "quam",
+        XIdempotencyKey: cashfree.String("molestiae"),
+        XRequestID: cashfree.String("velit"),
     })
     if err != nil {
         log.Fatal(err)
@@ -245,6 +252,7 @@ func main() {
 | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
 | `request`                                                                                              | [operations.CapturePreauthorizationRequest](../../models/operations/capturepreauthorizationrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
+| `opts`                                                                                                 | [][operations.Option](../../models/operations/option.md)                                               | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
 
 
 ### Response
@@ -278,17 +286,16 @@ func main() {
             },
         }),
     )
+    paymentID := "error"
+    xAPIVersion := "quia"
+    otpRequest := &shared.OTPRequest{
+        Action: shared.OTPRequestActionSubmitOtp,
+        Otp: "vitae",
+    }
+    xRequestID := "laborum"
 
     ctx := context.Background()
-    res, err := s.Payments.Submit(ctx, operations.SubmitOTPRequestRequest{
-        OTPRequest: &shared.OTPRequest{
-            Action: shared.OTPRequestActionSubmitOtp,
-            Otp: "laborum",
-        },
-        PaymentID: "animi",
-        XAPIVersion: "enim",
-        XRequestID: cashfree.String("odit"),
-    })
+    res, err := s.Payments.Submit(ctx, paymentID, xAPIVersion, otpRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -301,10 +308,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `request`                                                                                | [operations.SubmitOTPRequestRequest](../../models/operations/submitotprequestrequest.md) | :heavy_check_mark:                                                                       | The request object to use for the request.                                               |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `paymentID`                                                                                                                | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The order or invoice ID for which you want to view the payment details.                                                    |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `otpRequest`                                                                                                               | [*shared.OTPRequest](../../models/shared/otprequest.md)                                                                    | :heavy_minus_sign:                                                                                                         | Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account       |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

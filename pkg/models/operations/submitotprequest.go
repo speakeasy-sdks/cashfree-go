@@ -8,21 +8,14 @@ import (
 )
 
 type SubmitOTPRequestRequest struct {
-	// Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
-	OTPRequest *shared.OTPRequest `request:"mediaType=application/json"`
 	// The order or invoice ID for which you want to view the payment details.
 	PaymentID string `pathParam:"style=simple,explode=false,name=payment_id"`
 	// API version to be used. Format is in YYYY-MM-DD
 	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	// Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
+	OTPRequest *shared.OTPRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
-}
-
-func (o *SubmitOTPRequestRequest) GetOTPRequest() *shared.OTPRequest {
-	if o == nil {
-		return nil
-	}
-	return o.OTPRequest
 }
 
 func (o *SubmitOTPRequestRequest) GetPaymentID() string {
@@ -37,6 +30,13 @@ func (o *SubmitOTPRequestRequest) GetXAPIVersion() string {
 		return ""
 	}
 	return o.XAPIVersion
+}
+
+func (o *SubmitOTPRequestRequest) GetOTPRequest() *shared.OTPRequest {
+	if o == nil {
+		return nil
+	}
+	return o.OTPRequest
 }
 
 func (o *SubmitOTPRequestRequest) GetXRequestID() *string {

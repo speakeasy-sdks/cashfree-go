@@ -167,6 +167,7 @@ pkg/models/sdkerrors/apierror.go
 pkg/models/sdkerrors/apierror502.go
 pkg/models/callbacks/createorder.go
 docs/sdks/cashfree/README.md
+docs/models/operations/option.md
 docs/sdks/eligibility/README.md
 docs/sdks/offers/README.md
 docs/sdks/orders/README.md
@@ -401,4 +402,5 @@ docs/models/errors/ratelimiterror.md
 docs/models/errors/apierror.md
 docs/models/errors/apierror502.md
 docs/models/callbacks/createorderpaymentwebhookresponse.md
+pkg/models/operations/options.go
 .gitattributes

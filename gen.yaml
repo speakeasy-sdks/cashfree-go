@@ -1,6 +1,6 @@
 configVersion: 1.0.0
 management:
-  docChecksum: 131440d29356a01f791896a2c025baf7
+  docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
   docVersion: "2022-09-01"
   speakeasyVersion: 1.76.1
   generationVersion: 2.89.1
@@ -15,12 +15,14 @@ generation:
 features:
   go:
     core: 2.85.0
+    flattening: 2.81.1
     globalSecurity: 2.81.1
     globalServerURLs: 2.82.0
     nameOverrides: 2.81.1
+    retries: 2.81.1
     unions: 2.81.2
 go:
-  version: 0.2.0
+  version: 0.3.0
   clientServerStatusCodesAsErrors: true
   maxMethodParams: 4
   packageName: github.com/speakeasy-sdks/cashfree-go

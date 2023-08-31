@@ -137,7 +137,7 @@ func New(opts ...SDKOption) *Cashfree {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-09-01",
-			SDKVersion:        "0.2.0",
+			SDKVersion:        "0.3.0",
 			GenVersion:        "2.89.1",
 		},
 	}

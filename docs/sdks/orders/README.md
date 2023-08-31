@@ -41,66 +41,65 @@ func main() {
             },
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Orders.Create(ctx, operations.CreateOrderRequest{
-        CreateOrderBackendRequest: &shared.CreateOrderBackendRequest{
-            CustomerDetails: shared.CustomerDetails{
-                CustomerBankAccountNumber: cashfree.String("temporibus"),
-                CustomerBankCode: cashfree.Float64(710.36),
-                CustomerBankIfsc: cashfree.String("quis"),
-                CustomerEmail: cashfree.String("veritatis"),
-                CustomerID: "deserunt",
-                CustomerName: cashfree.String("perferendis"),
-                CustomerPhone: "ipsam",
+    xAPIVersion := "ab"
+    createOrderBackendRequest := &shared.CreateOrderBackendRequest{
+        CustomerDetails: shared.CustomerDetails{
+            CustomerBankAccountNumber: cashfree.String("quis"),
+            CustomerBankCode: cashfree.Float64(871.29),
+            CustomerBankIfsc: cashfree.String("deserunt"),
+            CustomerEmail: cashfree.String("perferendis"),
+            CustomerID: "ipsam",
+            CustomerName: cashfree.String("repellendus"),
+            CustomerPhone: "sapiente",
+        },
+        OrderAmount: 10.15,
+        OrderCurrency: "INR",
+        OrderExpiryTime: cashfree.String("2021-07-02T10:20:12+05:30"),
+        OrderID: cashfree.String("quo"),
+        OrderMeta: &shared.OrderMeta{
+            NotifyURL: cashfree.String("odit"),
+            PaymentMethods: cashfree.String("at"),
+            ReturnURL: cashfree.String("at"),
+        },
+        OrderNote: cashfree.String("Test order"),
+        OrderSplits: []shared.VendorSplit{
+            shared.VendorSplit{
+                Amount: cashfree.Float64(4736.08),
+                Percentage: cashfree.Float64(7991.59),
+                VendorID: cashfree.String("quod"),
             },
-            OrderAmount: 10.15,
-            OrderCurrency: "INR",
-            OrderExpiryTime: cashfree.String("2021-07-02T10:20:12+05:30"),
-            OrderID: cashfree.String("repellendus"),
-            OrderMeta: &shared.OrderMeta{
-                NotifyURL: cashfree.String("sapiente"),
-                PaymentMethods: cashfree.String("quo"),
-                ReturnURL: cashfree.String("odit"),
+            shared.VendorSplit{
+                Amount: cashfree.Float64(4614.79),
+                Percentage: cashfree.Float64(5204.78),
+                VendorID: cashfree.String("porro"),
             },
-            OrderNote: cashfree.String("Test order"),
-            OrderSplits: []shared.VendorSplit{
-                shared.VendorSplit{
-                    Amount: cashfree.Float64(8700.88),
-                    Percentage: cashfree.Float64(9786.19),
-                    VendorID: cashfree.String("molestiae"),
-                },
-                shared.VendorSplit{
-                    Amount: cashfree.Float64(7991.59),
-                    Percentage: cashfree.Float64(8009.11),
-                    VendorID: cashfree.String("esse"),
-                },
-                shared.VendorSplit{
-                    Amount: cashfree.Float64(5204.78),
-                    Percentage: cashfree.Float64(7805.29),
-                    VendorID: cashfree.String("dolorum"),
-                },
-                shared.VendorSplit{
-                    Amount: cashfree.Float64(1182.74),
-                    Percentage: cashfree.Float64(7206.33),
-                    VendorID: cashfree.String("officia"),
-                },
+            shared.VendorSplit{
+                Amount: cashfree.Float64(6788.8),
+                Percentage: cashfree.Float64(1182.74),
+                VendorID: cashfree.String("nam"),
             },
-            OrderTags: map[string]string{
-                "fugit": "deleniti",
-                "hic": "optio",
-                "totam": "beatae",
-            },
-            Terminal: &shared.TerminalDetails{
-                TerminalID: "commodi",
-                TerminalPhoneNo: "molestiae",
-                TerminalType: "modi",
+            shared.VendorSplit{
+                Amount: cashfree.Float64(6399.21),
+                Percentage: cashfree.Float64(5820.2),
+                VendorID: cashfree.String("fugit"),
             },
         },
-        XAPIVersion: "qui",
-        XIdempotencyKey: cashfree.String("impedit"),
-        XRequestID: cashfree.String("cum"),
-    })
+        OrderTags: map[string]string{
+            "hic": "optio",
+            "totam": "beatae",
+            "commodi": "molestiae",
+        },
+        Terminal: &shared.TerminalDetails{
+            TerminalID: "modi",
+            TerminalPhoneNo: "qui",
+            TerminalType: "impedit",
+        },
+    }
+    xIdempotencyKey := "cum"
+    xRequestID := "esse"
+
+    ctx := context.Background()
+    res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -113,10 +112,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.CreateOrderRequest](../../models/operations/createorderrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | Required                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | The context to use for the request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| `xAPIVersion`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | *string*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | API version to be used. Format is in YYYY-MM-DD                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `createOrderBackendRequest`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | [*shared.CreateOrderBackendRequest](../../models/shared/createorderbackendrequest.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Request body to create an order at cashfree                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| `xIdempotencyKey`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | **string*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.<br/><br/>Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders <br/> |
+| `xRequestID`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             | **string*                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `opts`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | [][operations.Option](../../models/operations/option.md)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | The options for this request.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
 
 
 ### Response
@@ -155,13 +158,12 @@ func main() {
             },
         }),
     )
+    orderID := "ipsum"
+    xAPIVersion := "excepturi"
+    xRequestID := "aspernatur"
 
     ctx := context.Background()
-    res, err := s.Orders.Get(ctx, operations.GetOrderRequest{
-        OrderID: "esse",
-        XAPIVersion: "ipsum",
-        XRequestID: cashfree.String("excepturi"),
-    })
+    res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -174,10 +176,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [operations.GetOrderRequest](../../models/operations/getorderrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The order or invoice ID for which you want to view the order  details.                                                     |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

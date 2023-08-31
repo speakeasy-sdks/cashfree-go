@@ -32,25 +32,25 @@ func main() {
             },
         }),
     )
-
-    ctx := context.Background()
-    res, err := s.Eligibility.GetAllOffers(ctx, operations.GetEligibilityOfferRequest{
-        EligibilityOffersRequest: &shared.EligibilityOffersRequest{
-            Filters: &shared.OfferFilters{
-                OfferType: []shared.OfferType{
-                    shared.OfferTypeNoCostEmi,
-                    shared.OfferTypeCashback,
-                    shared.OfferTypeDiscountAndCashback,
-                },
-            },
-            Queries: shared.OfferQueries{
-                Amount: cashfree.Float64(100),
-                OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+    xAPIVersion := "corrupti"
+    eligibilityOffersRequest := &shared.EligibilityOffersRequest{
+        Filters: &shared.OfferFilters{
+            OfferType: []shared.OfferType{
+                shared.OfferTypeCashback,
+                shared.OfferTypeDiscountAndCashback,
+                shared.OfferTypeDiscountAndCashback,
+                shared.OfferTypeCashback,
             },
         },
-        XAPIVersion: "deserunt",
-        XRequestID: cashfree.String("suscipit"),
-    })
+        Queries: shared.OfferQueries{
+            Amount: cashfree.Float64(100),
+            OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+        },
+    }
+    xRequestID := "iure"
+
+    ctx := context.Background()
+    res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -63,10 +63,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.GetEligibilityOfferRequest](../../models/operations/geteligibilityofferrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `eligibilityOffersRequest`                                                                                                 | [*shared.EligibilityOffersRequest](../../models/shared/eligibilityoffersrequest.md)                                        | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for offers                                                                           |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -100,21 +103,20 @@ func main() {
             },
         }),
     )
+    xAPIVersion := "magnam"
+    eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
+        Queries: shared.CardlessEMIQueries{
+            Amount: cashfree.Float64(100),
+            CustomerDetails: &shared.CustomerDetailsCardlessEMI{
+                CustomerPhone: "9898989898",
+            },
+            OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+        },
+    }
+    xRequestID := "debitis"
 
     ctx := context.Background()
-    res, err := s.Eligibility.GetCardlessEMI(ctx, operations.GetEligibilityCardlessEMIRequest{
-        EligibilityCardlessEMIRequest: &shared.EligibilityCardlessEMIRequest{
-            Queries: shared.CardlessEMIQueries{
-                Amount: cashfree.Float64(100),
-                CustomerDetails: &shared.CustomerDetailsCardlessEMI{
-                    CustomerPhone: "9898989898",
-                },
-                OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-            },
-        },
-        XAPIVersion: "iure",
-        XRequestID: cashfree.String("magnam"),
-    })
+    res, err := s.Eligibility.GetCardlessEMI(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -127,10 +129,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
-| `request`                                                                                                  | [operations.GetEligibilityCardlessEMIRequest](../../models/operations/geteligibilitycardlessemirequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `eligibilityCardlessEMIRequest`                                                                                            | [*shared.EligibilityCardlessEMIRequest](../../models/shared/eligibilitycardlessemirequest.md)                              | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for cardlessemi                                                                      |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -164,21 +169,20 @@ func main() {
             },
         }),
     )
+    xAPIVersion := "ipsa"
+    eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
+        Queries: shared.CardlessEMIQueries{
+            Amount: cashfree.Float64(100),
+            CustomerDetails: &shared.CustomerDetailsCardlessEMI{
+                CustomerPhone: "9898989898",
+            },
+            OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+        },
+    }
+    xRequestID := "delectus"
 
     ctx := context.Background()
-    res, err := s.Eligibility.GetPaylaterMethods(ctx, operations.GetEligibilityPaylaterRequest{
-        EligibilityCardlessEMIRequest: &shared.EligibilityCardlessEMIRequest{
-            Queries: shared.CardlessEMIQueries{
-                Amount: cashfree.Float64(100),
-                CustomerDetails: &shared.CustomerDetailsCardlessEMI{
-                    CustomerPhone: "9898989898",
-                },
-                OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-            },
-        },
-        XAPIVersion: "debitis",
-        XRequestID: cashfree.String("ipsa"),
-    })
+    res, err := s.Eligibility.GetPaylaterMethods(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -191,10 +195,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
-| `request`                                                                                            | [operations.GetEligibilityPaylaterRequest](../../models/operations/geteligibilitypaylaterrequest.md) | :heavy_check_mark:                                                                                   | The request object to use for the request.                                                           |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `eligibilityCardlessEMIRequest`                                                                                            | [*shared.EligibilityCardlessEMIRequest](../../models/shared/eligibilitycardlessemirequest.md)                              | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for paylater                                                                         |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

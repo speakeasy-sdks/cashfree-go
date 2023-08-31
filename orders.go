@@ -31,7 +31,24 @@ func newOrders(sdkConfig sdkConfiguration) *orders {
 // An order is an entity which has a amount and currency associated with it. It is something for which you want to collect payment for.
 // Use this API to create orders with Cashfree from your backend to get a `payment_sessions_id`.
 // You can use the `payment_sessions_id` to create a transaction for the order.
-func (s *orders) Create(ctx context.Context, request operations.CreateOrderRequest) (*operations.CreateOrderResponse, error) {
+func (s *orders) Create(ctx context.Context, xAPIVersion string, createOrderBackendRequest *shared.CreateOrderBackendRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateOrderResponse, error) {
+	request := operations.CreateOrderRequest{
+		XAPIVersion:               xAPIVersion,
+		CreateOrderBackendRequest: createOrderBackendRequest,
+		XIdempotencyKey:           xIdempotencyKey,
+		XRequestID:                xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/orders"
 
@@ -53,7 +70,29 @@ func (s *orders) Create(ctx context.Context, request operations.CreateOrderReque
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -196,7 +235,23 @@ func (s *orders) Create(ctx context.Context, request operations.CreateOrderReque
 // - To check the status of your order
 // - Once the order is PAID
 // - Once your customer returns to `return_url`
-func (s *orders) Get(ctx context.Context, request operations.GetOrderRequest) (*operations.GetOrderResponse, error) {
+func (s *orders) Get(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOrderResponse, error) {
+	request := operations.GetOrderRequest{
+		OrderID:     orderID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/orders/{order_id}", request, nil)
 	if err != nil {
@@ -214,7 +269,29 @@ func (s *orders) Get(ctx context.Context, request operations.GetOrderRequest) (*
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

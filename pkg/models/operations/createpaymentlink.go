@@ -8,10 +8,10 @@ import (
 )
 
 type CreatePaymentLinkRequest struct {
-	// Request body to create a payment link at cashfree
-	CreateLinkRequest *shared.CreateLinkRequest `request:"mediaType=application/json"`
 	// API version to be used. Format is in YYYY-MM-DD
 	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	// Request body to create a payment link at cashfree
+	CreateLinkRequest *shared.CreateLinkRequest `request:"mediaType=application/json"`
 	// Idempotency works by saving the resulting status code and body of the first request made for any given idempotency key, regardless of whether it succeeded or failed. Subsequent requests with the same key return the same result, including 500 errors.
 	//
 	// Currently supported on all POST calls that uses x-client-id & x-client-secret. To use enable, pass x-idempotency-key in the request header. The value of this header must be unique to each operation you are trying to do. One example can be to use the same order_id that you pass while creating orders
@@ -21,18 +21,18 @@ type CreatePaymentLinkRequest struct {
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
 }
 
-func (o *CreatePaymentLinkRequest) GetCreateLinkRequest() *shared.CreateLinkRequest {
-	if o == nil {
-		return nil
-	}
-	return o.CreateLinkRequest
-}
-
 func (o *CreatePaymentLinkRequest) GetXAPIVersion() string {
 	if o == nil {
 		return ""
 	}
 	return o.XAPIVersion
+}
+
+func (o *CreatePaymentLinkRequest) GetCreateLinkRequest() *shared.CreateLinkRequest {
+	if o == nil {
+		return nil
+	}
+	return o.CreateLinkRequest
 }
 
 func (o *CreatePaymentLinkRequest) GetXIdempotencyKey() *string {

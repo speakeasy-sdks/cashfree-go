@@ -28,7 +28,17 @@ func newSettlements(sdkConfig sdkConfiguration) *settlements {
 
 // Fetch - Settlement Reconciliation
 // Use this API to get settlement reconciliation details using Settlement ID, settlement UTR or date range.
-func (s *settlements) Fetch(ctx context.Context, request operations.GetSettlementReconciliationRequest) (*operations.GetSettlementReconciliationResponse, error) {
+func (s *settlements) Fetch(ctx context.Context, request operations.GetSettlementReconciliationRequest, opts ...operations.Option) (*operations.GetSettlementReconciliationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/settlement/recon"
 
@@ -50,7 +60,29 @@ func (s *settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -189,7 +221,17 @@ func (s *settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 
 // GetAll - Get All Settlements
 // Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
-func (s *settlements) GetAll(ctx context.Context, request operations.GetSettlementsRequest) (*operations.GetSettlementsResponse, error) {
+func (s *settlements) GetAll(ctx context.Context, request operations.GetSettlementsRequest, opts ...operations.Option) (*operations.GetSettlementsResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/settlements"
 
@@ -211,7 +253,29 @@ func (s *settlements) GetAll(ctx context.Context, request operations.GetSettleme
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -350,7 +414,23 @@ func (s *settlements) GetAll(ctx context.Context, request operations.GetSettleme
 
 // GetForOrder - Get Settlements by Order ID
 // Use this API to view all the settlements of a particular order.
-func (s *settlements) GetForOrder(ctx context.Context, request operations.GetSettlementsByOrderIDRequest) (*operations.GetSettlementsByOrderIDResponse, error) {
+func (s *settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetSettlementsByOrderIDResponse, error) {
+	request := operations.GetSettlementsByOrderIDRequest{
+		OrderID:     orderID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/orders/{order_id}/settlements", request, nil)
 	if err != nil {
@@ -368,7 +448,29 @@ func (s *settlements) GetForOrder(ctx context.Context, request operations.GetSet
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

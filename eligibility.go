@@ -27,7 +27,23 @@ func newEligibility(sdkConfig sdkConfiguration) *eligibility {
 
 // GetAllOffers - Get eligible Offers
 // Use this API to get eligible offers for an order or amount.
-func (s *eligibility) GetAllOffers(ctx context.Context, request operations.GetEligibilityOfferRequest) (*operations.GetEligibilityOfferResponse, error) {
+func (s *eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, eligibilityOffersRequest *shared.EligibilityOffersRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityOfferResponse, error) {
+	request := operations.GetEligibilityOfferRequest{
+		XAPIVersion:              xAPIVersion,
+		EligibilityOffersRequest: eligibilityOffersRequest,
+		XRequestID:               xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/eligibility/offers"
 
@@ -49,7 +65,29 @@ func (s *eligibility) GetAllOffers(ctx context.Context, request operations.GetEl
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -201,7 +239,23 @@ func (s *eligibility) GetAllOffers(ctx context.Context, request operations.GetEl
 
 // GetCardlessEMI - Get eligible Cardless EMI
 // Use this API to get eligible Cardless EMI Payment Methods for a customer on an order.
-func (s *eligibility) GetCardlessEMI(ctx context.Context, request operations.GetEligibilityCardlessEMIRequest) (*operations.GetEligibilityCardlessEMIResponse, error) {
+func (s *eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityCardlessEMIResponse, error) {
+	request := operations.GetEligibilityCardlessEMIRequest{
+		XAPIVersion:                   xAPIVersion,
+		EligibilityCardlessEMIRequest: eligibilityCardlessEMIRequest,
+		XRequestID:                    xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/eligibility/cardlessemi"
 
@@ -223,7 +277,29 @@ func (s *eligibility) GetCardlessEMI(ctx context.Context, request operations.Get
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -375,7 +451,23 @@ func (s *eligibility) GetCardlessEMI(ctx context.Context, request operations.Get
 
 // GetPaylaterMethods - Get eligible Paylater
 // Use this API to get eligible Paylater Payment Methods for a customer on an order.
-func (s *eligibility) GetPaylaterMethods(ctx context.Context, request operations.GetEligibilityPaylaterRequest) (*operations.GetEligibilityPaylaterResponse, error) {
+func (s *eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityPaylaterResponse, error) {
+	request := operations.GetEligibilityPaylaterRequest{
+		XAPIVersion:                   xAPIVersion,
+		EligibilityCardlessEMIRequest: eligibilityCardlessEMIRequest,
+		XRequestID:                    xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/eligibility/paylater"
 
@@ -397,7 +489,29 @@ func (s *eligibility) GetPaylaterMethods(ctx context.Context, request operations
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

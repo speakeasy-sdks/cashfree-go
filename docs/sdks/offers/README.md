@@ -35,43 +35,42 @@ func main() {
             },
         }),
     )
+    xAPIVersion := "tempora"
+    createOfferBackendRequest := &shared.CreateOfferBackendRequest{
+        OfferDetails: shared.OfferDetails{
+            CashbackDetails: &shared.CashbackDetails{
+                CashbackType: shared.CashbackDetailsCashbackTypeFlat,
+                CashbackValue: "molestiae",
+                MaxCashbackAmount: "minus",
+            },
+            DiscountDetails: &shared.DiscountDetails{
+                DiscountType: shared.DiscountDetailsDiscountTypePercentage,
+                DiscountValue: "voluptatum",
+                MaxDiscountAmount: "iusto",
+            },
+            OfferType: shared.OfferDetailsOfferTypeDiscountAndCashback,
+        },
+        OfferMeta: shared.OfferMeta{
+            OfferCode: "CFTESTOFFER",
+            OfferDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            OfferEndTime: "2023-03-29T08:09:51Z",
+            OfferStartTime: "2023-03-21T08:09:51Z",
+            OfferTitle: "Test Offer",
+        },
+        OfferTnc: shared.OfferTnc{
+            OfferTncType: shared.OfferTncOfferTncTypeText,
+            OfferTncValue: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        },
+        OfferValidations: shared.OfferValidations{
+            MaxAllowed: 10,
+            MinAmount: cashfree.Float64(1),
+            PaymentMethod: shared.OfferValidationsPaymentMethod{},
+        },
+    }
+    xRequestID := "excepturi"
 
     ctx := context.Background()
-    res, err := s.Offers.Create(ctx, operations.CreateOfferRequest{
-        CreateOfferBackendRequest: &shared.CreateOfferBackendRequest{
-            OfferDetails: shared.OfferDetails{
-                CashbackDetails: &shared.CashbackDetails{
-                    CashbackType: shared.CashbackDetailsCashbackTypePercentage,
-                    CashbackValue: "tempora",
-                    MaxCashbackAmount: "suscipit",
-                },
-                DiscountDetails: &shared.DiscountDetails{
-                    DiscountType: shared.DiscountDetailsDiscountTypeFlat,
-                    DiscountValue: "minus",
-                    MaxDiscountAmount: "placeat",
-                },
-                OfferType: shared.OfferDetailsOfferTypeDiscountAndCashback,
-            },
-            OfferMeta: shared.OfferMeta{
-                OfferCode: "CFTESTOFFER",
-                OfferDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                OfferEndTime: "2023-03-29T08:09:51Z",
-                OfferStartTime: "2023-03-21T08:09:51Z",
-                OfferTitle: "Test Offer",
-            },
-            OfferTnc: shared.OfferTnc{
-                OfferTncType: shared.OfferTncOfferTncTypeText,
-                OfferTncValue: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            },
-            OfferValidations: shared.OfferValidations{
-                MaxAllowed: 10,
-                MinAmount: cashfree.Float64(1),
-                PaymentMethod: shared.OfferValidationsPaymentMethod{},
-            },
-        },
-        XAPIVersion: "voluptatum",
-        XRequestID: cashfree.String("iusto"),
-    })
+    res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -84,10 +83,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `request`                                                                      | [operations.CreateOfferRequest](../../models/operations/createofferrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `createOfferBackendRequest`                                                                                                | [*shared.CreateOfferBackendRequest](../../models/shared/createofferbackendrequest.md)                                      | :heavy_minus_sign:                                                                                                         | Request body to create an offer at Cashfree                                                                                |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
@@ -121,13 +123,12 @@ func main() {
             },
         }),
     )
+    offerID := "nisi"
+    xAPIVersion := "recusandae"
+    xRequestID := "temporibus"
 
     ctx := context.Background()
-    res, err := s.Offers.Get(ctx, operations.GetOfferRequest{
-        OfferID: "excepturi",
-        XAPIVersion: "nisi",
-        XRequestID: cashfree.String("recusandae"),
-    })
+    res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)
     if err != nil {
         log.Fatal(err)
     }
@@ -140,10 +141,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
-| `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `request`                                                                | [operations.GetOfferRequest](../../models/operations/getofferrequest.md) | :heavy_check_mark:                                                       | The request object to use for the request.                               |
+| Parameter                                                                                                                  | Type                                                                                                                       | Required                                                                                                                   | Description                                                                                                                |
+| -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
+| `offerID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The offer ID for which you want to view the offer details.                                                                 |
+| `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
+| `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
+| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response

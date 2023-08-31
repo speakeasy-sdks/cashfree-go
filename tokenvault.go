@@ -27,7 +27,24 @@ func newTokenVault(sdkConfig sdkConfiguration) *tokenVault {
 
 // DeleteSavedInstrument - Delete Saved Instrument
 // To delete a saved instrument for a customer id and instrument id
-func (s *tokenVault) DeleteSavedInstrument(ctx context.Context, request operations.DeleteSpecificSavedInstrumentRequest) (*operations.DeleteSpecificSavedInstrumentResponse, error) {
+func (s *tokenVault) DeleteSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.DeleteSpecificSavedInstrumentResponse, error) {
+	request := operations.DeleteSpecificSavedInstrumentRequest{
+		CustomerID:   customerID,
+		InstrumentID: instrumentID,
+		XAPIVersion:  xAPIVersion,
+		XRequestID:   xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}", request, nil)
 	if err != nil {
@@ -45,7 +62,29 @@ func (s *tokenVault) DeleteSavedInstrument(ctx context.Context, request operatio
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -197,7 +236,24 @@ func (s *tokenVault) DeleteSavedInstrument(ctx context.Context, request operatio
 
 // FetchSavedInstrument - Fetch Single Saved Instrument
 // To get specific saved instrument for a customer id and instrument id
-func (s *tokenVault) FetchSavedInstrument(ctx context.Context, request operations.FetchSpecificSavedInstrumentRequest) (*operations.FetchSpecificSavedInstrumentResponse, error) {
+func (s *tokenVault) FetchSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchSpecificSavedInstrumentResponse, error) {
+	request := operations.FetchSpecificSavedInstrumentRequest{
+		CustomerID:   customerID,
+		InstrumentID: instrumentID,
+		XAPIVersion:  xAPIVersion,
+		XRequestID:   xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}", request, nil)
 	if err != nil {
@@ -215,7 +271,29 @@ func (s *tokenVault) FetchSavedInstrument(ctx context.Context, request operation
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -367,7 +445,24 @@ func (s *tokenVault) FetchSavedInstrument(ctx context.Context, request operation
 
 // FetchSavedInstrumentCryptogram - Fetch cryptogram for saved instrument
 // To get the card network token, token expiry and cryptogram for a saved instrument using instrument id
-func (s *tokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, request operations.FetchCryptogramRequest) (*operations.FetchCryptogramResponse, error) {
+func (s *tokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchCryptogramResponse, error) {
+	request := operations.FetchCryptogramRequest{
+		CustomerID:   customerID,
+		InstrumentID: instrumentID,
+		XAPIVersion:  xAPIVersion,
+		XRequestID:   xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}/cryptogram", request, nil)
 	if err != nil {
@@ -385,7 +480,29 @@ func (s *tokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, request
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -537,7 +654,24 @@ func (s *tokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, request
 
 // GetAllSavedInstruments - Fetch All Saved Instruments
 // To get all saved instruments for a customer id
-func (s *tokenVault) GetAllSavedInstruments(ctx context.Context, request operations.FetchAllSavedInstrumentsRequest) (*operations.FetchAllSavedInstrumentsResponse, error) {
+func (s *tokenVault) GetAllSavedInstruments(ctx context.Context, customerID string, instrumentType operations.FetchAllSavedInstrumentsInstrumentType, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchAllSavedInstrumentsResponse, error) {
+	request := operations.FetchAllSavedInstrumentsRequest{
+		CustomerID:     customerID,
+		InstrumentType: instrumentType,
+		XAPIVersion:    xAPIVersion,
+		XRequestID:     xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments", request, nil)
 	if err != nil {
@@ -559,7 +693,29 @@ func (s *tokenVault) GetAllSavedInstruments(ctx context.Context, request operati
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

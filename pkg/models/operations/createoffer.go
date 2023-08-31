@@ -8,19 +8,12 @@ import (
 )
 
 type CreateOfferRequest struct {
-	// Request body to create an offer at Cashfree
-	CreateOfferBackendRequest *shared.CreateOfferBackendRequest `request:"mediaType=application/json"`
 	// API version to be used. Format is in YYYY-MM-DD
 	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	// Request body to create an offer at Cashfree
+	CreateOfferBackendRequest *shared.CreateOfferBackendRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
-}
-
-func (o *CreateOfferRequest) GetCreateOfferBackendRequest() *shared.CreateOfferBackendRequest {
-	if o == nil {
-		return nil
-	}
-	return o.CreateOfferBackendRequest
 }
 
 func (o *CreateOfferRequest) GetXAPIVersion() string {
@@ -28,6 +21,13 @@ func (o *CreateOfferRequest) GetXAPIVersion() string {
 		return ""
 	}
 	return o.XAPIVersion
+}
+
+func (o *CreateOfferRequest) GetCreateOfferBackendRequest() *shared.CreateOfferBackendRequest {
+	if o == nil {
+		return nil
+	}
+	return o.CreateOfferBackendRequest
 }
 
 func (o *CreateOfferRequest) GetXRequestID() *string {

@@ -8,19 +8,12 @@ import (
 )
 
 type OrderPayRequest struct {
-	// Request body to create a transaction at cashfree using `payment_session_id`
-	OrderPayRequest *shared.OrderPayRequest `request:"mediaType=application/json"`
 	// API version to be used. Format is in YYYY-MM-DD
 	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	// Request body to create a transaction at cashfree using `payment_session_id`
+	OrderPayRequest *shared.OrderPayRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
-}
-
-func (o *OrderPayRequest) GetOrderPayRequest() *shared.OrderPayRequest {
-	if o == nil {
-		return nil
-	}
-	return o.OrderPayRequest
 }
 
 func (o *OrderPayRequest) GetXAPIVersion() string {
@@ -28,6 +21,13 @@ func (o *OrderPayRequest) GetXAPIVersion() string {
 		return ""
 	}
 	return o.XAPIVersion
+}
+
+func (o *OrderPayRequest) GetOrderPayRequest() *shared.OrderPayRequest {
+	if o == nil {
+		return nil
+	}
+	return o.OrderPayRequest
 }
 
 func (o *OrderPayRequest) GetXRequestID() *string {

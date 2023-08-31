@@ -28,7 +28,17 @@ func newPGReconciliation(sdkConfig sdkConfiguration) *pgReconciliation {
 
 // Get - PG Reconciliation
 // Use this API to get the payment gateway reconciliation details with date range.
-func (s *pgReconciliation) Get(ctx context.Context, request operations.GetPGReconciliationRequest) (*operations.GetPGReconciliationResponse, error) {
+func (s *pgReconciliation) Get(ctx context.Context, request operations.GetPGReconciliationRequest, opts ...operations.Option) (*operations.GetPGReconciliationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/recon"
 
@@ -50,7 +60,29 @@ func (s *pgReconciliation) Get(ctx context.Context, request operations.GetPGReco
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

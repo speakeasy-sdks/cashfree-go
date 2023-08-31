@@ -28,7 +28,23 @@ func newOffers(sdkConfig sdkConfiguration) *offers {
 
 // Create - Create Offer
 // Use this API to create offers with Cashfree from your backend
-func (s *offers) Create(ctx context.Context, request operations.CreateOfferRequest) (*operations.CreateOfferResponse, error) {
+func (s *offers) Create(ctx context.Context, xAPIVersion string, createOfferBackendRequest *shared.CreateOfferBackendRequest, xRequestID *string, opts ...operations.Option) (*operations.CreateOfferResponse, error) {
+	request := operations.CreateOfferRequest{
+		XAPIVersion:               xAPIVersion,
+		CreateOfferBackendRequest: createOfferBackendRequest,
+		XRequestID:                xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/offers"
 
@@ -50,7 +66,29 @@ func (s *offers) Create(ctx context.Context, request operations.CreateOfferReque
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -189,7 +227,23 @@ func (s *offers) Create(ctx context.Context, request operations.CreateOfferReque
 
 // Get - Get Offer by ID
 // Use this API to get offer by offer_id
-func (s *offers) Get(ctx context.Context, request operations.GetOfferRequest) (*operations.GetOfferResponse, error) {
+func (s *offers) Get(ctx context.Context, offerID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOfferResponse, error) {
+	request := operations.GetOfferRequest{
+		OfferID:     offerID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/offers/{offer_id}", request, nil)
 	if err != nil {
@@ -207,7 +261,29 @@ func (s *offers) Get(ctx context.Context, request operations.GetOfferRequest) (*
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

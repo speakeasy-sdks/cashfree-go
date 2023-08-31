@@ -28,7 +28,24 @@ func newPayments(sdkConfig sdkConfiguration) *payments {
 
 // Payment - Get Payment by ID
 // Use this API to view payment details of an order for a payment ID.
-func (s *payments) Payment(ctx context.Context, request operations.GetPaymentbyIDRequest) (*operations.GetPaymentbyIDResponse, error) {
+func (s *payments) Payment(ctx context.Context, cfPaymentID int64, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentbyIDResponse, error) {
+	request := operations.GetPaymentbyIDRequest{
+		CfPaymentID: cfPaymentID,
+		OrderID:     orderID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/orders/{order_id}/payments/{cf_payment_id}", request, nil)
 	if err != nil {
@@ -46,7 +63,29 @@ func (s *payments) Payment(ctx context.Context, request operations.GetPaymentbyI
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -198,7 +237,23 @@ func (s *payments) Payment(ctx context.Context, request operations.GetPaymentbyI
 
 // GetforOrder - Get Payments for an Order
 // Use this API to view all payment details for an order.
-func (s *payments) GetforOrder(ctx context.Context, request operations.GetPaymentsforOrderRequest) (*operations.GetPaymentsforOrderResponse, error) {
+func (s *payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentsforOrderResponse, error) {
+	request := operations.GetPaymentsforOrderRequest{
+		OrderID:     orderID,
+		XAPIVersion: xAPIVersion,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/orders/{order_id}/payments", request, nil)
 	if err != nil {
@@ -216,7 +271,29 @@ func (s *payments) GetforOrder(ctx context.Context, request operations.GetPaymen
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -372,7 +449,23 @@ func (s *payments) GetforOrder(ctx context.Context, request operations.GetPaymen
 // Cashfree to process the payment. To use this API S2S flag needs to be enabled
 // from the backend. In case you want to use the cards payment option the PCI
 // DSS flag is required, for more information send an email to "care@cashfree.com".
-func (s *payments) PayOrder(ctx context.Context, request operations.OrderPayRequest) (*operations.OrderPayResponse, error) {
+func (s *payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayRequest *shared.OrderPayRequest, xRequestID *string, opts ...operations.Option) (*operations.OrderPayResponse, error) {
+	request := operations.OrderPayRequest{
+		XAPIVersion:     xAPIVersion,
+		OrderPayRequest: orderPayRequest,
+		XRequestID:      xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url := strings.TrimSuffix(baseURL, "/") + "/orders/sessions"
 
@@ -394,7 +487,29 @@ func (s *payments) PayOrder(ctx context.Context, request operations.OrderPayRequ
 
 	client := s.sdkConfiguration.DefaultClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -546,7 +661,17 @@ func (s *payments) PayOrder(ctx context.Context, request operations.OrderPayRequ
 
 // PreauthorizeOrder - Preauthorization
 // Use this API to capture or void a preauthorized payment
-func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.CapturePreauthorizationRequest) (*operations.CapturePreauthorizationResponse, error) {
+func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.CapturePreauthorizationRequest, opts ...operations.Option) (*operations.CapturePreauthorizationResponse, error) {
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/orders/{order_id}/authorization", request, nil)
 	if err != nil {
@@ -571,7 +696,29 @@ func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 
 	client := s.sdkConfiguration.SecurityClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}
@@ -723,7 +870,24 @@ func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 
 // Submit - Submit or Resend OTP
 // If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.
-func (s *payments) Submit(ctx context.Context, request operations.SubmitOTPRequestRequest) (*operations.SubmitOTPRequestResponse, error) {
+func (s *payments) Submit(ctx context.Context, paymentID string, xAPIVersion string, otpRequest *shared.OTPRequest, xRequestID *string, opts ...operations.Option) (*operations.SubmitOTPRequestResponse, error) {
+	request := operations.SubmitOTPRequestRequest{
+		PaymentID:   paymentID,
+		XAPIVersion: xAPIVersion,
+		OTPRequest:  otpRequest,
+		XRequestID:  xRequestID,
+	}
+
+	o := operations.Options{}
+	supportedOptions := []string{
+		operations.SupportedOptionRetries,
+	}
+
+	for _, opt := range opts {
+		if err := opt(&o, supportedOptions...); err != nil {
+			return nil, fmt.Errorf("error applying option: %w", err)
+		}
+	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
 	url, err := utils.GenerateURL(ctx, baseURL, "/orders/pay/authenticate/{payment_id}", request, nil)
 	if err != nil {
@@ -748,7 +912,29 @@ func (s *payments) Submit(ctx context.Context, request operations.SubmitOTPReque
 
 	client := s.sdkConfiguration.DefaultClient
 
-	httpRes, err := client.Do(req)
+	retryConfig := o.Retries
+	if retryConfig == nil {
+		retryConfig = &utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 500,
+				MaxInterval:     60000,
+				Exponent:        1.5,
+				MaxElapsedTime:  3600000,
+			},
+			RetryConnectionErrors: true,
+		}
+	}
+
+	httpRes, err := utils.Retry(ctx, utils.Retries{
+		Config: retryConfig,
+		StatusCodes: []string{
+			"5XX",
+			"4XX",
+		},
+	}, func() (*http.Response, error) {
+		return client.Do(req)
+	})
 	if err != nil {
 		return nil, fmt.Errorf("error sending request: %w", err)
 	}

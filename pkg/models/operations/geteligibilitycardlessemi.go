@@ -8,19 +8,12 @@ import (
 )
 
 type GetEligibilityCardlessEMIRequest struct {
-	// Request body to check for eligibility for cardlessemi
-	EligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest `request:"mediaType=application/json"`
 	// API version to be used. Format is in YYYY-MM-DD
 	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	// Request body to check for eligibility for cardlessemi
+	EligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
-}
-
-func (o *GetEligibilityCardlessEMIRequest) GetEligibilityCardlessEMIRequest() *shared.EligibilityCardlessEMIRequest {
-	if o == nil {
-		return nil
-	}
-	return o.EligibilityCardlessEMIRequest
 }
 
 func (o *GetEligibilityCardlessEMIRequest) GetXAPIVersion() string {
@@ -28,6 +21,13 @@ func (o *GetEligibilityCardlessEMIRequest) GetXAPIVersion() string {
 		return ""
 	}
 	return o.XAPIVersion
+}
+
+func (o *GetEligibilityCardlessEMIRequest) GetEligibilityCardlessEMIRequest() *shared.EligibilityCardlessEMIRequest {
+	if o == nil {
+		return nil
+	}
+	return o.EligibilityCardlessEMIRequest
 }
 
 func (o *GetEligibilityCardlessEMIRequest) GetXRequestID() *string {
