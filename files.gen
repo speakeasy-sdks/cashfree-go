@@ -401,3 +401,4 @@ docs/models/errors/ratelimiterror.md
 docs/models/errors/apierror.md
 docs/models/errors/apierror502.md
 docs/models/callbacks/createorderpaymentwebhookresponse.md
+.gitattributes

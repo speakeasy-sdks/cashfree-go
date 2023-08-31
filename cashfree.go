@@ -137,8 +137,8 @@ func New(opts ...SDKOption) *Cashfree {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-09-01",
-			SDKVersion:        "0.1.0",
-			GenVersion:        "2.88.6",
+			SDKVersion:        "0.2.0",
+			GenVersion:        "2.89.1",
 		},
 	}
 	for _, opt := range opts {
