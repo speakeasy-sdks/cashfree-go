@@ -38,6 +38,17 @@ tags:
     description: APIs to get detail list about money settled to your account
   - name: PGReconciliation
     description: Transac1tio1n reconciliation
+x-speakeasy-retries:
+  strategy: backoff
+  backoff:
+    initialInterval: 500        # 500 milliseconds
+    maxInterval: 60000          # 60 seconds
+    maxElapsedTime: 3600000     # 5 minutes
+    exponent: 1.5
+  statusCodes:
+    - 5XX
+    - 4XX
+  retryConnectionErrors: true
 x-speakeasy-name-override:
   - operationId: ^get.*
     methodNameOverride: get
