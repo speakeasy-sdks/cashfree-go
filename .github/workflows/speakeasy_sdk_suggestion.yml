@@ -2,6 +2,9 @@ name: Suggest Cashfree Spec
 
 on:
   workflow_dispatch: {} # Allows manual triggering of the workflow to suggest OpenAPI document
+  push:
+    branches:    
+      - test-suggestion  
 
 jobs:
   suggest:
