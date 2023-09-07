@@ -25,7 +25,7 @@ func newRefunds(sdkConfig sdkConfiguration) *refunds {
 	}
 }
 
-// Create - Create Refund
+// Create Refund
 // Use this API to initiate refunds.
 func (s *refunds) Create(ctx context.Context, request operations.CreateRefundRequest, opts ...operations.Option) (*operations.CreateRefundResponse, error) {
 	o := operations.Options{}
@@ -234,7 +234,7 @@ func (s *refunds) Create(ctx context.Context, request operations.CreateRefundReq
 	return res, nil
 }
 
-// Get - Get Refund
+// Get Refund
 // Use this API to fetch a specific refund processed on your Cashfree Account.
 func (s *refunds) Get(ctx context.Context, orderID string, refundID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetRefundResponse, error) {
 	request := operations.GetRefundRequest{

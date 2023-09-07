@@ -32,14 +32,11 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "corrupti"
+    xAPIVersion := "quibusdam"
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Filters: &shared.OfferFilters{
             OfferType: []shared.OfferType{
-                shared.OfferTypeCashback,
                 shared.OfferTypeDiscountAndCashback,
-                shared.OfferTypeDiscountAndCashback,
-                shared.OfferTypeCashback,
             },
         },
         Queries: shared.OfferQueries{
@@ -47,7 +44,7 @@ func main() {
             OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "iure"
+    xRequestID := "nulla"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
@@ -103,7 +100,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "magnam"
+    xAPIVersion := "corrupti"
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfree.Float64(100),
@@ -113,7 +110,7 @@ func main() {
             OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "debitis"
+    xRequestID := "illum"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetCardlessEMI(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
@@ -169,7 +166,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "ipsa"
+    xAPIVersion := "vel"
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfree.Float64(100),
@@ -179,7 +176,7 @@ func main() {
             OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "delectus"
+    xRequestID := "error"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetPaylaterMethods(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)

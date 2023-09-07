@@ -35,18 +35,18 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "tempora"
+    xAPIVersion := "deserunt"
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
                 CashbackType: shared.CashbackDetailsCashbackTypeFlat,
-                CashbackValue: "molestiae",
-                MaxCashbackAmount: "minus",
+                CashbackValue: "iure",
+                MaxCashbackAmount: "magnam",
             },
             DiscountDetails: &shared.DiscountDetails{
                 DiscountType: shared.DiscountDetailsDiscountTypePercentage,
-                DiscountValue: "voluptatum",
-                MaxDiscountAmount: "iusto",
+                DiscountValue: "ipsa",
+                MaxDiscountAmount: "delectus",
             },
             OfferType: shared.OfferDetailsOfferTypeDiscountAndCashback,
         },
@@ -67,7 +67,7 @@ func main() {
             PaymentMethod: shared.OfferValidationsPaymentMethod{},
         },
     }
-    xRequestID := "excepturi"
+    xRequestID := "tempora"
 
     ctx := context.Background()
     res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
@@ -123,9 +123,9 @@ func main() {
             },
         }),
     )
-    offerID := "nisi"
-    xAPIVersion := "recusandae"
-    xRequestID := "temporibus"
+    offerID := "suscipit"
+    xAPIVersion := "molestiae"
+    xRequestID := "minus"
 
     ctx := context.Background()
     res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)

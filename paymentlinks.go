@@ -26,7 +26,7 @@ func newPaymentLinks(sdkConfig sdkConfiguration) *paymentLinks {
 	}
 }
 
-// Cancel - Cancel Payment Link
+// Cancel Payment Link
 // Use this API to cancel a payment link. No further payments can be done against a cancelled link. Only a link in ACTIVE status can be cancelled.
 func (s *paymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion string, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CancelPaymentLinkResponse, error) {
 	request := operations.CancelPaymentLinkRequest{
@@ -222,7 +222,7 @@ func (s *paymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion st
 	return res, nil
 }
 
-// Create - Create Payment Link
+// Create Payment Link
 // Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.
 func (s *paymentLinks) Create(ctx context.Context, xAPIVersion string, createLinkRequest *shared.CreateLinkRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreatePaymentLinkResponse, error) {
 	request := operations.CreatePaymentLinkRequest{
@@ -422,7 +422,7 @@ func (s *paymentLinks) Create(ctx context.Context, xAPIVersion string, createLin
 	return res, nil
 }
 
-// Fetch - Fetch Payment Link Details
+// Fetch Payment Link Details
 // Use this API to view all details and status of a payment link.
 func (s *paymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchPaymentLinkDetailsResponse, error) {
 	request := operations.FetchPaymentLinkDetailsRequest{

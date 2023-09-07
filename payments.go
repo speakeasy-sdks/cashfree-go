@@ -26,7 +26,7 @@ func newPayments(sdkConfig sdkConfiguration) *payments {
 	}
 }
 
-// Payment - Get Payment by ID
+// Get Payment by ID
 // Use this API to view payment details of an order for a payment ID.
 func (s *payments) Payment(ctx context.Context, cfPaymentID int64, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentbyIDResponse, error) {
 	request := operations.GetPaymentbyIDRequest{
@@ -868,7 +868,7 @@ func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 	return res, nil
 }
 
-// Submit - Submit or Resend OTP
+// Submit or Resend OTP
 // If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.
 func (s *payments) Submit(ctx context.Context, paymentID string, xAPIVersion string, otpRequest *shared.OTPRequest, xRequestID *string, opts ...operations.Option) (*operations.SubmitOTPRequestResponse, error) {
 	request := operations.SubmitOTPRequestRequest{

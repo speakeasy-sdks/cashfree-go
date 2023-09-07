@@ -26,7 +26,7 @@ func newOrders(sdkConfig sdkConfiguration) *orders {
 	}
 }
 
-// Create - Create Order
+// Create Order
 // ### Order
 // An order is an entity which has a amount and currency associated with it. It is something for which you want to collect payment for.
 // Use this API to create orders with Cashfree from your backend to get a `payment_sessions_id`.
@@ -229,7 +229,7 @@ func (s *orders) Create(ctx context.Context, xAPIVersion string, createOrderBack
 	return res, nil
 }
 
-// Get - Get Order
+// Get Order
 // Use this API to fetch the order that was created at Cashfree's using the `order_id`.
 // ## When to use this API
 // - To check the status of your order

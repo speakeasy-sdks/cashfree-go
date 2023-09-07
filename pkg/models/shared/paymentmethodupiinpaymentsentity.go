@@ -2,21 +2,29 @@
 
 package shared
 
-type PaymentMethodUPIInPaymentsEntity struct {
-	Channel string  `json:"channel"`
-	UpiID   *string `json:"upi_id,omitempty"`
+type PaymentMethodAppInPaymentsEntity struct {
+	Channel  *string `json:"channel,omitempty"`
+	Phone    *string `json:"phone,omitempty"`
+	Provider *string `json:"provider,omitempty"`
 }
 
-func (o *PaymentMethodUPIInPaymentsEntity) GetChannel() string {
+func (o *PaymentMethodAppInPaymentsEntity) GetChannel() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Channel
 }
 
-func (o *PaymentMethodUPIInPaymentsEntity) GetUpiID() *string {
+func (o *PaymentMethodAppInPaymentsEntity) GetPhone() *string {
 	if o == nil {
 		return nil
 	}
-	return o.UpiID
+	return o.Phone
+}
+
+func (o *PaymentMethodAppInPaymentsEntity) GetProvider() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Provider
 }

@@ -318,12 +318,12 @@ docs/models/shared/paymentsentitypaymentstatus.md
 docs/models/shared/paymentsentity.md
 docs/models/shared/paymentmethodinpaymentsentitypaymentmethod.md
 docs/models/shared/paymentmethodinpaymentsentity.md
-docs/models/shared/paymentmethodcardinpaymentsentity.md
-docs/models/shared/paymentmethodnetbankinginpaymentsentity.md
 docs/models/shared/paymentmethodupiinpaymentsentity.md
+docs/models/shared/paymentmethodnetbankinginpaymentsentity.md
 docs/models/shared/paymentmethodappinpaymentsentity.md
 docs/models/shared/paymentmethodcardlessemiinpaymentsentity.md
 docs/models/shared/paymentmethodpaylaterinpaymentsentity.md
+docs/models/shared/paymentmethodcardinpaymentsentity.md
 docs/models/shared/errordetailsinpaymentsentity.md
 docs/models/shared/authorizationinpaymentsentityaction.md
 docs/models/shared/authorizationinpaymentsentitystatus.md

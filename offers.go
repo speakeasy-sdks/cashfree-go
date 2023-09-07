@@ -26,7 +26,7 @@ func newOffers(sdkConfig sdkConfiguration) *offers {
 	}
 }
 
-// Create - Create Offer
+// Create Offer
 // Use this API to create offers with Cashfree from your backend
 func (s *offers) Create(ctx context.Context, xAPIVersion string, createOfferBackendRequest *shared.CreateOfferBackendRequest, xRequestID *string, opts ...operations.Option) (*operations.CreateOfferResponse, error) {
 	request := operations.CreateOfferRequest{
@@ -225,7 +225,7 @@ func (s *offers) Create(ctx context.Context, xAPIVersion string, createOfferBack
 	return res, nil
 }
 
-// Get - Get Offer by ID
+// Get Offer by ID
 // Use this API to get offer by offer_id
 func (s *offers) Get(ctx context.Context, offerID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOfferResponse, error) {
 	request := operations.GetOfferRequest{

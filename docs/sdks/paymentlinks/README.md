@@ -38,9 +38,9 @@ func main() {
         }),
     )
     linkID := "hic"
-    xAPIVersion := "saepe"
-    xIdempotencyKey := "fuga"
-    xRequestID := "in"
+    xAPIVersion := "optio"
+    xIdempotencyKey := "totam"
+    xRequestID := "beatae"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Cancel(ctx, linkID, xAPIVersion, xIdempotencyKey, xRequestID)
@@ -97,37 +97,37 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "corporis"
+    xAPIVersion := "commodi"
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
-            CustomerEmail: cashfree.String("iste"),
-            CustomerName: cashfree.String("iure"),
-            CustomerPhone: "saepe",
+            CustomerEmail: cashfree.String("molestiae"),
+            CustomerName: cashfree.String("modi"),
+            CustomerPhone: "qui",
         },
-        LinkAmount: 6976.31,
+        LinkAmount: 7742.34,
         LinkAutoReminders: cashfree.Bool(false),
-        LinkCurrency: "architecto",
-        LinkExpiryTime: cashfree.String("ipsa"),
-        LinkID: "reiciendis",
+        LinkCurrency: "cum",
+        LinkExpiryTime: cashfree.String("esse"),
+        LinkID: "ipsum",
         LinkMeta: &shared.LinkMetaEntity{
-            NotifyURL: cashfree.String("est"),
-            PaymentMethods: cashfree.String("mollitia"),
-            ReturnURL: cashfree.String("laborum"),
+            NotifyURL: cashfree.String("excepturi"),
+            PaymentMethods: cashfree.String("aspernatur"),
+            ReturnURL: cashfree.String("perferendis"),
             UpiIntent: cashfree.Bool(false),
         },
-        LinkMinimumPartialAmount: cashfree.Float64(1709.09),
+        LinkMinimumPartialAmount: cashfree.Float64(3241.41),
         LinkNotes: map[string]string{
-            "corporis": "explicabo",
+            "natus": "sed",
         },
         LinkNotify: &shared.LinkNotifyEntity{
             SendEmail: cashfree.Bool(false),
             SendSms: cashfree.Bool(false),
         },
         LinkPartialPayments: cashfree.Bool(false),
-        LinkPurpose: "nobis",
+        LinkPurpose: "iste",
     }
-    xIdempotencyKey := "enim"
-    xRequestID := "omnis"
+    xIdempotencyKey := "dolor"
+    xRequestID := "natus"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Create(ctx, xAPIVersion, createLinkRequest, xIdempotencyKey, xRequestID)
@@ -184,9 +184,9 @@ func main() {
             },
         }),
     )
-    linkID := "nemo"
-    xAPIVersion := "minima"
-    xRequestID := "excepturi"
+    linkID := "laboriosam"
+    xAPIVersion := "hic"
+    xRequestID := "saepe"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Fetch(ctx, linkID, xAPIVersion, xRequestID)
@@ -242,9 +242,9 @@ func main() {
             },
         }),
     )
-    linkID := "accusantium"
-    xAPIVersion := "iure"
-    xRequestID := "culpa"
+    linkID := "fuga"
+    xAPIVersion := "in"
+    xRequestID := "corporis"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.GetOrders(ctx, linkID, xAPIVersion, xRequestID)

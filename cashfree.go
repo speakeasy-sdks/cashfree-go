@@ -61,26 +61,26 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 	return ServerList[c.ServerIndex], nil
 }
 
-// Cashfree - Cashfree Payment Gateway APIs: Cashfree's Payment Gateway APIs provide developers with a streamlined pathway to integrate advanced payment processing capabilities into their applications, platforms and websites.
+// Cashfree Payment Gateway APIs: Cashfree's Payment Gateway APIs provide developers with a streamlined pathway to integrate advanced payment processing capabilities into their applications, platforms and websites.
 type Cashfree struct {
 	Eligibility *eligibility
-	// Offers - Collection of apis to get offers applicable for an order
+	// Collection of apis to get offers applicable for an order
 	Offers *offers
-	// Orders - Collection of APIs to create, accept payments and refund for an order.
+	// Collection of APIs to create, accept payments and refund for an order.
 	Orders *orders
-	// PGReconciliation - Transac1tio1n reconciliation
+	// Transac1tio1n reconciliation
 	PGReconciliation *pgReconciliation
-	// PaymentLinks - Collection of APIs handle payment links.
+	// Collection of APIs handle payment links.
 	PaymentLinks *paymentLinks
-	// Payments - Collection of APIs handle payments.
+	// Collection of APIs handle payments.
 	Payments *payments
-	// Refunds - Collection of APIs handle refunds.
+	// Collection of APIs handle refunds.
 	Refunds *refunds
-	// Settlements - Collection of APIs handle settlements.
+	// Collection of APIs handle settlements.
 	Settlements *settlements
-	// TokenVault - Cashfree's token Vault helps you save cards and tokenize them in a PCI complaint manner. We support creation of network tokens which can be used across acquiring banks
+	// Cashfree's token Vault helps you save cards and tokenize them in a PCI complaint manner. We support creation of network tokens which can be used across acquiring banks
 	TokenVault *tokenVault
-	// SoftPOS - softPOS' agent and order management system now supported by APIs
+	// softPOS' agent and order management system now supported by APIs
 	SoftPOS *softPOS
 
 	sdkConfiguration sdkConfiguration
@@ -137,8 +137,8 @@ func New(opts ...SDKOption) *Cashfree {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-09-01",
-			SDKVersion:        "0.3.0",
-			GenVersion:        "2.89.1",
+			SDKVersion:        "0.4.0",
+			GenVersion:        "2.101.0",
 		},
 	}
 	for _, opt := range opts {

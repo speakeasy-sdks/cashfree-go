@@ -38,10 +38,10 @@ func main() {
             },
         }),
     )
-    cfPaymentID := 988374
-    orderID := "sapiente"
-    xAPIVersion := "architecto"
-    xRequestID := "mollitia"
+    cfPaymentID := 613064
+    orderID := "iure"
+    xAPIVersion := "saepe"
+    xRequestID := "quidem"
 
     ctx := context.Background()
     res, err := s.Payments.Payment(ctx, cfPaymentID, orderID, xAPIVersion, xRequestID)
@@ -98,9 +98,9 @@ func main() {
             },
         }),
     )
-    orderID := "dolorem"
-    xAPIVersion := "culpa"
-    xRequestID := "consequuntur"
+    orderID := "architecto"
+    xAPIVersion := "ipsa"
+    xRequestID := "reiciendis"
 
     ctx := context.Background()
     res, err := s.Payments.GetforOrder(ctx, orderID, xAPIVersion, xRequestID)
@@ -161,7 +161,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "repellat"
+    xAPIVersion := "est"
     orderPayRequest := &shared.OrderPayRequest{
         OfferID: cashfree.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
         PaymentMethod: shared.OrderPayRequestPaymentMethod{},
@@ -229,12 +229,12 @@ func main() {
     res, err := s.Payments.PreauthorizeOrder(ctx, operations.CapturePreauthorizationRequest{
         AuthorizationRequest: &shared.AuthorizationRequest{
             Action: shared.AuthorizationRequestActionVoid.ToPointer(),
-            Amount: cashfree.Float64(2532.91),
+            Amount: cashfree.Float64(1709.09),
         },
-        OrderID: "commodi",
-        XAPIVersion: "quam",
-        XIdempotencyKey: cashfree.String("molestiae"),
-        XRequestID: cashfree.String("velit"),
+        OrderID: "dolorem",
+        XAPIVersion: "corporis",
+        XIdempotencyKey: cashfree.String("explicabo"),
+        XRequestID: cashfree.String("nobis"),
     })
     if err != nil {
         log.Fatal(err)
@@ -286,13 +286,13 @@ func main() {
             },
         }),
     )
-    paymentID := "error"
-    xAPIVersion := "quia"
+    paymentID := "enim"
+    xAPIVersion := "omnis"
     otpRequest := &shared.OTPRequest{
         Action: shared.OTPRequestActionSubmitOtp,
-        Otp: "vitae",
+        Otp: "minima",
     }
-    xRequestID := "laborum"
+    xRequestID := "excepturi"
 
     ctx := context.Background()
     res, err := s.Payments.Submit(ctx, paymentID, xAPIVersion, otpRequest, xRequestID)

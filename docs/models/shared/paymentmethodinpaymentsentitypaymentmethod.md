@@ -3,22 +3,16 @@
 
 ## Supported Types
 
-### PaymentMethodCardInPaymentsEntity
+### PaymentMethodUPIInPaymentsEntity
 
 ```go
-paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodCardInPaymentsEntity(shared.PaymentMethodCardInPaymentsEntity{/* values here */})
+paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodUPIInPaymentsEntity(shared.PaymentMethodUPIInPaymentsEntity{/* values here */})
 ```
 
 ### PaymentMethodNetBankingInPaymentsEntity
 
 ```go
 paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodNetBankingInPaymentsEntity(shared.PaymentMethodNetBankingInPaymentsEntity{/* values here */})
-```
-
-### PaymentMethodUPIInPaymentsEntity
-
-```go
-paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodUPIInPaymentsEntity(shared.PaymentMethodUPIInPaymentsEntity{/* values here */})
 ```
 
 ### PaymentMethodAppInPaymentsEntity
@@ -37,5 +31,11 @@ paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymen
 
 ```go
 paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodPaylaterInPaymentsEntity(shared.PaymentMethodPaylaterInPaymentsEntity{/* values here */})
+```
+
+### PaymentMethodCardInPaymentsEntity
+
+```go
+paymentMethodInPaymentsEntityPaymentMethod := shared.CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodCardInPaymentsEntity(shared.PaymentMethodCardInPaymentsEntity{/* values here */})
 ```
 

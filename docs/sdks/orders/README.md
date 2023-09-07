@@ -41,62 +41,45 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "ab"
+    xAPIVersion := "placeat"
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
-            CustomerBankAccountNumber: cashfree.String("quis"),
-            CustomerBankCode: cashfree.Float64(871.29),
-            CustomerBankIfsc: cashfree.String("deserunt"),
-            CustomerEmail: cashfree.String("perferendis"),
-            CustomerID: "ipsam",
-            CustomerName: cashfree.String("repellendus"),
-            CustomerPhone: "sapiente",
+            CustomerBankAccountNumber: cashfree.String("voluptatum"),
+            CustomerBankCode: cashfree.Float64(4799.77),
+            CustomerBankIfsc: cashfree.String("excepturi"),
+            CustomerEmail: cashfree.String("nisi"),
+            CustomerID: "recusandae",
+            CustomerName: cashfree.String("temporibus"),
+            CustomerPhone: "ab",
         },
         OrderAmount: 10.15,
         OrderCurrency: "INR",
         OrderExpiryTime: cashfree.String("2021-07-02T10:20:12+05:30"),
-        OrderID: cashfree.String("quo"),
+        OrderID: cashfree.String("quis"),
         OrderMeta: &shared.OrderMeta{
-            NotifyURL: cashfree.String("odit"),
-            PaymentMethods: cashfree.String("at"),
-            ReturnURL: cashfree.String("at"),
+            NotifyURL: cashfree.String("veritatis"),
+            PaymentMethods: cashfree.String("deserunt"),
+            ReturnURL: cashfree.String("perferendis"),
         },
         OrderNote: cashfree.String("Test order"),
         OrderSplits: []shared.VendorSplit{
             shared.VendorSplit{
-                Amount: cashfree.Float64(4736.08),
-                Percentage: cashfree.Float64(7991.59),
-                VendorID: cashfree.String("quod"),
-            },
-            shared.VendorSplit{
-                Amount: cashfree.Float64(4614.79),
-                Percentage: cashfree.Float64(5204.78),
-                VendorID: cashfree.String("porro"),
-            },
-            shared.VendorSplit{
-                Amount: cashfree.Float64(6788.8),
-                Percentage: cashfree.Float64(1182.74),
-                VendorID: cashfree.String("nam"),
-            },
-            shared.VendorSplit{
-                Amount: cashfree.Float64(6399.21),
-                Percentage: cashfree.Float64(5820.2),
-                VendorID: cashfree.String("fugit"),
+                Amount: cashfree.Float64(3682.41),
+                Percentage: cashfree.Float64(8326.2),
+                VendorID: cashfree.String("sapiente"),
             },
         },
         OrderTags: map[string]string{
-            "hic": "optio",
-            "totam": "beatae",
-            "commodi": "molestiae",
+            "quo": "odit",
         },
         Terminal: &shared.TerminalDetails{
-            TerminalID: "modi",
-            TerminalPhoneNo: "qui",
-            TerminalType: "impedit",
+            TerminalID: "at",
+            TerminalPhoneNo: "at",
+            TerminalType: "maiores",
         },
     }
-    xIdempotencyKey := "cum"
-    xRequestID := "esse"
+    xIdempotencyKey := "molestiae"
+    xRequestID := "quod"
 
     ctx := context.Background()
     res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
@@ -158,9 +141,9 @@ func main() {
             },
         }),
     )
-    orderID := "ipsum"
-    xAPIVersion := "excepturi"
-    xRequestID := "aspernatur"
+    orderID := "quod"
+    xAPIVersion := "esse"
+    xRequestID := "totam"
 
     ctx := context.Background()
     res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)

@@ -40,22 +40,22 @@ func main() {
     ctx := context.Background()
     res, err := s.Refunds.Create(ctx, operations.CreateRefundRequest{
         CreateRefundRequest: &shared.CreateRefundRequest{
-            RefundAmount: 6563.3,
-            RefundID: "enim",
-            RefundNote: cashfree.String("odit"),
+            RefundAmount: 384.25,
+            RefundID: "iure",
+            RefundNote: cashfree.String("culpa"),
             RefundSpeed: shared.CreateRefundRequestRefundSpeedInstant.ToPointer(),
             RefundSplits: []shared.VendorSplit{
                 shared.VendorSplit{
-                    Amount: cashfree.Float64(9495.72),
-                    Percentage: cashfree.Float64(3687.25),
-                    VendorID: cashfree.String("id"),
+                    Amount: cashfree.Float64(9589.5),
+                    Percentage: cashfree.Float64(1020.44),
+                    VendorID: cashfree.String("mollitia"),
                 },
             },
         },
-        OrderID: "possimus",
-        XAPIVersion: "aut",
-        XIdempotencyKey: cashfree.String("quasi"),
-        XRequestID: cashfree.String("error"),
+        OrderID: "dolorem",
+        XAPIVersion: "culpa",
+        XIdempotencyKey: cashfree.String("consequuntur"),
+        XRequestID: cashfree.String("repellat"),
     })
     if err != nil {
         log.Fatal(err)
@@ -107,10 +107,10 @@ func main() {
             },
         }),
     )
-    orderID := "temporibus"
-    refundID := "laborum"
-    xAPIVersion := "quasi"
-    xRequestID := "reiciendis"
+    orderID := "mollitia"
+    refundID := "occaecati"
+    xAPIVersion := "numquam"
+    xRequestID := "commodi"
 
     ctx := context.Background()
     res, err := s.Refunds.Get(ctx, orderID, refundID, xAPIVersion, xRequestID)
@@ -167,9 +167,9 @@ func main() {
             },
         }),
     )
-    orderID := "voluptatibus"
-    xAPIVersion := "vero"
-    xRequestID := "nihil"
+    orderID := "quam"
+    xAPIVersion := "molestiae"
+    xRequestID := "velit"
 
     ctx := context.Background()
     res, err := s.Refunds.GetAllforOrder(ctx, orderID, xAPIVersion, xRequestID)

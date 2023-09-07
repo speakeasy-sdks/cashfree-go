@@ -39,29 +39,26 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.Fetch(ctx, operations.GetSettlementReconciliationRequest{
-        AcceptMedia: cashfree.String("praesentium"),
+        AcceptMedia: cashfree.String("error"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    55714,
-                    604846,
-                    451159,
-                    739264,
+                    158969,
                 },
-                EndDate: cashfree.String("perferendis"),
+                EndDate: cashfree.String("quis"),
                 SettlementUtrs: []string{
-                    "reprehenderit",
+                    "vitae",
                 },
-                StartDate: cashfree.String("ut"),
+                StartDate: cashfree.String("laborum"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfree.String("maiores"),
-                Limit: 120196,
+                Cursor: cashfree.String("animi"),
+                Limit: 317202,
             },
         },
-        XAPIVersion: "corporis",
-        XIdempotencyKey: cashfree.String("dolore"),
-        XRequestID: cashfree.String("iusto"),
+        XAPIVersion: "odit",
+        XIdempotencyKey: cashfree.String("quo"),
+        XRequestID: cashfree.String("sequi"),
     })
     if err != nil {
         log.Fatal(err)
@@ -116,28 +113,26 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.GetAll(ctx, operations.GetSettlementsRequest{
-        AcceptMedia: cashfree.String("dicta"),
+        AcceptMedia: cashfree.String("tenetur"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    317983,
-                    880476,
-                    414263,
+                    368725,
                 },
-                EndDate: cashfree.String("repudiandae"),
+                EndDate: cashfree.String("id"),
                 SettlementUtrs: []string{
-                    "ipsum",
+                    "possimus",
                 },
-                StartDate: cashfree.String("quidem"),
+                StartDate: cashfree.String("aut"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfree.String("molestias"),
-                Limit: 566602,
+                Cursor: cashfree.String("quasi"),
+                Limit: 622846,
             },
         },
-        XAPIVersion: "pariatur",
-        XIdempotencyKey: cashfree.String("modi"),
-        XRequestID: cashfree.String("praesentium"),
+        XAPIVersion: "temporibus",
+        XIdempotencyKey: cashfree.String("laborum"),
+        XRequestID: cashfree.String("quasi"),
     })
     if err != nil {
         log.Fatal(err)
@@ -189,9 +184,9 @@ func main() {
             },
         }),
     )
-    orderID := "rem"
-    xAPIVersion := "voluptates"
-    xRequestID := "quasi"
+    orderID := "reiciendis"
+    xAPIVersion := "voluptatibus"
+    xRequestID := "vero"
 
     ctx := context.Background()
     res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)

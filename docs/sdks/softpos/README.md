@@ -35,9 +35,9 @@ func main() {
             },
         }),
     )
-    terminalPhoneNo := "qui"
-    xAPIVersion := "aliquid"
-    xRequestID := "cupiditate"
+    terminalPhoneNo := "iusto"
+    xAPIVersion := "dicta"
+    xRequestID := "harum"
 
     ctx := context.Background()
     res, err := s.SoftPOS.TerminalStatus(ctx, terminalPhoneNo, xAPIVersion, xRequestID)
@@ -93,14 +93,14 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "quos"
+    xAPIVersion := "enim"
     createTerminalRequest := &shared.CreateTerminalRequest{
-        TerminalID: cashfree.String("perferendis"),
-        TerminalName: "magni",
-        TerminalPhoneNo: "assumenda",
+        TerminalID: cashfree.String("accusamus"),
+        TerminalName: "commodi",
+        TerminalPhoneNo: "repudiandae",
     }
-    xIdempotencyKey := "ipsam"
-    xRequestID := "alias"
+    xIdempotencyKey := "quae"
+    xRequestID := "ipsum"
 
     ctx := context.Background()
     res, err := s.SoftPOS.CreateTerminals(ctx, xAPIVersion, createTerminalRequest, xIdempotencyKey, xRequestID)

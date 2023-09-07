@@ -37,20 +37,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
-        AcceptMedia: cashfree.String("perferendis"),
+        AcceptMedia: cashfree.String("porro"),
         FetchPGReconRequest: &shared.FetchPGReconRequest{
             Filters: shared.FetchPGReconRequestFilters{
-                EndDate: "ad",
-                StartDate: "natus",
+                EndDate: "dolorum",
+                StartDate: "dicta",
             },
             Pagination: shared.FetchPGReconRequestPagination{
-                Cursor: cashfree.String("sed"),
-                Limit: 612096,
+                Cursor: cashfree.String("nam"),
+                Limit: 639921,
             },
         },
-        XAPIVersion: "dolor",
-        XIdempotencyKey: cashfree.String("natus"),
-        XRequestID: cashfree.String("laboriosam"),
+        XAPIVersion: "occaecati",
+        XIdempotencyKey: cashfree.String("fugit"),
+        XRequestID: cashfree.String("deleniti"),
     })
     if err != nil {
         log.Fatal(err)

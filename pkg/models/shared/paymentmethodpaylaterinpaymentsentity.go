@@ -2,29 +2,61 @@
 
 package shared
 
-type PaymentMethodPaylaterInPaymentsEntity struct {
-	Channel  *string `json:"channel,omitempty"`
-	Phone    *string `json:"phone,omitempty"`
-	Provider *string `json:"provider,omitempty"`
+type PaymentMethodCardInPaymentsEntity struct {
+	CardBankName           *string `json:"card_bank_name,omitempty"`
+	CardCountry            *string `json:"card_country,omitempty"`
+	CardNetwork            *string `json:"card_network,omitempty"`
+	CardNetworkReferenceID *string `json:"card_network_reference_id,omitempty"`
+	CardNumber             *string `json:"card_number,omitempty"`
+	CardType               *string `json:"card_type,omitempty"`
+	Channel                *string `json:"channel,omitempty"`
 }
 
-func (o *PaymentMethodPaylaterInPaymentsEntity) GetChannel() *string {
+func (o *PaymentMethodCardInPaymentsEntity) GetCardBankName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardBankName
+}
+
+func (o *PaymentMethodCardInPaymentsEntity) GetCardCountry() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardCountry
+}
+
+func (o *PaymentMethodCardInPaymentsEntity) GetCardNetwork() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardNetwork
+}
+
+func (o *PaymentMethodCardInPaymentsEntity) GetCardNetworkReferenceID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardNetworkReferenceID
+}
+
+func (o *PaymentMethodCardInPaymentsEntity) GetCardNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardNumber
+}
+
+func (o *PaymentMethodCardInPaymentsEntity) GetCardType() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CardType
+}
+
+func (o *PaymentMethodCardInPaymentsEntity) GetChannel() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Channel
-}
-
-func (o *PaymentMethodPaylaterInPaymentsEntity) GetPhone() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Phone
-}
-
-func (o *PaymentMethodPaylaterInPaymentsEntity) GetProvider() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Provider
 }

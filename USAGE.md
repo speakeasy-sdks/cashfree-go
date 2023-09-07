@@ -26,8 +26,6 @@ func main() {
         Filters: &shared.OfferFilters{
             OfferType: []shared.OfferType{
                 shared.OfferTypeDiscountAndCashback,
-                shared.OfferTypeNoCostEmi,
-                shared.OfferTypeDiscountAndCashback,
             },
         },
         Queries: shared.OfferQueries{
@@ -35,7 +33,7 @@ func main() {
             OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "nulla"
+    xRequestID := "distinctio"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)

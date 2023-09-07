@@ -37,10 +37,10 @@ func main() {
             },
         }),
     )
-    customerID := "repudiandae"
-    instrumentID := "sint"
-    xAPIVersion := "veritatis"
-    xRequestID := "itaque"
+    customerID := "nihil"
+    instrumentID := "praesentium"
+    xAPIVersion := "voluptatibus"
+    xRequestID := "ipsa"
 
     ctx := context.Background()
     res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -97,10 +97,10 @@ func main() {
             },
         }),
     )
-    customerID := "incidunt"
-    instrumentID := "enim"
-    xAPIVersion := "consequatur"
-    xRequestID := "est"
+    customerID := "omnis"
+    instrumentID := "voluptate"
+    xAPIVersion := "cum"
+    xRequestID := "perferendis"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -157,10 +157,10 @@ func main() {
             },
         }),
     )
-    customerID := "quibusdam"
-    instrumentID := "explicabo"
-    xAPIVersion := "deserunt"
-    xRequestID := "distinctio"
+    customerID := "doloremque"
+    instrumentID := "reprehenderit"
+    xAPIVersion := "ut"
+    xRequestID := "maiores"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -217,10 +217,10 @@ func main() {
             },
         }),
     )
-    customerID := "quibusdam"
+    customerID := "dicta"
     instrumentType := operations.FetchAllSavedInstrumentsInstrumentTypeCard
-    xAPIVersion := "labore"
-    xRequestID := "modi"
+    xAPIVersion := "corporis"
+    xRequestID := "dolore"
 
     ctx := context.Background()
     res, err := s.TokenVault.GetAllSavedInstruments(ctx, customerID, instrumentType, xAPIVersion, xRequestID)
