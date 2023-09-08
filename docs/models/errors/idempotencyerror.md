@@ -1,7 +1,5 @@
 # IdempotencyError
 
-Idempotency error
-
 
 ## Fields
 

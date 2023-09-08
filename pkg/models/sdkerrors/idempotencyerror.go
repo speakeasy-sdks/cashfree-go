@@ -7,7 +7,6 @@ import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
-// IdempotencyError - Idempotency error
 type IdempotencyError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`

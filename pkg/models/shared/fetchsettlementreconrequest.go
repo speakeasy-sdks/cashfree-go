@@ -67,7 +67,6 @@ func (o *FetchSettlementReconRequestPagination) GetLimit() int64 {
 	return o.Limit
 }
 
-// FetchSettlementReconRequest - Request body to fetch details about settlement
 type FetchSettlementReconRequest struct {
 	// Specify either the Settlement ID, Settlement UTR, or start date and end date to fetch the settlement details.
 	Filters FetchSettlementReconRequestFilters `json:"filters"`

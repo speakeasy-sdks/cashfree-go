@@ -60,7 +60,6 @@ func (e *FetchAllSavedInstrumentsInstrumentType) UnmarshalJSON(data []byte) erro
 	}
 }
 
-// FetchAllSavedInstruments - OK
 type FetchAllSavedInstruments struct {
 	// cf_payment_id of the successful transaction done while saving instrument
 	AfaReference *int64 `json:"afa_reference,omitempty"`

@@ -1,7 +1,5 @@
 # SettlementsEntity
 
-OK
-
 
 ## Fields
 

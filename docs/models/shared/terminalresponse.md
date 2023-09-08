@@ -1,7 +1,5 @@
 # TerminalResponse
 
-Terminal created
-
 
 ## Fields
 

@@ -2,7 +2,6 @@
 
 package shared
 
-// CreateTerminalRequest - Request body to create a Terminal at Cashfree
 type CreateTerminalRequest struct {
 	// merchant’s internal terminal id
 	TerminalID *string `json:"terminal_id,omitempty"`

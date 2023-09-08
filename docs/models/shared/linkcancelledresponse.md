@@ -1,7 +1,5 @@
 # LinkCancelledResponse
 
-Payment Link cancelled
-
 
 ## Fields
 

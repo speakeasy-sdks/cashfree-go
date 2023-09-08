@@ -129,7 +129,6 @@ func (e *RefundsEntityRefundType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// RefundsEntity - Refund created
 type RefundsEntity struct {
 	// Cashfree Payments ID of the payment for which refund is initiated
 	CfPaymentID *int64 `json:"cf_payment_id,omitempty"`

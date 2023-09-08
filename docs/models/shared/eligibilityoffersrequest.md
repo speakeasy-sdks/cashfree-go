@@ -1,7 +1,5 @@
 # EligibilityOffersRequest
 
-Request body to check for eligibility for offers
-
 
 ## Fields
 

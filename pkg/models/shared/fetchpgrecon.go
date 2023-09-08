@@ -428,7 +428,6 @@ func (o *FetchPGReconData) GetVendorCommission() *float64 {
 	return o.VendorCommission
 }
 
-// FetchPGRecon - OK
 type FetchPGRecon struct {
 	// Specifies from where the next set of settlement details should be fetched.
 	Cursor *string            `json:"cursor,omitempty"`

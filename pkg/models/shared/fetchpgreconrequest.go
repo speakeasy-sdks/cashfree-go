@@ -48,7 +48,6 @@ func (o *FetchPGReconRequestPagination) GetLimit() int64 {
 	return o.Limit
 }
 
-// FetchPGReconRequest - Request body to fetch detailed list of transactions
 type FetchPGReconRequest struct {
 	Filters FetchPGReconRequestFilters `json:"filters"`
 	// To fetch the next set of settlements, pass the cursor received in the response to the next API call.

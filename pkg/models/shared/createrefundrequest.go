@@ -35,7 +35,6 @@ func (e *CreateRefundRequestRefundSpeed) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// CreateRefundRequest - Request body to fetch refunds for an order
 type CreateRefundRequest struct {
 	// Amount to be refunded. Should be lesser than or equal to the transaction amount. (Decimals allowed)
 	RefundAmount float64 `json:"refund_amount"`

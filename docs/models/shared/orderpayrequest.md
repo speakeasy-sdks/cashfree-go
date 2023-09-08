@@ -1,7 +1,5 @@
 # OrderPayRequest
 
-Request body to create a transaction at cashfree using `payment_session_id`
-
 
 ## Fields
 

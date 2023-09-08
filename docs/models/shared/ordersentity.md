@@ -1,7 +1,5 @@
 # OrdersEntity
 
-OK
-
 
 ## Fields
 

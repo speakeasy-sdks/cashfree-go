@@ -1,7 +1,5 @@
 # FetchSettlementReconRequest
 
-Request body to fetch details about settlement
-
 
 ## Fields
 

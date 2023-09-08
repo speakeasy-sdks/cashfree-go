@@ -7,7 +7,6 @@ import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
-// APIError409 - Resource already present
 type APIError409 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`

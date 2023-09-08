@@ -7,7 +7,6 @@ import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
-// APIError502 - Bank related Error
 type APIError502 struct {
 	// `bank_processing_failure` will be returned here to denote failure at bank.
 	//
