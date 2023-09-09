@@ -1,7 +1,5 @@
 # OrderPayResponse
 
-OK
-
 
 ## Fields
 

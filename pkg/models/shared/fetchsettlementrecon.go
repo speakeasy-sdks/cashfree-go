@@ -320,7 +320,6 @@ func (o *FetchSettlementReconData) GetVendorCommission() *float64 {
 	return o.VendorCommission
 }
 
-// FetchSettlementRecon - OK
 type FetchSettlementRecon struct {
 	// Specifies from where the next set of settlement details should be fetched.
 	Cursor *string                    `json:"cursor,omitempty"`

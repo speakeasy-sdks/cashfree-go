@@ -1,7 +1,5 @@
 # PaymentsEntity
 
-OK
-
 
 ## Fields
 

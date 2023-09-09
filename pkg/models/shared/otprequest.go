@@ -35,7 +35,6 @@ func (e *OTPRequestAction) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// OTPRequest - Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
 type OTPRequest struct {
 	// The action for this workflow. Could be either SUBMIT_OTP or RESEND_OTP
 	Action OTPRequestAction `json:"action"`

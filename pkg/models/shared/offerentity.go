@@ -2,7 +2,6 @@
 
 package shared
 
-// OfferEntity - OK
 type OfferEntity struct {
 	OfferDetails     *OfferDetails     `json:"offer_details,omitempty"`
 	OfferID          *int64            `json:"offer_id,omitempty"`

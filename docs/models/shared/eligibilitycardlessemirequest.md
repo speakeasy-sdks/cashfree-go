@@ -1,7 +1,5 @@
 # EligibilityCardlessEMIRequest
 
-Request body to check for eligibility for cardlessemi
-
 
 ## Fields
 

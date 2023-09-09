@@ -2,7 +2,6 @@
 
 package shared
 
-// EligibilityCardlessEMIRequest - Request body to check for eligibility for cardlessemi
 type EligibilityCardlessEMIRequest struct {
 	Queries CardlessEMIQueries `json:"queries"`
 }

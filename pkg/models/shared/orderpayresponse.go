@@ -115,7 +115,6 @@ func (e *OrderPayResponsePaymentMethod) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// OrderPayResponse - OK
 type OrderPayResponse struct {
 	// One of ["link", "custom", "form"]
 	Action *OrderPayResponseAction `json:"action,omitempty"`

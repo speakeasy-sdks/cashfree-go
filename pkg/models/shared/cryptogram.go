@@ -2,7 +2,6 @@
 
 package shared
 
-// Cryptogram - OK
 type Cryptogram struct {
 	// last 4 digits of original card number
 	CardDisplay *string `json:"card_display,omitempty"`

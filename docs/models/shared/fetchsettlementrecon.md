@@ -1,7 +1,5 @@
 # FetchSettlementRecon
 
-OK
-
 
 ## Fields
 

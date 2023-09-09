@@ -2,7 +2,6 @@
 
 package shared
 
-// LinkCancelledResponse - Payment Link cancelled
 type LinkCancelledResponse struct {
 	CfLinkID                 *int64                     `json:"cf_link_id,omitempty"`
 	CustomerDetails          *LinkCustomerDetailsEntity `json:"customer_details,omitempty"`

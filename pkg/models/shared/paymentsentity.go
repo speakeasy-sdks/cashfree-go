@@ -50,7 +50,6 @@ func (e *PaymentsEntityPaymentStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// PaymentsEntity - OK
 type PaymentsEntity struct {
 	AuthID *string `json:"auth_id,omitempty"`
 	// The authorization details are present for payments which go through the preauthorization workflow. Or else this parameter will be null.

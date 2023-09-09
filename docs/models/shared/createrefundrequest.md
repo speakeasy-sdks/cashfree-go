@@ -1,7 +1,5 @@
 # CreateRefundRequest
 
-Request body to fetch refunds for an order
-
 
 ## Fields
 

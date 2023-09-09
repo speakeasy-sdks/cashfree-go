@@ -196,7 +196,6 @@ func (u OrderPayRequestPaymentMethod) MarshalJSON() ([]byte, error) {
 	return nil, nil
 }
 
-// OrderPayRequest - Request body to create a transaction at cashfree using `payment_session_id`
 type OrderPayRequest struct {
 	// This is required if any offers needs to be applied to the order.
 	OfferID          *string                      `json:"offer_id,omitempty"`

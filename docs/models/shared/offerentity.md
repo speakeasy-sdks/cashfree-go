@@ -1,7 +1,5 @@
 # OfferEntity
 
-OK
-
 
 ## Fields
 

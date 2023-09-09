@@ -1,7 +1,5 @@
 # AuthorizationRequest
 
-Request body to capture or void a transaction
-
 
 ## Fields
 

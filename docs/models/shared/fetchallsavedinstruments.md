@@ -1,7 +1,5 @@
 # FetchAllSavedInstruments
 
-OK
-
 
 ## Fields
 

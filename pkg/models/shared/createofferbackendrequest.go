@@ -2,7 +2,6 @@
 
 package shared
 
-// CreateOfferBackendRequest - Request body to create an offer at Cashfree
 type CreateOfferBackendRequest struct {
 	OfferDetails     OfferDetails     `json:"offer_details"`
 	OfferMeta        OfferMeta        `json:"offer_meta"`

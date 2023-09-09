@@ -1,7 +1,5 @@
 # OTPRequest
 
-Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
-
 
 ## Fields
 

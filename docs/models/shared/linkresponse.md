@@ -1,7 +1,5 @@
 # LinkResponse
 
-Payment Link created
-
 
 ## Fields
 

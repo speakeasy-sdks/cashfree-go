@@ -1,7 +1,5 @@
 # FetchPGReconRequest
 
-Request body to fetch detailed list of transactions
-
 
 ## Fields
 

@@ -2,7 +2,6 @@
 
 package shared
 
-// SettlementsEntity - OK
 type SettlementsEntity struct {
 	CfPaymentID        *string  `json:"cf_payment_id,omitempty"`
 	CfSettlementID     *string  `json:"cf_settlement_id,omitempty"`

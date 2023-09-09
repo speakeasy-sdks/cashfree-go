@@ -1,7 +1,5 @@
 # RefundsEntity
 
-Refund created
-
 
 ## Fields
 

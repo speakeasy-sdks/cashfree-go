@@ -2,7 +2,6 @@
 
 package shared
 
-// TerminalResponse - Terminal created
 type TerminalResponse struct {
 	AddedOn         *string `json:"added_on,omitempty"`
 	CfTerminalID    *string `json:"cf_terminal_id,omitempty"`

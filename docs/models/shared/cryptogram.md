@@ -1,7 +1,5 @@
 # Cryptogram
 
-OK
-
 
 ## Fields
 

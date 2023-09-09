@@ -1,7 +1,5 @@
 # APIError502
 
-Bank related Error
-
 
 ## Fields
 

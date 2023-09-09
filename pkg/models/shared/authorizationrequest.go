@@ -35,7 +35,6 @@ func (e *AuthorizationRequestAction) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// AuthorizationRequest - Request body to capture or void a transaction
 type AuthorizationRequest struct {
 	// Type of authorization to run. Can be one of 'CAPTURE' , 'VOID'
 	Action *AuthorizationRequestAction `json:"action,omitempty"`

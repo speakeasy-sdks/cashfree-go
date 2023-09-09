@@ -2,7 +2,6 @@
 
 package shared
 
-// EligibilityOffersRequest - Request body to check for eligibility for offers
 type EligibilityOffersRequest struct {
 	Filters *OfferFilters `json:"filters,omitempty"`
 	Queries OfferQueries  `json:"queries"`

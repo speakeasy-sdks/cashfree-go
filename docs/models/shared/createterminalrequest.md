@@ -1,7 +1,5 @@
 # CreateTerminalRequest
 
-Request body to create a Terminal at Cashfree
-
 
 ## Fields
 

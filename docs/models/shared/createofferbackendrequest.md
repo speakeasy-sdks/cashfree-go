@@ -1,7 +1,5 @@
 # CreateOfferBackendRequest
 
-Request body to create an offer at Cashfree
-
 
 ## Fields
 
