@@ -193,7 +193,8 @@ func (u OrderPayRequestPaymentMethod) MarshalJSON() ([]byte, error) {
 		return json.Marshal(u.PaylaterPaymentMethod)
 	}
 
-	return nil, nil
+	return nil, errors.New("could not marshal union type: all fields are null")
+
 }
 
 type OrderPayRequest struct {

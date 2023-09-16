@@ -331,12 +331,12 @@ func (s *payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out *operations.GetPaymentsforOrder200ApplicationJSON
+			var out *shared.PaymentsEntity
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out); err != nil {
 				return nil, err
 			}
 
-			res.GetPaymentsforOrder200ApplicationJSONOneOf = out
+			res.PaymentsEntity = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

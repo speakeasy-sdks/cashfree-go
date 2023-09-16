@@ -3,9 +3,6 @@
 package operations
 
 import (
-	"bytes"
-	"encoding/json"
-	"errors"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"net/http"
 )
@@ -40,57 +37,13 @@ func (o *GetPaymentsforOrderRequest) GetXRequestID() *string {
 	return o.XRequestID
 }
 
-type GetPaymentsforOrder200ApplicationJSONType string
-
-const (
-	GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity GetPaymentsforOrder200ApplicationJSONType = "PaymentsEntity"
-)
-
-type GetPaymentsforOrder200ApplicationJSON struct {
-	PaymentsEntity *shared.PaymentsEntity
-
-	Type GetPaymentsforOrder200ApplicationJSONType
-}
-
-func CreateGetPaymentsforOrder200ApplicationJSONPaymentsEntity(paymentsEntity shared.PaymentsEntity) GetPaymentsforOrder200ApplicationJSON {
-	typ := GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
-
-	return GetPaymentsforOrder200ApplicationJSON{
-		PaymentsEntity: &paymentsEntity,
-		Type:           typ,
-	}
-}
-
-func (u *GetPaymentsforOrder200ApplicationJSON) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
-
-	paymentsEntity := new(shared.PaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentsEntity); err == nil {
-		u.PaymentsEntity = paymentsEntity
-		u.Type = GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
-		return nil
-	}
-
-	return errors.New("could not unmarshal into supported union types")
-}
-
-func (u GetPaymentsforOrder200ApplicationJSON) MarshalJSON() ([]byte, error) {
-	if u.PaymentsEntity != nil {
-		return json.Marshal(u.PaymentsEntity)
-	}
-
-	return nil, nil
-}
-
 type GetPaymentsforOrderResponse struct {
 	ContentType string
 	Headers     map[string][]string
-	StatusCode  int
-	RawResponse *http.Response
 	// OK
-	GetPaymentsforOrder200ApplicationJSONOneOf *GetPaymentsforOrder200ApplicationJSON
+	PaymentsEntity *shared.PaymentsEntity
+	StatusCode     int
+	RawResponse    *http.Response
 }
 
 func (o *GetPaymentsforOrderResponse) GetContentType() string {
@@ -107,6 +60,13 @@ func (o *GetPaymentsforOrderResponse) GetHeaders() map[string][]string {
 	return o.Headers
 }
 
+func (o *GetPaymentsforOrderResponse) GetPaymentsEntity() *shared.PaymentsEntity {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentsEntity
+}
+
 func (o *GetPaymentsforOrderResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -119,11 +79,4 @@ func (o *GetPaymentsforOrderResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
-}
-
-func (o *GetPaymentsforOrderResponse) GetGetPaymentsforOrder200ApplicationJSONOneOf() *GetPaymentsforOrder200ApplicationJSON {
-	if o == nil {
-		return nil
-	}
-	return o.GetPaymentsforOrder200ApplicationJSONOneOf
 }

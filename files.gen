@@ -207,7 +207,6 @@ docs/models/operations/getpaymentlinkordersresponse.md
 docs/models/operations/getpaymentbyidrequest.md
 docs/models/operations/getpaymentbyidresponse.md
 docs/models/operations/getpaymentsfororderrequest.md
-docs/models/operations/getpaymentsfororder200applicationjson.md
 docs/models/operations/getpaymentsfororderresponse.md
 docs/models/operations/orderpayrequest.md
 docs/models/operations/orderpayresponse.md
