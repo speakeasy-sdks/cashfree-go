@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 )
 
 type OfferValidationsPaymentMethodType string
@@ -96,66 +95,51 @@ func CreateOfferValidationsPaymentMethodOfferEMI(offerEMI OfferEMI) OfferValidat
 }
 
 func (u *OfferValidationsPaymentMethod) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	offerAll := new(OfferAll)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerAll); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerAll, "", true, true); err == nil {
 		u.OfferAll = offerAll
 		u.Type = OfferValidationsPaymentMethodTypeOfferAll
 		return nil
 	}
 
 	offerCard := new(OfferCard)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerCard); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerCard, "", true, true); err == nil {
 		u.OfferCard = offerCard
 		u.Type = OfferValidationsPaymentMethodTypeOfferCard
 		return nil
 	}
 
 	offerNB := new(OfferNB)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerNB); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerNB, "", true, true); err == nil {
 		u.OfferNB = offerNB
 		u.Type = OfferValidationsPaymentMethodTypeOfferNB
 		return nil
 	}
 
 	offerWallet := new(OfferWallet)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerWallet); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerWallet, "", true, true); err == nil {
 		u.OfferWallet = offerWallet
 		u.Type = OfferValidationsPaymentMethodTypeOfferWallet
 		return nil
 	}
 
 	offerUPI := new(OfferUPI)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerUPI); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerUPI, "", true, true); err == nil {
 		u.OfferUPI = offerUPI
 		u.Type = OfferValidationsPaymentMethodTypeOfferUPI
 		return nil
 	}
 
 	offerPaylater := new(OfferPaylater)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerPaylater); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerPaylater, "", true, true); err == nil {
 		u.OfferPaylater = offerPaylater
 		u.Type = OfferValidationsPaymentMethodTypeOfferPaylater
 		return nil
 	}
 
 	offerEMI := new(OfferEMI)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&offerEMI); err == nil {
+	if err := utils.UnmarshalJSON(data, &offerEMI, "", true, true); err == nil {
 		u.OfferEMI = offerEMI
 		u.Type = OfferValidationsPaymentMethodTypeOfferEMI
 		return nil
@@ -166,35 +150,34 @@ func (u *OfferValidationsPaymentMethod) UnmarshalJSON(data []byte) error {
 
 func (u OfferValidationsPaymentMethod) MarshalJSON() ([]byte, error) {
 	if u.OfferAll != nil {
-		return json.Marshal(u.OfferAll)
+		return utils.MarshalJSON(u.OfferAll, "", true)
 	}
 
 	if u.OfferCard != nil {
-		return json.Marshal(u.OfferCard)
+		return utils.MarshalJSON(u.OfferCard, "", true)
 	}
 
 	if u.OfferNB != nil {
-		return json.Marshal(u.OfferNB)
+		return utils.MarshalJSON(u.OfferNB, "", true)
 	}
 
 	if u.OfferWallet != nil {
-		return json.Marshal(u.OfferWallet)
+		return utils.MarshalJSON(u.OfferWallet, "", true)
 	}
 
 	if u.OfferUPI != nil {
-		return json.Marshal(u.OfferUPI)
+		return utils.MarshalJSON(u.OfferUPI, "", true)
 	}
 
 	if u.OfferPaylater != nil {
-		return json.Marshal(u.OfferPaylater)
+		return utils.MarshalJSON(u.OfferPaylater, "", true)
 	}
 
 	if u.OfferEMI != nil {
-		return json.Marshal(u.OfferEMI)
+		return utils.MarshalJSON(u.OfferEMI, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type OfferValidations struct {
