@@ -4,16 +4,28 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
 type GetEligibilityOfferRequest struct {
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request body to check for eligibility for offers
 	EligibilityOffersRequest *shared.EligibilityOffersRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (g GetEligibilityOfferRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetEligibilityOfferRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetEligibilityOfferRequest) GetXAPIVersion() string {

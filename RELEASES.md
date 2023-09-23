@@ -59,3 +59,13 @@ Based on:
 - [go v0.6.0] .
 ### Releases
 - [Go v0.6.0] https://github.com/speakeasy-sdks/cashfree-go/releases/tag/v0.6.0 - .
+
+## 2023-09-23 00:47:33
+### Changes
+Based on:
+- OpenAPI Doc 2022-09-01 
+- Speakeasy CLI 1.90.0 (2.125.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.6.1] .
+### Releases
+- [Go v0.6.1] https://github.com/speakeasy-sdks/cashfree-go/releases/tag/v0.6.1 - .

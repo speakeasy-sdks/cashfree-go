@@ -21,23 +21,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    terminalPhoneNo := "iusto"
-    xAPIVersion := "dicta"
-    xRequestID := "harum"
+    terminalPhoneNo := "accusamus"
+    xAPIVersion := "commodi"
+    xRequestID := "repudiandae"
 
     ctx := context.Background()
     res, err := s.SoftPOS.TerminalStatus(ctx, terminalPhoneNo, xAPIVersion, xRequestID)
@@ -79,28 +79,28 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    xAPIVersion := "enim"
+    xAPIVersion := "quae"
     createTerminalRequest := &shared.CreateTerminalRequest{
-        TerminalID: cashfree.String("accusamus"),
-        TerminalName: "commodi",
-        TerminalPhoneNo: "repudiandae",
+        TerminalID: cashfreego.String("ipsum"),
+        TerminalName: "quidem",
+        TerminalPhoneNo: "molestias",
     }
-    xIdempotencyKey := "quae"
-    xRequestID := "ipsum"
+    xIdempotencyKey := "excepturi"
+    xRequestID := "pariatur"
 
     ctx := context.Background()
     res, err := s.SoftPOS.CreateTerminals(ctx, xAPIVersion, createTerminalRequest, xIdempotencyKey, xRequestID)

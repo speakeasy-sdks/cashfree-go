@@ -3,46 +3,31 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
-
-// FetchAllSavedInstrumentsInstrumentType - type to instrument to query
-type FetchAllSavedInstrumentsInstrumentType string
-
-const (
-	FetchAllSavedInstrumentsInstrumentTypeCard FetchAllSavedInstrumentsInstrumentType = "card"
-)
-
-func (e FetchAllSavedInstrumentsInstrumentType) ToPointer() *FetchAllSavedInstrumentsInstrumentType {
-	return &e
-}
-
-func (e *FetchAllSavedInstrumentsInstrumentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "card":
-		*e = FetchAllSavedInstrumentsInstrumentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FetchAllSavedInstrumentsInstrumentType: %v", v)
-	}
-}
 
 type FetchAllSavedInstrumentsRequest struct {
 	// The customer_id for which all the saved cards are queried
 	CustomerID string `pathParam:"style=simple,explode=false,name=customer_id"`
 	// type to instrument to query
-	InstrumentType FetchAllSavedInstrumentsInstrumentType `queryParam:"style=form,explode=true,name=instrument_type"`
+	instrumentType string `const:"card" queryParam:"style=form,explode=true,name=instrument_type"`
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (f FetchAllSavedInstrumentsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(f, "", false)
+}
+
+func (f *FetchAllSavedInstrumentsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *FetchAllSavedInstrumentsRequest) GetCustomerID() string {
@@ -52,11 +37,8 @@ func (o *FetchAllSavedInstrumentsRequest) GetCustomerID() string {
 	return o.CustomerID
 }
 
-func (o *FetchAllSavedInstrumentsRequest) GetInstrumentType() FetchAllSavedInstrumentsInstrumentType {
-	if o == nil {
-		return FetchAllSavedInstrumentsInstrumentType("")
-	}
-	return o.InstrumentType
+func (o *FetchAllSavedInstrumentsRequest) GetInstrumentType() string {
+	return "card"
 }
 
 func (o *FetchAllSavedInstrumentsRequest) GetXAPIVersion() string {
