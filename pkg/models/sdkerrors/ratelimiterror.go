@@ -4,14 +4,14 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/types"
 )
 
 type RateLimitError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// rate_limit_error
-	Type *shared.RateLimitErrorType `json:"type,omitempty"`
+	Type *string `const:"rate_limit_error" json:"type,omitempty"`
 }
 
 var _ error = &RateLimitError{}

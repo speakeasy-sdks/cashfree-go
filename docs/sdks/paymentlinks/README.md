@@ -23,24 +23,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    linkID := "hic"
-    xAPIVersion := "optio"
-    xIdempotencyKey := "totam"
-    xRequestID := "beatae"
+    linkID := "beatae"
+    xAPIVersion := "commodi"
+    xIdempotencyKey := "molestiae"
+    xRequestID := "modi"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Cancel(ctx, linkID, xAPIVersion, xIdempotencyKey, xRequestID)
@@ -83,51 +83,51 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    xAPIVersion := "commodi"
+    xAPIVersion := "qui"
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
-            CustomerEmail: cashfree.String("molestiae"),
-            CustomerName: cashfree.String("modi"),
-            CustomerPhone: "qui",
+            CustomerEmail: cashfreego.String("impedit"),
+            CustomerName: cashfreego.String("cum"),
+            CustomerPhone: "esse",
         },
-        LinkAmount: 7742.34,
-        LinkAutoReminders: cashfree.Bool(false),
-        LinkCurrency: "cum",
-        LinkExpiryTime: cashfree.String("esse"),
-        LinkID: "ipsum",
+        LinkAmount: 2165.5,
+        LinkAutoReminders: cashfreego.Bool(false),
+        LinkCurrency: "excepturi",
+        LinkExpiryTime: cashfreego.String("aspernatur"),
+        LinkID: "perferendis",
         LinkMeta: &shared.LinkMetaEntity{
-            NotifyURL: cashfree.String("excepturi"),
-            PaymentMethods: cashfree.String("aspernatur"),
-            ReturnURL: cashfree.String("perferendis"),
-            UpiIntent: cashfree.Bool(false),
+            NotifyURL: cashfreego.String("ad"),
+            PaymentMethods: cashfreego.String("natus"),
+            ReturnURL: cashfreego.String("sed"),
+            UpiIntent: cashfreego.Bool(false),
         },
-        LinkMinimumPartialAmount: cashfree.Float64(3241.41),
+        LinkMinimumPartialAmount: cashfreego.Float64(6120.96),
         LinkNotes: map[string]string{
-            "natus": "sed",
+            "dolor": "natus",
         },
         LinkNotify: &shared.LinkNotifyEntity{
-            SendEmail: cashfree.Bool(false),
-            SendSms: cashfree.Bool(false),
+            SendEmail: cashfreego.Bool(false),
+            SendSms: cashfreego.Bool(false),
         },
-        LinkPartialPayments: cashfree.Bool(false),
-        LinkPurpose: "iste",
+        LinkPartialPayments: cashfreego.Bool(false),
+        LinkPurpose: "laboriosam",
     }
-    xIdempotencyKey := "dolor"
-    xRequestID := "natus"
+    xIdempotencyKey := "hic"
+    xRequestID := "saepe"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Create(ctx, xAPIVersion, createLinkRequest, xIdempotencyKey, xRequestID)
@@ -170,23 +170,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    linkID := "laboriosam"
-    xAPIVersion := "hic"
-    xRequestID := "saepe"
+    linkID := "fuga"
+    xAPIVersion := "in"
+    xRequestID := "corporis"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Fetch(ctx, linkID, xAPIVersion, xRequestID)
@@ -228,23 +228,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    linkID := "fuga"
-    xAPIVersion := "in"
-    xRequestID := "corporis"
+    linkID := "iste"
+    xAPIVersion := "iure"
+    xRequestID := "saepe"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.GetOrders(ctx, linkID, xAPIVersion, xRequestID)
