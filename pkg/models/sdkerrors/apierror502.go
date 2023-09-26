@@ -4,7 +4,7 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/types"
 )
 
 type APIError502 struct {
@@ -13,7 +13,7 @@ type APIError502 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// api_error
-	Type *shared.APIError502Type `json:"type,omitempty"`
+	Type *string `const:"api_error" json:"type,omitempty"`
 }
 
 var _ error = &APIError502{}

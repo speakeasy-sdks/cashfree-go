@@ -22,14 +22,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
@@ -40,22 +40,22 @@ func main() {
     ctx := context.Background()
     res, err := s.Refunds.Create(ctx, operations.CreateRefundRequest{
         CreateRefundRequest: &shared.CreateRefundRequest{
-            RefundAmount: 384.25,
-            RefundID: "iure",
-            RefundNote: cashfree.String("culpa"),
+            RefundAmount: 9883.74,
+            RefundID: "sapiente",
+            RefundNote: cashfreego.String("architecto"),
             RefundSpeed: shared.CreateRefundRequestRefundSpeedInstant.ToPointer(),
             RefundSplits: []shared.VendorSplit{
                 shared.VendorSplit{
-                    Amount: cashfree.Float64(9589.5),
-                    Percentage: cashfree.Float64(1020.44),
-                    VendorID: cashfree.String("mollitia"),
+                    Amount: cashfreego.Float64(2088.76),
+                    Percentage: cashfreego.Float64(6350.59),
+                    VendorID: cashfreego.String("consequuntur"),
                 },
             },
         },
-        OrderID: "dolorem",
-        XAPIVersion: "culpa",
-        XIdempotencyKey: cashfree.String("consequuntur"),
-        XRequestID: cashfree.String("repellat"),
+        OrderID: "repellat",
+        XAPIVersion: "mollitia",
+        XIdempotencyKey: cashfreego.String("occaecati"),
+        XRequestID: cashfreego.String("numquam"),
     })
     if err != nil {
         log.Fatal(err)
@@ -93,24 +93,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    orderID := "mollitia"
-    refundID := "occaecati"
-    xAPIVersion := "numquam"
-    xRequestID := "commodi"
+    orderID := "commodi"
+    refundID := "quam"
+    xAPIVersion := "molestiae"
+    xRequestID := "velit"
 
     ctx := context.Background()
     res, err := s.Refunds.Get(ctx, orderID, refundID, xAPIVersion, xRequestID)
@@ -153,23 +153,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    orderID := "quam"
-    xAPIVersion := "molestiae"
-    xRequestID := "velit"
+    orderID := "error"
+    xAPIVersion := "quia"
+    xRequestID := "quis"
 
     ctx := context.Background()
     res, err := s.Refunds.GetAllforOrder(ctx, orderID, xAPIVersion, xRequestID)

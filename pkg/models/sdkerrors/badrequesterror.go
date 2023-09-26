@@ -4,13 +4,13 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/types"
 )
 
 type BadRequestError struct {
-	Code    *string                     `json:"code,omitempty"`
-	Message *string                     `json:"message,omitempty"`
-	Type    *shared.BadRequestErrorType `json:"type,omitempty"`
+	Code    *string `json:"code,omitempty"`
+	Message *string `json:"message,omitempty"`
+	Type    *string `const:"invalid_request_error" json:"type,omitempty"`
 }
 
 var _ error = &BadRequestError{}
