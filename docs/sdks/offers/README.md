@@ -1,4 +1,5 @@
 # Offers
+(*Offers*)
 
 ## Overview
 
@@ -21,32 +22,32 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    xAPIVersion := "deserunt"
+    xAPIVersion := "magnam"
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
-                CashbackType: shared.CashbackDetailsCashbackTypeFlat,
-                CashbackValue: "iure",
-                MaxCashbackAmount: "magnam",
+                CashbackType: shared.CashbackDetailsCashbackTypePercentage,
+                CashbackValue: "ipsa",
+                MaxCashbackAmount: "delectus",
             },
             DiscountDetails: &shared.DiscountDetails{
-                DiscountType: shared.DiscountDetailsDiscountTypePercentage,
-                DiscountValue: "ipsa",
-                MaxDiscountAmount: "delectus",
+                DiscountType: shared.DiscountDetailsDiscountTypeFlat,
+                DiscountValue: "suscipit",
+                MaxDiscountAmount: "molestiae",
             },
             OfferType: shared.OfferDetailsOfferTypeDiscountAndCashback,
         },
@@ -63,11 +64,11 @@ func main() {
         },
         OfferValidations: shared.OfferValidations{
             MaxAllowed: 10,
-            MinAmount: cashfree.Float64(1),
+            MinAmount: cashfreego.Float64(1),
             PaymentMethod: shared.OfferValidationsPaymentMethod{},
         },
     }
-    xRequestID := "tempora"
+    xRequestID := "minus"
 
     ctx := context.Background()
     res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
@@ -109,23 +110,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    offerID := "suscipit"
-    xAPIVersion := "molestiae"
-    xRequestID := "minus"
+    offerID := "placeat"
+    xAPIVersion := "voluptatum"
+    xRequestID := "iusto"
 
     ctx := context.Background()
     res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)

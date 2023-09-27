@@ -1,4 +1,5 @@
 # TokenVault
+(*TokenVault*)
 
 ## Overview
 
@@ -23,24 +24,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    customerID := "nihil"
-    instrumentID := "praesentium"
-    xAPIVersion := "voluptatibus"
-    xRequestID := "ipsa"
+    customerID := "ipsa"
+    instrumentID := "omnis"
+    xAPIVersion := "voluptate"
+    xRequestID := "cum"
 
     ctx := context.Background()
     res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -83,24 +84,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    customerID := "omnis"
-    instrumentID := "voluptate"
-    xAPIVersion := "cum"
-    xRequestID := "perferendis"
+    customerID := "perferendis"
+    instrumentID := "doloremque"
+    xAPIVersion := "reprehenderit"
+    xRequestID := "ut"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -143,24 +144,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    customerID := "doloremque"
-    instrumentID := "reprehenderit"
-    xAPIVersion := "ut"
-    xRequestID := "maiores"
+    customerID := "maiores"
+    instrumentID := "dicta"
+    xAPIVersion := "corporis"
+    xRequestID := "dolore"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -203,24 +204,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    customerID := "dicta"
-    instrumentType := operations.FetchAllSavedInstrumentsInstrumentTypeCard
-    xAPIVersion := "corporis"
-    xRequestID := "dolore"
+    customerID := "iusto"
+    instrumentType := "dicta"
+    xAPIVersion := "harum"
+    xRequestID := "enim"
 
     ctx := context.Background()
     res, err := s.TokenVault.GetAllSavedInstruments(ctx, customerID, instrumentType, xAPIVersion, xRequestID)
@@ -240,7 +241,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id for which all the saved cards are queried                                                                  |
-| `instrumentType`                                                                                                           | [operations.FetchAllSavedInstrumentsInstrumentType](../../models/operations/fetchallsavedinstrumentsinstrumenttype.md)     | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
+| `instrumentType`                                                                                                           | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
 | `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |

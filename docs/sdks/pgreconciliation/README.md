@@ -1,4 +1,5 @@
 # PGReconciliation
+(*PGReconciliation*)
 
 ## Overview
 
@@ -20,14 +21,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
@@ -37,20 +38,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
-        AcceptMedia: cashfree.String("porro"),
+        AcceptMedia: cashfreego.String("nam"),
         FetchPGReconRequest: &shared.FetchPGReconRequest{
             Filters: shared.FetchPGReconRequestFilters{
-                EndDate: "dolorum",
-                StartDate: "dicta",
+                EndDate: "officia",
+                StartDate: "occaecati",
             },
             Pagination: shared.FetchPGReconRequestPagination{
-                Cursor: cashfree.String("nam"),
-                Limit: 639921,
+                Cursor: cashfreego.String("fugit"),
+                Limit: 537373,
             },
         },
-        XAPIVersion: "occaecati",
-        XIdempotencyKey: cashfree.String("fugit"),
-        XRequestID: cashfree.String("deleniti"),
+        XAPIVersion: "hic",
+        XIdempotencyKey: cashfreego.String("optio"),
+        XRequestID: cashfreego.String("totam"),
     })
     if err != nil {
         log.Fatal(err)

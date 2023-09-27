@@ -7,14 +7,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
@@ -29,8 +29,8 @@ func main() {
             },
         },
         Queries: shared.OfferQueries{
-            Amount: cashfree.Float64(100),
-            OrderID: cashfree.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+            Amount: cashfreego.Float64(100),
+            OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
     xRequestID := "distinctio"

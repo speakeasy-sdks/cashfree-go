@@ -1,4 +1,5 @@
 # Settlements
+(*Settlements*)
 
 ## Overview
 
@@ -22,14 +23,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
@@ -39,26 +40,26 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.Fetch(ctx, operations.GetSettlementReconciliationRequest{
-        AcceptMedia: cashfree.String("error"),
+        AcceptMedia: cashfreego.String("vitae"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    158969,
+                    674752,
                 },
-                EndDate: cashfree.String("quis"),
+                EndDate: cashfreego.String("animi"),
                 SettlementUtrs: []string{
-                    "vitae",
+                    "enim",
                 },
-                StartDate: cashfree.String("laborum"),
+                StartDate: cashfreego.String("odit"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfree.String("animi"),
-                Limit: 317202,
+                Cursor: cashfreego.String("quo"),
+                Limit: 196582,
             },
         },
-        XAPIVersion: "odit",
-        XIdempotencyKey: cashfree.String("quo"),
-        XRequestID: cashfree.String("sequi"),
+        XAPIVersion: "tenetur",
+        XIdempotencyKey: cashfreego.String("ipsam"),
+        XRequestID: cashfreego.String("id"),
     })
     if err != nil {
         log.Fatal(err)
@@ -96,14 +97,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
@@ -113,26 +114,26 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.GetAll(ctx, operations.GetSettlementsRequest{
-        AcceptMedia: cashfree.String("tenetur"),
+        AcceptMedia: cashfreego.String("possimus"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    368725,
+                    13571,
                 },
-                EndDate: cashfree.String("id"),
+                EndDate: cashfreego.String("quasi"),
                 SettlementUtrs: []string{
-                    "possimus",
+                    "error",
                 },
-                StartDate: cashfree.String("aut"),
+                StartDate: cashfreego.String("temporibus"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfree.String("quasi"),
-                Limit: 622846,
+                Cursor: cashfreego.String("laborum"),
+                Limit: 96098,
             },
         },
-        XAPIVersion: "temporibus",
-        XIdempotencyKey: cashfree.String("laborum"),
-        XRequestID: cashfree.String("quasi"),
+        XAPIVersion: "reiciendis",
+        XIdempotencyKey: cashfreego.String("voluptatibus"),
+        XRequestID: cashfreego.String("vero"),
     })
     if err != nil {
         log.Fatal(err)
@@ -170,23 +171,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    orderID := "reiciendis"
-    xAPIVersion := "voluptatibus"
-    xRequestID := "vero"
+    orderID := "nihil"
+    xAPIVersion := "praesentium"
+    xRequestID := "voluptatibus"
 
     ctx := context.Background()
     res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)
