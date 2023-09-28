@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
@@ -11,9 +12,20 @@ type GetTerminalByMobileNumberRequest struct {
 	// The terminal for which you want to view the order details.
 	TerminalPhoneNo string `pathParam:"style=simple,explode=false,name=terminal_phone_no"`
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (g GetTerminalByMobileNumberRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetTerminalByMobileNumberRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetTerminalByMobileNumberRequest) GetTerminalPhoneNo() string {
@@ -38,9 +50,12 @@ func (o *GetTerminalByMobileNumberRequest) GetXRequestID() *string {
 }
 
 type GetTerminalByMobileNumberResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	Headers     map[string][]string
-	StatusCode  int
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
 	TerminalDetails *shared.TerminalDetails

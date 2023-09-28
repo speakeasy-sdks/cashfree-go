@@ -3,6 +3,7 @@
 package shared
 
 import (
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"time"
 )
 
@@ -37,6 +38,17 @@ type OrdersEntity struct {
 	Payments         *PaymentURLObject    `json:"payments,omitempty"`
 	Refunds          *RefundURLObject     `json:"refunds,omitempty"`
 	Settlements      *SettlementURLObject `json:"settlements,omitempty"`
+}
+
+func (o OrdersEntity) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(o, "", false)
+}
+
+func (o *OrdersEntity) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &o, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *OrdersEntity) GetCfOrderID() *int64 {
