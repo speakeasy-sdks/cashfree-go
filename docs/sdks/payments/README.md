@@ -1,4 +1,5 @@
 # Payments
+(*Payments*)
 
 ## Overview
 
@@ -24,24 +25,24 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    cfPaymentID := 613064
-    orderID := "iure"
-    xAPIVersion := "saepe"
-    xRequestID := "quidem"
+    cfPaymentID := 158773
+    orderID := "mobile"
+    xAPIVersion := "Avon"
+    xRequestID := "Solutions"
 
     ctx := context.Background()
     res, err := s.Payments.Payment(ctx, cfPaymentID, orderID, xAPIVersion, xRequestID)
@@ -84,23 +85,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    orderID := "architecto"
-    xAPIVersion := "ipsa"
-    xRequestID := "reiciendis"
+    orderID := "Garden"
+    xAPIVersion := "ADP"
+    xRequestID := "Specialist"
 
     ctx := context.Background()
     res, err := s.Payments.GetforOrder(ctx, orderID, xAPIVersion, xRequestID)
@@ -147,28 +148,28 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    xAPIVersion := "est"
+    xAPIVersion := "brown"
     orderPayRequest := &shared.OrderPayRequest{
-        OfferID: cashfree.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
+        OfferID: cashfreego.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
         PaymentMethod: shared.OrderPayRequestPaymentMethod{},
         PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
-        SaveInstrument: cashfree.Bool(false),
+        SaveInstrument: cashfreego.Bool(false),
     }
-    xRequestID := "mollitia"
+    xRequestID := "Via"
 
     ctx := context.Background()
     res, err := s.Payments.PayOrder(ctx, xAPIVersion, orderPayRequest, xRequestID)
@@ -210,14 +211,14 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
@@ -228,13 +229,13 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.PreauthorizeOrder(ctx, operations.CapturePreauthorizationRequest{
         AuthorizationRequest: &shared.AuthorizationRequest{
-            Action: shared.AuthorizationRequestActionVoid.ToPointer(),
-            Amount: cashfree.Float64(1709.09),
+            Action: shared.AuthorizationRequestActionCapture.ToPointer(),
+            Amount: cashfreego.Float64(5634.95),
         },
-        OrderID: "dolorem",
-        XAPIVersion: "corporis",
-        XIdempotencyKey: cashfree.String("explicabo"),
-        XRequestID: cashfree.String("nobis"),
+        OrderID: "North West Mercedes",
+        XAPIVersion: "repeatedly Lead",
+        XIdempotencyKey: cashfreego.String("ivory Maine"),
+        XRequestID: cashfreego.String("Incredible"),
     })
     if err != nil {
         log.Fatal(err)
@@ -272,27 +273,27 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    paymentID := "enim"
-    xAPIVersion := "omnis"
+    paymentID := "sad"
+    xAPIVersion := "challenge"
     otpRequest := &shared.OTPRequest{
         Action: shared.OTPRequestActionSubmitOtp,
-        Otp: "minima",
+        Otp: "Oriental Gasoline",
     }
-    xRequestID := "excepturi"
+    xRequestID := "seriously"
 
     ctx := context.Background()
     res, err := s.Payments.Submit(ctx, paymentID, xAPIVersion, otpRequest, xRequestID)
