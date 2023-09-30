@@ -3,9 +3,8 @@
 package shared
 
 import (
-	"bytes"
-	"encoding/json"
 	"errors"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 )
 
 type PaymentMethodInPaymentsEntityPaymentMethodType string
@@ -85,57 +84,44 @@ func CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodPaylaterInPaym
 }
 
 func (u *PaymentMethodInPaymentsEntityPaymentMethod) UnmarshalJSON(data []byte) error {
-	var d *json.Decoder
 
 	paymentMethodUPIInPaymentsEntity := new(PaymentMethodUPIInPaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentMethodUPIInPaymentsEntity); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentMethodUPIInPaymentsEntity, "", true, true); err == nil {
 		u.PaymentMethodUPIInPaymentsEntity = paymentMethodUPIInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodUPIInPaymentsEntity
 		return nil
 	}
 
 	paymentMethodNetBankingInPaymentsEntity := new(PaymentMethodNetBankingInPaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentMethodNetBankingInPaymentsEntity); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentMethodNetBankingInPaymentsEntity, "", true, true); err == nil {
 		u.PaymentMethodNetBankingInPaymentsEntity = paymentMethodNetBankingInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodNetBankingInPaymentsEntity
 		return nil
 	}
 
 	paymentMethodAppInPaymentsEntity := new(PaymentMethodAppInPaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentMethodAppInPaymentsEntity); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentMethodAppInPaymentsEntity, "", true, true); err == nil {
 		u.PaymentMethodAppInPaymentsEntity = paymentMethodAppInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodAppInPaymentsEntity
 		return nil
 	}
 
 	paymentMethodCardlessEMIInPaymentsEntity := new(PaymentMethodCardlessEMIInPaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentMethodCardlessEMIInPaymentsEntity); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentMethodCardlessEMIInPaymentsEntity, "", true, true); err == nil {
 		u.PaymentMethodCardlessEMIInPaymentsEntity = paymentMethodCardlessEMIInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodCardlessEMIInPaymentsEntity
 		return nil
 	}
 
 	paymentMethodPaylaterInPaymentsEntity := new(PaymentMethodPaylaterInPaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentMethodPaylaterInPaymentsEntity); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentMethodPaylaterInPaymentsEntity, "", true, true); err == nil {
 		u.PaymentMethodPaylaterInPaymentsEntity = paymentMethodPaylaterInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodPaylaterInPaymentsEntity
 		return nil
 	}
 
 	paymentMethodCardInPaymentsEntity := new(PaymentMethodCardInPaymentsEntity)
-	d = json.NewDecoder(bytes.NewReader(data))
-	d.DisallowUnknownFields()
-	if err := d.Decode(&paymentMethodCardInPaymentsEntity); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentMethodCardInPaymentsEntity, "", true, true); err == nil {
 		u.PaymentMethodCardInPaymentsEntity = paymentMethodCardInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodCardInPaymentsEntity
 		return nil
@@ -145,32 +131,31 @@ func (u *PaymentMethodInPaymentsEntityPaymentMethod) UnmarshalJSON(data []byte) 
 }
 
 func (u PaymentMethodInPaymentsEntityPaymentMethod) MarshalJSON() ([]byte, error) {
-	if u.PaymentMethodUPIInPaymentsEntity != nil {
-		return json.Marshal(u.PaymentMethodUPIInPaymentsEntity)
+	if u.PaymentMethodCardInPaymentsEntity != nil {
+		return utils.MarshalJSON(u.PaymentMethodCardInPaymentsEntity, "", true)
 	}
 
 	if u.PaymentMethodNetBankingInPaymentsEntity != nil {
-		return json.Marshal(u.PaymentMethodNetBankingInPaymentsEntity)
+		return utils.MarshalJSON(u.PaymentMethodNetBankingInPaymentsEntity, "", true)
+	}
+
+	if u.PaymentMethodUPIInPaymentsEntity != nil {
+		return utils.MarshalJSON(u.PaymentMethodUPIInPaymentsEntity, "", true)
 	}
 
 	if u.PaymentMethodAppInPaymentsEntity != nil {
-		return json.Marshal(u.PaymentMethodAppInPaymentsEntity)
+		return utils.MarshalJSON(u.PaymentMethodAppInPaymentsEntity, "", true)
 	}
 
 	if u.PaymentMethodCardlessEMIInPaymentsEntity != nil {
-		return json.Marshal(u.PaymentMethodCardlessEMIInPaymentsEntity)
+		return utils.MarshalJSON(u.PaymentMethodCardlessEMIInPaymentsEntity, "", true)
 	}
 
 	if u.PaymentMethodPaylaterInPaymentsEntity != nil {
-		return json.Marshal(u.PaymentMethodPaylaterInPaymentsEntity)
-	}
-
-	if u.PaymentMethodCardInPaymentsEntity != nil {
-		return json.Marshal(u.PaymentMethodCardInPaymentsEntity)
+		return utils.MarshalJSON(u.PaymentMethodPaylaterInPaymentsEntity, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type: all fields are null")
-
 }
 
 type PaymentMethodInPaymentsEntity struct {
