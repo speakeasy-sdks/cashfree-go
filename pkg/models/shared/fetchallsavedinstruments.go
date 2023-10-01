@@ -5,6 +5,8 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/types"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 )
 
 // FetchAllSavedInstrumentsInstrumentStatus - Status of the saved instrument.
@@ -35,31 +37,6 @@ func (e *FetchAllSavedInstrumentsInstrumentStatus) UnmarshalJSON(data []byte) er
 	}
 }
 
-// FetchAllSavedInstrumentsInstrumentType - Type of the saved instrument
-type FetchAllSavedInstrumentsInstrumentType string
-
-const (
-	FetchAllSavedInstrumentsInstrumentTypeCard FetchAllSavedInstrumentsInstrumentType = "card"
-)
-
-func (e FetchAllSavedInstrumentsInstrumentType) ToPointer() *FetchAllSavedInstrumentsInstrumentType {
-	return &e
-}
-
-func (e *FetchAllSavedInstrumentsInstrumentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "card":
-		*e = FetchAllSavedInstrumentsInstrumentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for FetchAllSavedInstrumentsInstrumentType: %v", v)
-	}
-}
-
 type FetchAllSavedInstruments struct {
 	// cf_payment_id of the successful transaction done while saving instrument
 	AfaReference *int64 `json:"afa_reference,omitempty"`
@@ -75,9 +52,20 @@ type FetchAllSavedInstruments struct {
 	// Status of the saved instrument.
 	InstrumentStatus *FetchAllSavedInstrumentsInstrumentStatus `json:"instrument_status,omitempty"`
 	// Type of the saved instrument
-	InstrumentType *FetchAllSavedInstrumentsInstrumentType `json:"instrument_type,omitempty"`
+	instrumentType *string `const:"card" json:"instrument_type,omitempty"`
 	// Unique id for the saved instrument
 	InstrumentUID *string `json:"instrument_uid,omitempty"`
+}
+
+func (f FetchAllSavedInstruments) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(f, "", false)
+}
+
+func (f *FetchAllSavedInstruments) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *FetchAllSavedInstruments) GetAfaReference() *int64 {
@@ -129,11 +117,8 @@ func (o *FetchAllSavedInstruments) GetInstrumentStatus() *FetchAllSavedInstrumen
 	return o.InstrumentStatus
 }
 
-func (o *FetchAllSavedInstruments) GetInstrumentType() *FetchAllSavedInstrumentsInstrumentType {
-	if o == nil {
-		return nil
-	}
-	return o.InstrumentType
+func (o *FetchAllSavedInstruments) GetInstrumentType() *string {
+	return types.String("card")
 }
 
 func (o *FetchAllSavedInstruments) GetInstrumentUID() *string {

@@ -1,4 +1,5 @@
 # Orders
+(*Orders*)
 
 ## Overview
 
@@ -25,7 +26,7 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/callbacks"
@@ -33,53 +34,53 @@ import(
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    xAPIVersion := "placeat"
+    xAPIVersion := "online"
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
-            CustomerBankAccountNumber: cashfree.String("voluptatum"),
-            CustomerBankCode: cashfree.Float64(4799.77),
-            CustomerBankIfsc: cashfree.String("excepturi"),
-            CustomerEmail: cashfree.String("nisi"),
-            CustomerID: "recusandae",
-            CustomerName: cashfree.String("temporibus"),
-            CustomerPhone: "ab",
+            CustomerBankAccountNumber: cashfreego.String("Extended South"),
+            CustomerBankCode: cashfreego.Float64(9967.06),
+            CustomerBankIfsc: cashfreego.String("abnormally deposit evolve"),
+            CustomerEmail: cashfreego.String("fuchsia Gasoline Screen"),
+            CustomerID: "physical Ameliorated",
+            CustomerName: cashfreego.String("after"),
+            CustomerPhone: "Intelligent Fish",
         },
         OrderAmount: 10.15,
         OrderCurrency: "INR",
-        OrderExpiryTime: cashfree.String("2021-07-02T10:20:12+05:30"),
-        OrderID: cashfree.String("quis"),
+        OrderExpiryTime: cashfreego.String("2021-07-02T10:20:12+05:30"),
+        OrderID: cashfreego.String("Fiat"),
         OrderMeta: &shared.OrderMeta{
-            NotifyURL: cashfree.String("veritatis"),
-            PaymentMethods: cashfree.String("deserunt"),
-            ReturnURL: cashfree.String("perferendis"),
+            NotifyURL: cashfreego.String("Grocery Borders Northwest"),
+            PaymentMethods: cashfreego.String("Kentucky animated"),
+            ReturnURL: cashfreego.String("Interactions Senior Mouse"),
         },
-        OrderNote: cashfree.String("Test order"),
+        OrderNote: cashfreego.String("Test order"),
         OrderSplits: []shared.VendorSplit{
             shared.VendorSplit{
-                Amount: cashfree.Float64(3682.41),
-                Percentage: cashfree.Float64(8326.2),
-                VendorID: cashfree.String("sapiente"),
+                Amount: cashfreego.Float64(155.52),
+                Percentage: cashfreego.Float64(9081.06),
+                VendorID: cashfreego.String("Towels likewise"),
             },
         },
         OrderTags: map[string]string{
-            "quo": "odit",
+            "voluptate": "Praseodymium",
         },
         Terminal: &shared.TerminalDetails{
-            TerminalID: "at",
-            TerminalPhoneNo: "at",
-            TerminalType: "maiores",
+            TerminalID: "Rubber silver Indiana",
+            TerminalPhoneNo: "Toyota Neptunium round",
+            TerminalType: "Salad",
         },
     }
-    xIdempotencyKey := "molestiae"
-    xRequestID := "quod"
+    xIdempotencyKey := "incompatible overhang"
+    xRequestID := "Electronic"
 
     ctx := context.Background()
     res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
@@ -127,23 +128,23 @@ package main
 import(
 	"context"
 	"log"
-	"github.com/speakeasy-sdks/cashfree-go"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
-    s := cashfree.New(
-        cashfree.WithSecurity(shared.Security{
+    s := cashfreego.New(
+        cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
                 XClientID: "",
                 XClientSecret: "",
             },
         }),
     )
-    orderID := "quod"
-    xAPIVersion := "esse"
-    xRequestID := "totam"
+    orderID := "female"
+    xAPIVersion := "program"
+    xRequestID := "transmit"
 
     ctx := context.Background()
     res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)
