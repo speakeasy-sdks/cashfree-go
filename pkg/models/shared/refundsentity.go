@@ -5,32 +5,9 @@ package shared
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/types"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 )
-
-// RefundsEntityEntity - Type of object
-type RefundsEntityEntity string
-
-const (
-	RefundsEntityEntityRefund RefundsEntityEntity = "refund"
-)
-
-func (e RefundsEntityEntity) ToPointer() *RefundsEntityEntity {
-	return &e
-}
-
-func (e *RefundsEntityEntity) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "refund":
-		*e = RefundsEntityEntity(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RefundsEntityEntity: %v", v)
-	}
-}
 
 // RefundsEntityMetadata - Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs
 type RefundsEntityMetadata struct {
@@ -137,7 +114,7 @@ type RefundsEntity struct {
 	// Time of refund creation
 	CreatedAt *string `json:"created_at,omitempty"`
 	// Type of object
-	Entity *RefundsEntityEntity `json:"entity,omitempty"`
+	entity *string `const:"refund" json:"entity,omitempty"`
 	// Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs
 	Metadata *RefundsEntityMetadata `json:"metadata,omitempty"`
 	// Merchant’s order Id of the order for which refund is initiated
@@ -168,6 +145,17 @@ type RefundsEntity struct {
 	StatusDescription *string `json:"status_description,omitempty"`
 }
 
+func (r RefundsEntity) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(r, "", false)
+}
+
+func (r *RefundsEntity) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
 func (o *RefundsEntity) GetCfPaymentID() *int64 {
 	if o == nil {
 		return nil
@@ -189,11 +177,8 @@ func (o *RefundsEntity) GetCreatedAt() *string {
 	return o.CreatedAt
 }
 
-func (o *RefundsEntity) GetEntity() *RefundsEntityEntity {
-	if o == nil {
-		return nil
-	}
-	return o.Entity
+func (o *RefundsEntity) GetEntity() *string {
+	return types.String("refund")
 }
 
 func (o *RefundsEntity) GetMetadata() *RefundsEntityMetadata {

@@ -4,16 +4,28 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
 type GetEligibilityPaylaterRequest struct {
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request body to check for eligibility for paylater
 	EligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (g GetEligibilityPaylaterRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetEligibilityPaylaterRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetEligibilityPaylaterRequest) GetXAPIVersion() string {
@@ -38,12 +50,15 @@ func (o *GetEligibilityPaylaterRequest) GetXRequestID() *string {
 }
 
 type GetEligibilityPaylaterResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
 	EligiblePaylaters []shared.EligiblePaylater
 	Headers           map[string][]string
-	StatusCode        int
-	RawResponse       *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *GetEligibilityPaylaterResponse) GetContentType() string {
