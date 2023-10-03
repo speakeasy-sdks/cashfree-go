@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
@@ -11,11 +12,22 @@ type SubmitOTPRequestRequest struct {
 	// The order or invoice ID for which you want to view the payment details.
 	PaymentID string `pathParam:"style=simple,explode=false,name=payment_id"`
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account
 	OTPRequest *shared.OTPRequest `request:"mediaType=application/json"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (s SubmitOTPRequestRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SubmitOTPRequestRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *SubmitOTPRequestRequest) GetPaymentID() string {
@@ -47,12 +59,15 @@ func (o *SubmitOTPRequestRequest) GetXRequestID() *string {
 }
 
 type SubmitOTPRequestResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	Headers     map[string][]string
 	// OK
 	OTPResponseEntity *shared.OTPResponseEntity
-	StatusCode        int
-	RawResponse       *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *SubmitOTPRequestResponse) GetContentType() string {
