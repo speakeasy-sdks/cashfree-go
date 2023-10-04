@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
@@ -13,9 +14,20 @@ type GetRefundRequest struct {
 	// Refund Id of the refund you want to fetch.
 	RefundID string `pathParam:"style=simple,explode=false,name=refund_id"`
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (g GetRefundRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetRefundRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetRefundRequest) GetOrderID() string {
@@ -47,12 +59,15 @@ func (o *GetRefundRequest) GetXRequestID() *string {
 }
 
 type GetRefundResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	Headers     map[string][]string
 	// OK
 	RefundsEntity *shared.RefundsEntity
-	StatusCode    int
-	RawResponse   *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *GetRefundResponse) GetContentType() string {

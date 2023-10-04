@@ -4,7 +4,7 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/types"
 )
 
 // APIError404 - Error when resource requested is not found
@@ -12,7 +12,7 @@ type APIError404 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// invalid_request_error
-	Type *shared.APIError404Type `json:"type,omitempty"`
+	Type *string `const:"invalid_request_error" json:"type,omitempty"`
 }
 
 var _ error = &APIError404{}

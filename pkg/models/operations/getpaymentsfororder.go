@@ -3,7 +3,9 @@
 package operations
 
 import (
+	"errors"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
@@ -11,9 +13,20 @@ type GetPaymentsforOrderRequest struct {
 	// Order or the invoice ID for which you want to view the payment details.
 	OrderID string `pathParam:"style=simple,explode=false,name=order_id"`
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (g GetPaymentsforOrderRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GetPaymentsforOrderRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GetPaymentsforOrderRequest) GetOrderID() string {
@@ -37,13 +50,57 @@ func (o *GetPaymentsforOrderRequest) GetXRequestID() *string {
 	return o.XRequestID
 }
 
+type GetPaymentsforOrder200ApplicationJSONType string
+
+const (
+	GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity GetPaymentsforOrder200ApplicationJSONType = "PaymentsEntity"
+)
+
+type GetPaymentsforOrder200ApplicationJSON struct {
+	PaymentsEntity *shared.PaymentsEntity
+
+	Type GetPaymentsforOrder200ApplicationJSONType
+}
+
+func CreateGetPaymentsforOrder200ApplicationJSONPaymentsEntity(paymentsEntity shared.PaymentsEntity) GetPaymentsforOrder200ApplicationJSON {
+	typ := GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
+
+	return GetPaymentsforOrder200ApplicationJSON{
+		PaymentsEntity: &paymentsEntity,
+		Type:           typ,
+	}
+}
+
+func (u *GetPaymentsforOrder200ApplicationJSON) UnmarshalJSON(data []byte) error {
+
+	paymentsEntity := new(shared.PaymentsEntity)
+	if err := utils.UnmarshalJSON(data, &paymentsEntity, "", true, true); err == nil {
+		u.PaymentsEntity = paymentsEntity
+		u.Type = GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
+		return nil
+	}
+
+	return errors.New("could not unmarshal into supported union types")
+}
+
+func (u GetPaymentsforOrder200ApplicationJSON) MarshalJSON() ([]byte, error) {
+	if u.PaymentsEntity != nil {
+		return utils.MarshalJSON(u.PaymentsEntity, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type: all fields are null")
+}
+
 type GetPaymentsforOrderResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	Headers     map[string][]string
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 	// OK
-	PaymentsEntity *shared.PaymentsEntity
-	StatusCode     int
-	RawResponse    *http.Response
+	GetPaymentsforOrder200ApplicationJSONOneOf *GetPaymentsforOrder200ApplicationJSON
 }
 
 func (o *GetPaymentsforOrderResponse) GetContentType() string {
@@ -60,13 +117,6 @@ func (o *GetPaymentsforOrderResponse) GetHeaders() map[string][]string {
 	return o.Headers
 }
 
-func (o *GetPaymentsforOrderResponse) GetPaymentsEntity() *shared.PaymentsEntity {
-	if o == nil {
-		return nil
-	}
-	return o.PaymentsEntity
-}
-
 func (o *GetPaymentsforOrderResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -79,4 +129,11 @@ func (o *GetPaymentsforOrderResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetPaymentsforOrderResponse) GetGetPaymentsforOrder200ApplicationJSONOneOf() *GetPaymentsforOrder200ApplicationJSON {
+	if o == nil {
+		return nil
+	}
+	return o.GetPaymentsforOrder200ApplicationJSONOneOf
 }
