@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"net/http"
 )
 
@@ -40,9 +41,20 @@ type FetchAllSavedInstrumentsRequest struct {
 	// type to instrument to query
 	InstrumentType FetchAllSavedInstrumentsInstrumentType `queryParam:"style=form,explode=true,name=instrument_type"`
 	// API version to be used. Format is in YYYY-MM-DD
-	XAPIVersion string `header:"style=simple,explode=false,name=x-api-version"`
+	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
 	XRequestID *string `header:"style=simple,explode=false,name=x-request-id"`
+}
+
+func (f FetchAllSavedInstrumentsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(f, "", false)
+}
+
+func (f *FetchAllSavedInstrumentsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &f, "", false, false); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *FetchAllSavedInstrumentsRequest) GetCustomerID() string {
@@ -74,12 +86,15 @@ func (o *FetchAllSavedInstrumentsRequest) GetXRequestID() *string {
 }
 
 type FetchAllSavedInstrumentsResponse struct {
+	// HTTP response content type for this operation
 	ContentType string
 	// OK
 	FetchAllSavedInstruments []shared.FetchAllSavedInstruments
 	Headers                  map[string][]string
-	StatusCode               int
-	RawResponse              *http.Response
+	// HTTP response status code for this operation
+	StatusCode int
+	// Raw HTTP response; suitable for custom response parsing
+	RawResponse *http.Response
 }
 
 func (o *FetchAllSavedInstrumentsResponse) GetContentType() string {
