@@ -28,9 +28,7 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/callbacks"
-	"net/http"
 )
 
 func main() {
@@ -42,45 +40,32 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "online"
+    var xAPIVersion string = "online"
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
-            CustomerBankAccountNumber: cashfreego.String("Extended South"),
-            CustomerBankCode: cashfreego.Float64(9967.06),
-            CustomerBankIfsc: cashfreego.String("abnormally deposit evolve"),
-            CustomerEmail: cashfreego.String("fuchsia Gasoline Screen"),
-            CustomerID: "physical Ameliorated",
-            CustomerName: cashfreego.String("after"),
-            CustomerPhone: "Intelligent Fish",
+            CustomerID: "Extended South",
+            CustomerPhone: "grey technology East",
         },
         OrderAmount: 10.15,
         OrderCurrency: "INR",
         OrderExpiryTime: cashfreego.String("2021-07-02T10:20:12+05:30"),
-        OrderID: cashfreego.String("Fiat"),
-        OrderMeta: &shared.OrderMeta{
-            NotifyURL: cashfreego.String("Grocery Borders Northwest"),
-            PaymentMethods: cashfreego.String("Kentucky animated"),
-            ReturnURL: cashfreego.String("Interactions Senior Mouse"),
-        },
+        OrderMeta: &shared.OrderMeta{},
         OrderNote: cashfreego.String("Test order"),
         OrderSplits: []shared.VendorSplit{
-            shared.VendorSplit{
-                Amount: cashfreego.Float64(155.52),
-                Percentage: cashfreego.Float64(9081.06),
-                VendorID: cashfreego.String("Towels likewise"),
-            },
+            shared.VendorSplit{},
         },
         OrderTags: map[string]string{
-            "voluptate": "Praseodymium",
+            "product": "Laptop",
+            "shipping_address": "123 Main St",
         },
         Terminal: &shared.TerminalDetails{
-            TerminalID: "Rubber silver Indiana",
-            TerminalPhoneNo: "Toyota Neptunium round",
-            TerminalType: "Salad",
+            TerminalID: "evolve",
+            TerminalPhoneNo: "fuchsia Gasoline Screen",
+            TerminalType: "physical Ameliorated",
         },
     }
-    xIdempotencyKey := "incompatible overhang"
-    xRequestID := "Electronic"
+    var xIdempotencyKey *string = "after"
+    var xRequestID *string = "overriding"
 
     ctx := context.Background()
     res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
@@ -130,7 +115,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -142,9 +126,9 @@ func main() {
             },
         }),
     )
-    orderID := "female"
-    xAPIVersion := "program"
-    xRequestID := "transmit"
+    var orderID string = "female"
+    var xAPIVersion string = "program"
+    var xRequestID *string = "transmit"
 
     ctx := context.Background()
     res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)

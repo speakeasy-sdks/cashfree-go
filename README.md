@@ -25,7 +25,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -37,7 +36,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "Gasoline"
+    var xAPIVersion string = "Gasoline"
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Filters: &shared.OfferFilters{
             OfferType: []shared.OfferType{
@@ -49,7 +48,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "Southwest"
+    var xRequestID *string = "Southwest"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
@@ -132,8 +131,6 @@ func main() {
 
 <!-- Start Dev Containers -->
 
-
-
 <!-- End Dev Containers -->
 
 
@@ -146,8 +143,6 @@ returned response object will have a `Next` method that can be called to pull do
 return value of `Next` is `nil`, then there are no more pages to be fetched.
 
 Here's an example of one such pagination call:
-
-
 <!-- End Pagination -->
 
 

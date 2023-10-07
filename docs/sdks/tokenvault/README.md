@@ -26,7 +26,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -38,10 +37,10 @@ func main() {
             },
         }),
     )
-    customerID := "Branding"
-    instrumentID := "East"
-    xAPIVersion := "withdrawal"
-    xRequestID := "violet"
+    var customerID string = "Branding"
+    var instrumentID string = "East"
+    var xAPIVersion string = "withdrawal"
+    var xRequestID *string = "violet"
 
     ctx := context.Background()
     res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -86,7 +85,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -98,10 +96,10 @@ func main() {
             },
         }),
     )
-    customerID := "vice"
-    instrumentID := "Representative"
-    xAPIVersion := "Smart"
-    xRequestID := "red"
+    var customerID string = "vice"
+    var instrumentID string = "Representative"
+    var xAPIVersion string = "Smart"
+    var xRequestID *string = "red"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -146,7 +144,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -158,10 +155,10 @@ func main() {
             },
         }),
     )
-    customerID := "Cab"
-    instrumentID := "ex"
-    xAPIVersion := "Practical"
-    xRequestID := "24/365"
+    var customerID string = "Cab"
+    var instrumentID string = "ex"
+    var xAPIVersion string = "Practical"
+    var xRequestID *string = "24/365"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -218,10 +215,10 @@ func main() {
             },
         }),
     )
-    customerID := "Balanced"
-    instrumentType := operations.FetchAllSavedInstrumentsInstrumentTypeCard
-    xAPIVersion := "Iranian"
-    xRequestID := "above"
+    var customerID string = "Balanced"
+    var instrumentType operations.FetchAllSavedInstrumentsInstrumentType = operations.FetchAllSavedInstrumentsInstrumentTypeCard
+    var xAPIVersion string = "Iranian"
+    var xRequestID *string = "above"
 
     ctx := context.Background()
     res, err := s.TokenVault.GetAllSavedInstruments(ctx, customerID, instrumentType, xAPIVersion, xRequestID)

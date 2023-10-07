@@ -38,20 +38,16 @@ func main() {
 
     ctx := context.Background()
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
-        AcceptMedia: cashfreego.String("Northeast Hatchback Kia"),
         FetchPGReconRequest: &shared.FetchPGReconRequest{
             Filters: shared.FetchPGReconRequestFilters{
-                EndDate: "towards",
-                StartDate: "Xenon Account",
+                EndDate: "Northeast Hatchback Kia",
+                StartDate: "towards",
             },
             Pagination: shared.FetchPGReconRequestPagination{
-                Cursor: cashfreego.String("Cambridgeshire"),
-                Limit: 284160,
+                Limit: 458049,
             },
         },
-        XAPIVersion: "Neon aside",
-        XIdempotencyKey: cashfreego.String("incubate South"),
-        XRequestID: cashfreego.String("Bicycle group"),
+        XAPIVersion: "withdrawal Car magnetic",
     })
     if err != nil {
         log.Fatal(err)

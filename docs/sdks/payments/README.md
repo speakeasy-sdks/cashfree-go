@@ -27,7 +27,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -39,10 +38,10 @@ func main() {
             },
         }),
     )
-    cfPaymentID := 158773
-    orderID := "mobile"
-    xAPIVersion := "Avon"
-    xRequestID := "Solutions"
+    var cfPaymentID int64 = 158773
+    var orderID string = "mobile"
+    var xAPIVersion string = "Avon"
+    var xRequestID *string = "Solutions"
 
     ctx := context.Background()
     res, err := s.Payments.Payment(ctx, cfPaymentID, orderID, xAPIVersion, xRequestID)
@@ -87,7 +86,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -99,9 +97,9 @@ func main() {
             },
         }),
     )
-    orderID := "Garden"
-    xAPIVersion := "ADP"
-    xRequestID := "Specialist"
+    var orderID string = "Garden"
+    var xAPIVersion string = "ADP"
+    var xRequestID *string = "Specialist"
 
     ctx := context.Background()
     res, err := s.Payments.GetforOrder(ctx, orderID, xAPIVersion, xRequestID)
@@ -150,7 +148,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -162,14 +159,20 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "brown"
+    var xAPIVersion string = "brown"
     orderPayRequest := &shared.OrderPayRequest{
         OfferID: cashfreego.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
-        PaymentMethod: shared.OrderPayRequestPaymentMethod{},
+        PaymentMethod: shared.CreateOrderPayRequestPaymentMethodUPIPaymentMethod(
+                shared.UPIPaymentMethod{
+                    Upi: shared.Upi{
+                        Authorization: &shared.UPIAuthorizeDetails{},
+                        Channel: shared.UpiChannelQrcode,
+                    },
+                },
+        ),
         PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
-        SaveInstrument: cashfreego.Bool(false),
     }
-    xRequestID := "Via"
+    var xRequestID *string = "Bicycle"
 
     ctx := context.Background()
     res, err := s.Payments.PayOrder(ctx, xAPIVersion, orderPayRequest, xRequestID)
@@ -228,14 +231,9 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.PreauthorizeOrder(ctx, operations.CapturePreauthorizationRequest{
-        AuthorizationRequest: &shared.AuthorizationRequest{
-            Action: shared.AuthorizationRequestActionCapture.ToPointer(),
-            Amount: cashfreego.Float64(5634.95),
-        },
-        OrderID: "North West Mercedes",
-        XAPIVersion: "repeatedly Lead",
-        XIdempotencyKey: cashfreego.String("ivory Maine"),
-        XRequestID: cashfreego.String("Incredible"),
+        AuthorizationRequest: &shared.AuthorizationRequest{},
+        OrderID: "maiores",
+        XAPIVersion: "Avon",
     })
     if err != nil {
         log.Fatal(err)
@@ -275,7 +273,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -287,13 +284,13 @@ func main() {
             },
         }),
     )
-    paymentID := "sad"
-    xAPIVersion := "challenge"
+    var paymentID string = "sad"
+    var xAPIVersion string = "challenge"
     otpRequest := &shared.OTPRequest{
         Action: shared.OTPRequestActionSubmitOtp,
         Otp: "Oriental Gasoline",
     }
-    xRequestID := "seriously"
+    var xRequestID *string = "seriously"
 
     ctx := context.Background()
     res, err := s.Payments.Submit(ctx, paymentID, xAPIVersion, otpRequest, xRequestID)

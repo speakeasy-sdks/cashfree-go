@@ -43,20 +43,12 @@ func main() {
         CreateRefundRequest: &shared.CreateRefundRequest{
             RefundAmount: 4865.89,
             RefundID: "Configuration Money",
-            RefundNote: cashfreego.String("Cambridgeshire grey technology"),
-            RefundSpeed: shared.CreateRefundRequestRefundSpeedStandard.ToPointer(),
             RefundSplits: []shared.VendorSplit{
-                shared.VendorSplit{
-                    Amount: cashfreego.Float64(4552.22),
-                    Percentage: cashfreego.Float64(1697.27),
-                    VendorID: cashfreego.String("Northwest"),
-                },
+                shared.VendorSplit{},
             },
         },
-        OrderID: "SUV quantify Polestar",
-        XAPIVersion: "physical Ameliorated",
-        XIdempotencyKey: cashfreego.String("after"),
-        XRequestID: cashfreego.String("Intelligent Fish"),
+        OrderID: "Cambridgeshire grey technology",
+        XAPIVersion: "deposit",
     })
     if err != nil {
         log.Fatal(err)
@@ -96,7 +88,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -108,10 +99,10 @@ func main() {
             },
         }),
     )
-    orderID := "female"
-    refundID := "program"
-    xAPIVersion := "transmit"
-    xRequestID := "protocol"
+    var orderID string = "female"
+    var refundID string = "program"
+    var xAPIVersion string = "transmit"
+    var xRequestID *string = "protocol"
 
     ctx := context.Background()
     res, err := s.Refunds.Get(ctx, orderID, refundID, xAPIVersion, xRequestID)
@@ -156,7 +147,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -168,9 +158,9 @@ func main() {
             },
         }),
     )
-    orderID := "Borders"
-    xAPIVersion := "Brand"
-    xRequestID := "bandwidth"
+    var orderID string = "Borders"
+    var xAPIVersion string = "Brand"
+    var xRequestID *string = "bandwidth"
 
     ctx := context.Background()
     res, err := s.Refunds.GetAllforOrder(ctx, orderID, xAPIVersion, xRequestID)

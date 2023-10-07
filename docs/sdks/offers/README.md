@@ -24,7 +24,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -36,7 +35,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "online"
+    var xAPIVersion string = "online"
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
@@ -65,10 +64,16 @@ func main() {
         OfferValidations: shared.OfferValidations{
             MaxAllowed: 10,
             MinAmount: cashfreego.Float64(1),
-            PaymentMethod: shared.OfferValidationsPaymentMethod{},
+            PaymentMethod: shared.CreateOfferValidationsPaymentMethodOfferWallet(
+                    shared.OfferWallet{
+                        App: &shared.OfferWalletWalletOffer{
+                            Provider: cashfreego.String("paytm"),
+                        },
+                    },
+            ),
         },
     }
-    xRequestID := "mobile"
+    var xRequestID *string = "physical"
 
     ctx := context.Background()
     res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
@@ -112,7 +117,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -124,9 +128,9 @@ func main() {
             },
         }),
     )
-    offerID := "female"
-    xAPIVersion := "program"
-    xRequestID := "transmit"
+    var offerID string = "female"
+    var xAPIVersion string = "program"
+    var xRequestID *string = "transmit"
 
     ctx := context.Background()
     res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)

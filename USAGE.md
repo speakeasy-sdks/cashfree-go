@@ -9,7 +9,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -21,7 +20,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "Gasoline"
+    var xAPIVersion string = "Gasoline"
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Filters: &shared.OfferFilters{
             OfferType: []shared.OfferType{
@@ -33,7 +32,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "Southwest"
+    var xRequestID *string = "Southwest"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)

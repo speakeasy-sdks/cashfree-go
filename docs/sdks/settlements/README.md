@@ -40,26 +40,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.Fetch(ctx, operations.GetSettlementReconciliationRequest{
-        AcceptMedia: cashfreego.String("Total Honda Southeast"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    324295,
+                    874373,
                 },
-                EndDate: cashfreego.String("who Caesium sometimes"),
                 SettlementUtrs: []string{
-                    "lumen",
+                    "Total",
                 },
-                StartDate: cashfreego.String("auxiliary New cyan"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfreego.String("connect"),
-                Limit: 306165,
+                Limit: 823192,
             },
         },
-        XAPIVersion: "scarily",
-        XIdempotencyKey: cashfreego.String("model microphone"),
-        XRequestID: cashfreego.String("feed holistic"),
+        XAPIVersion: "Southeast who",
     })
     if err != nil {
         log.Fatal(err)
@@ -114,26 +108,20 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Settlements.GetAll(ctx, operations.GetSettlementsRequest{
-        AcceptMedia: cashfreego.String("Van Reggae"),
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    651203,
+                    461008,
                 },
-                EndDate: cashfreego.String("North PCI"),
                 SettlementUtrs: []string{
-                    "Program",
+                    "Van",
                 },
-                StartDate: cashfreego.String("scalable"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Cursor: cashfreego.String("violet"),
-                Limit: 151768,
+                Limit: 598480,
             },
         },
-        XAPIVersion: "Fish",
-        XIdempotencyKey: cashfreego.String("Devolved meh radian"),
-        XRequestID: cashfreego.String("Assurance"),
+        XAPIVersion: "Global North PCI",
     })
     if err != nil {
         log.Fatal(err)
@@ -173,7 +161,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -185,9 +172,9 @@ func main() {
             },
         }),
     )
-    orderID := "Avon"
-    xAPIVersion := "Coupe"
-    xRequestID := "ASCII"
+    var orderID string = "Avon"
+    var xAPIVersion string = "Coupe"
+    var xRequestID *string = "ASCII"
 
     ctx := context.Background()
     res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)

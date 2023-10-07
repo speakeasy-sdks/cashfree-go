@@ -24,7 +24,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -36,9 +35,9 @@ func main() {
             },
         }),
     )
-    terminalPhoneNo := "Account"
-    xAPIVersion := "blockchains"
-    xRequestID := "Steel"
+    var terminalPhoneNo string = "Account"
+    var xAPIVersion string = "blockchains"
+    var xRequestID *string = "Steel"
 
     ctx := context.Background()
     res, err := s.SoftPOS.TerminalStatus(ctx, terminalPhoneNo, xAPIVersion, xRequestID)
@@ -82,7 +81,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -94,14 +92,13 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "yet"
+    var xAPIVersion string = "yet"
     createTerminalRequest := &shared.CreateTerminalRequest{
-        TerminalID: cashfreego.String("generating Internal"),
-        TerminalName: "Fantastic Factors male",
-        TerminalPhoneNo: "SUV Smart Reggae",
+        TerminalName: "generating Internal",
+        TerminalPhoneNo: "Fantastic Factors male",
     }
-    xIdempotencyKey := "wage"
-    xRequestID := "but"
+    var xIdempotencyKey *string = "SUV Smart Reggae"
+    var xRequestID *string = "Wintheiser"
 
     ctx := context.Background()
     res, err := s.SoftPOS.CreateTerminals(ctx, xAPIVersion, createTerminalRequest, xIdempotencyKey, xRequestID)

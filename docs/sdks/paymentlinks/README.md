@@ -26,7 +26,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -38,10 +37,10 @@ func main() {
             },
         }),
     )
-    linkID := "Clifton"
-    xAPIVersion := "powder"
-    xIdempotencyKey := "Avon teal"
-    xRequestID := "Northwest"
+    var linkID string = "Clifton"
+    var xAPIVersion string = "powder"
+    var xIdempotencyKey *string = "Avon teal"
+    var xRequestID *string = "Northwest"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Cancel(ctx, linkID, xAPIVersion, xIdempotencyKey, xRequestID)
@@ -86,7 +85,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -98,37 +96,24 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "online"
+    var xAPIVersion string = "online"
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
-            CustomerEmail: cashfreego.String("Extended South"),
-            CustomerName: cashfreego.String("grey technology East"),
-            CustomerPhone: "evolve",
+            CustomerPhone: "Extended South",
         },
-        LinkAmount: 7150.4,
-        LinkAutoReminders: cashfreego.Bool(false),
-        LinkCurrency: "SUV quantify Polestar",
-        LinkExpiryTime: cashfreego.String("physical Ameliorated"),
-        LinkID: "after",
-        LinkMeta: &shared.LinkMetaEntity{
-            NotifyURL: cashfreego.String("Intelligent Fish"),
-            PaymentMethods: cashfreego.String("Fiat"),
-            ReturnURL: cashfreego.String("Grocery Borders Northwest"),
-            UpiIntent: cashfreego.Bool(false),
-        },
-        LinkMinimumPartialAmount: cashfreego.Float64(6519.85),
+        LinkAmount: 9967.06,
+        LinkCurrency: "abnormally deposit evolve",
+        LinkID: "fuchsia Gasoline Screen",
+        LinkMeta: &shared.LinkMetaEntity{},
         LinkNotes: map[string]string{
-            "aspernatur": "metrics",
+            "key_1": "value_1",
+            "key_2": "value_2",
         },
-        LinkNotify: &shared.LinkNotifyEntity{
-            SendEmail: cashfreego.Bool(false),
-            SendSms: cashfreego.Bool(false),
-        },
-        LinkPartialPayments: cashfreego.Bool(false),
-        LinkPurpose: "Minivan",
+        LinkNotify: &shared.LinkNotifyEntity{},
+        LinkPurpose: "physical Ameliorated",
     }
-    xIdempotencyKey := "Senior Mouse West"
-    xRequestID := "array"
+    var xIdempotencyKey *string = "after"
+    var xRequestID *string = "overriding"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Create(ctx, xAPIVersion, createLinkRequest, xIdempotencyKey, xRequestID)
@@ -173,7 +158,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -185,9 +169,9 @@ func main() {
             },
         }),
     )
-    linkID := "grateful"
-    xAPIVersion := "tomorrow"
-    xRequestID := "Account"
+    var linkID string = "grateful"
+    var xAPIVersion string = "tomorrow"
+    var xRequestID *string = "Account"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Fetch(ctx, linkID, xAPIVersion, xRequestID)
@@ -231,7 +215,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -243,9 +226,9 @@ func main() {
             },
         }),
     )
-    linkID := "violet"
-    xAPIVersion := "delicious"
-    xRequestID := "Account"
+    var linkID string = "violet"
+    var xAPIVersion string = "delicious"
+    var xRequestID *string = "Account"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.GetOrders(ctx, linkID, xAPIVersion, xRequestID)

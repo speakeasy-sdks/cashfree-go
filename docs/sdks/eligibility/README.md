@@ -21,7 +21,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -33,7 +32,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "Gasoline"
+    var xAPIVersion string = "Gasoline"
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Filters: &shared.OfferFilters{
             OfferType: []shared.OfferType{
@@ -45,7 +44,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "Southwest"
+    var xRequestID *string = "Southwest"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
@@ -89,7 +88,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -101,7 +99,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "protocol"
+    var xAPIVersion string = "protocol"
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfreego.Float64(100),
@@ -111,7 +109,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "navigate"
+    var xRequestID *string = "navigate"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetCardlessEMI(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
@@ -155,7 +153,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {
@@ -167,7 +164,7 @@ func main() {
             },
         }),
     )
-    xAPIVersion := "visualize"
+    var xAPIVersion string = "visualize"
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfreego.Float64(100),
@@ -177,7 +174,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
-    xRequestID := "concept"
+    var xRequestID *string = "concept"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetPaylaterMethods(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
