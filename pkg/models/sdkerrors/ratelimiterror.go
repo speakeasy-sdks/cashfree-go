@@ -4,14 +4,39 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"fmt"
 )
+
+// RateLimitErrorType - rate_limit_error
+type RateLimitErrorType string
+
+const (
+	RateLimitErrorTypeRateLimitError RateLimitErrorType = "rate_limit_error"
+)
+
+func (e RateLimitErrorType) ToPointer() *RateLimitErrorType {
+	return &e
+}
+
+func (e *RateLimitErrorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "rate_limit_error":
+		*e = RateLimitErrorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for RateLimitErrorType: %v", v)
+	}
+}
 
 type RateLimitError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// rate_limit_error
-	Type *shared.RateLimitErrorType `json:"type,omitempty"`
+	Type *RateLimitErrorType `json:"type,omitempty"`
 }
 
 var _ error = &RateLimitError{}

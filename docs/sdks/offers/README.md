@@ -35,7 +35,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "online"
+
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
@@ -73,6 +76,7 @@ func main() {
             ),
         },
     }
+
     var xRequestID *string = "physical"
 
     ctx := context.Background()
@@ -128,8 +132,12 @@ func main() {
             },
         }),
     )
+
+
     var offerID string = "female"
+
     var xAPIVersion string = "program"
+
     var xRequestID *string = "transmit"
 
     ctx := context.Background()

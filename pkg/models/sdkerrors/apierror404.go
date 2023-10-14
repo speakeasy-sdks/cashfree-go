@@ -4,15 +4,40 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"fmt"
 )
+
+// APIError404Type - invalid_request_error
+type APIError404Type string
+
+const (
+	APIError404TypeInvalidRequestError APIError404Type = "invalid_request_error"
+)
+
+func (e APIError404Type) ToPointer() *APIError404Type {
+	return &e
+}
+
+func (e *APIError404Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "invalid_request_error":
+		*e = APIError404Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for APIError404Type: %v", v)
+	}
+}
 
 // APIError404 - Error when resource requested is not found
 type APIError404 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// invalid_request_error
-	Type *shared.APIError404Type `json:"type,omitempty"`
+	Type *APIError404Type `json:"type,omitempty"`
 }
 
 var _ error = &APIError404{}

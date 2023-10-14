@@ -4,8 +4,33 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"fmt"
 )
+
+// APIError502Type - api_error
+type APIError502Type string
+
+const (
+	APIError502TypeAPIError APIError502Type = "api_error"
+)
+
+func (e APIError502Type) ToPointer() *APIError502Type {
+	return &e
+}
+
+func (e *APIError502Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "api_error":
+		*e = APIError502Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for APIError502Type: %v", v)
+	}
+}
 
 type APIError502 struct {
 	// `bank_processing_failure` will be returned here to denote failure at bank.
@@ -13,7 +38,7 @@ type APIError502 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// api_error
-	Type *shared.APIError502Type `json:"type,omitempty"`
+	Type *APIError502Type `json:"type,omitempty"`
 }
 
 var _ error = &APIError502{}

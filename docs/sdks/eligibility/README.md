@@ -32,7 +32,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "Gasoline"
+
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Filters: &shared.OfferFilters{
             OfferType: []shared.OfferType{
@@ -44,6 +47,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
+
     var xRequestID *string = "Southwest"
 
     ctx := context.Background()
@@ -99,7 +103,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "protocol"
+
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfreego.Float64(100),
@@ -109,6 +116,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
+
     var xRequestID *string = "navigate"
 
     ctx := context.Background()
@@ -164,7 +172,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "visualize"
+
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfreego.Float64(100),
@@ -174,6 +185,7 @@ func main() {
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
+
     var xRequestID *string = "concept"
 
     ctx := context.Background()

@@ -38,9 +38,14 @@ func main() {
             },
         }),
     )
+
+
     var cfPaymentID int64 = 158773
+
     var orderID string = "mobile"
+
     var xAPIVersion string = "Avon"
+
     var xRequestID *string = "Solutions"
 
     ctx := context.Background()
@@ -97,8 +102,12 @@ func main() {
             },
         }),
     )
+
+
     var orderID string = "Garden"
+
     var xAPIVersion string = "ADP"
+
     var xRequestID *string = "Specialist"
 
     ctx := context.Background()
@@ -159,7 +168,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "brown"
+
     orderPayRequest := &shared.OrderPayRequest{
         OfferID: cashfreego.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
         PaymentMethod: shared.CreateOrderPayRequestPaymentMethodUPIPaymentMethod(
@@ -172,6 +184,7 @@ func main() {
         ),
         PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
     }
+
     var xRequestID *string = "Bicycle"
 
     ctx := context.Background()
@@ -284,12 +297,17 @@ func main() {
             },
         }),
     )
+
+
     var paymentID string = "sad"
+
     var xAPIVersion string = "challenge"
+
     otpRequest := &shared.OTPRequest{
         Action: shared.OTPRequestActionSubmitOtp,
         Otp: "Oriental Gasoline",
     }
+
     var xRequestID *string = "seriously"
 
     ctx := context.Background()

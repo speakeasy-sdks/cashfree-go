@@ -4,14 +4,39 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"fmt"
 )
+
+// APIError409Type - invalid_request_error
+type APIError409Type string
+
+const (
+	APIError409TypeInvalidRequestError APIError409Type = "invalid_request_error"
+)
+
+func (e APIError409Type) ToPointer() *APIError409Type {
+	return &e
+}
+
+func (e *APIError409Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "invalid_request_error":
+		*e = APIError409Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for APIError409Type: %v", v)
+	}
+}
 
 type APIError409 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// invalid_request_error
-	Type *shared.APIError409Type `json:"type,omitempty"`
+	Type *APIError409Type `json:"type,omitempty"`
 }
 
 var _ error = &APIError409{}

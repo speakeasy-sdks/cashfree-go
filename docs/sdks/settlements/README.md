@@ -172,8 +172,12 @@ func main() {
             },
         }),
     )
+
+
     var orderID string = "Avon"
+
     var xAPIVersion string = "Coupe"
+
     var xRequestID *string = "ASCII"
 
     ctx := context.Background()

@@ -40,7 +40,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "online"
+
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
             CustomerID: "Extended South",
@@ -64,7 +67,9 @@ func main() {
             TerminalType: "physical Ameliorated",
         },
     }
+
     var xIdempotencyKey *string = "after"
+
     var xRequestID *string = "overriding"
 
     ctx := context.Background()
@@ -126,8 +131,12 @@ func main() {
             },
         }),
     )
+
+
     var orderID string = "female"
+
     var xAPIVersion string = "program"
+
     var xRequestID *string = "transmit"
 
     ctx := context.Background()

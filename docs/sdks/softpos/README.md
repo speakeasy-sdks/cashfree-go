@@ -35,8 +35,12 @@ func main() {
             },
         }),
     )
+
+
     var terminalPhoneNo string = "Account"
+
     var xAPIVersion string = "blockchains"
+
     var xRequestID *string = "Steel"
 
     ctx := context.Background()
@@ -92,12 +96,17 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "yet"
+
     createTerminalRequest := &shared.CreateTerminalRequest{
         TerminalName: "generating Internal",
         TerminalPhoneNo: "Fantastic Factors male",
     }
+
     var xIdempotencyKey *string = "SUV Smart Reggae"
+
     var xRequestID *string = "Wintheiser"
 
     ctx := context.Background()

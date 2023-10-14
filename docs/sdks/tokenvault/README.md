@@ -37,9 +37,14 @@ func main() {
             },
         }),
     )
+
+
     var customerID string = "Branding"
+
     var instrumentID string = "East"
+
     var xAPIVersion string = "withdrawal"
+
     var xRequestID *string = "violet"
 
     ctx := context.Background()
@@ -96,9 +101,14 @@ func main() {
             },
         }),
     )
+
+
     var customerID string = "vice"
+
     var instrumentID string = "Representative"
+
     var xAPIVersion string = "Smart"
+
     var xRequestID *string = "red"
 
     ctx := context.Background()
@@ -155,9 +165,14 @@ func main() {
             },
         }),
     )
+
+
     var customerID string = "Cab"
+
     var instrumentID string = "ex"
+
     var xAPIVersion string = "Practical"
+
     var xRequestID *string = "24/365"
 
     ctx := context.Background()
@@ -215,9 +230,14 @@ func main() {
             },
         }),
     )
+
+
     var customerID string = "Balanced"
+
     var instrumentType operations.FetchAllSavedInstrumentsInstrumentType = operations.FetchAllSavedInstrumentsInstrumentTypeCard
+
     var xAPIVersion string = "Iranian"
+
     var xRequestID *string = "above"
 
     ctx := context.Background()

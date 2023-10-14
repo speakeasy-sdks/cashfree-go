@@ -4,13 +4,37 @@ package sdkerrors
 
 import (
 	"encoding/json"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"fmt"
 )
 
+type BadRequestErrorType string
+
+const (
+	BadRequestErrorTypeInvalidRequestError BadRequestErrorType = "invalid_request_error"
+)
+
+func (e BadRequestErrorType) ToPointer() *BadRequestErrorType {
+	return &e
+}
+
+func (e *BadRequestErrorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "invalid_request_error":
+		*e = BadRequestErrorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for BadRequestErrorType: %v", v)
+	}
+}
+
 type BadRequestError struct {
-	Code    *string                     `json:"code,omitempty"`
-	Message *string                     `json:"message,omitempty"`
-	Type    *shared.BadRequestErrorType `json:"type,omitempty"`
+	Code    *string              `json:"code,omitempty"`
+	Message *string              `json:"message,omitempty"`
+	Type    *BadRequestErrorType `json:"type,omitempty"`
 }
 
 var _ error = &BadRequestError{}

@@ -37,9 +37,14 @@ func main() {
             },
         }),
     )
+
+
     var linkID string = "Clifton"
+
     var xAPIVersion string = "powder"
+
     var xIdempotencyKey *string = "Avon teal"
+
     var xRequestID *string = "Northwest"
 
     ctx := context.Background()
@@ -96,7 +101,10 @@ func main() {
             },
         }),
     )
+
+
     var xAPIVersion string = "online"
+
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
             CustomerPhone: "Extended South",
@@ -112,7 +120,9 @@ func main() {
         LinkNotify: &shared.LinkNotifyEntity{},
         LinkPurpose: "physical Ameliorated",
     }
+
     var xIdempotencyKey *string = "after"
+
     var xRequestID *string = "overriding"
 
     ctx := context.Background()
@@ -169,8 +179,12 @@ func main() {
             },
         }),
     )
+
+
     var linkID string = "grateful"
+
     var xAPIVersion string = "tomorrow"
+
     var xRequestID *string = "Account"
 
     ctx := context.Background()
@@ -226,8 +240,12 @@ func main() {
             },
         }),
     )
+
+
     var linkID string = "violet"
+
     var xAPIVersion string = "delicious"
+
     var xRequestID *string = "Account"
 
     ctx := context.Background()
