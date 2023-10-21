@@ -46,14 +46,14 @@ func main() {
                     874373,
                 },
                 SettlementUtrs: []string{
-                    "Total",
+                    "string",
                 },
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Limit: 823192,
+                Limit: 347223,
             },
         },
-        XAPIVersion: "Southeast who",
+        XAPIVersion: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -114,14 +114,14 @@ func main() {
                     461008,
                 },
                 SettlementUtrs: []string{
-                    "Van",
+                    "string",
                 },
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Limit: 598480,
+                Limit: 858162,
             },
         },
-        XAPIVersion: "Global North PCI",
+        XAPIVersion: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -174,11 +174,11 @@ func main() {
     )
 
 
-    var orderID string = "Avon"
+    var orderID string = "string"
 
-    var xAPIVersion string = "Coupe"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "ASCII"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)

@@ -39,13 +39,13 @@ func main() {
     )
 
 
-    var customerID string = "Branding"
+    var customerID string = "string"
 
-    var instrumentID string = "East"
+    var instrumentID string = "string"
 
-    var xAPIVersion string = "withdrawal"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "violet"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -103,13 +103,13 @@ func main() {
     )
 
 
-    var customerID string = "vice"
+    var customerID string = "string"
 
-    var instrumentID string = "Representative"
+    var instrumentID string = "string"
 
-    var xAPIVersion string = "Smart"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "red"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -167,13 +167,13 @@ func main() {
     )
 
 
-    var customerID string = "Cab"
+    var customerID string = "string"
 
-    var instrumentID string = "ex"
+    var instrumentID string = "string"
 
-    var xAPIVersion string = "Practical"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "24/365"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -232,13 +232,13 @@ func main() {
     )
 
 
-    var customerID string = "Balanced"
+    var customerID string = "string"
 
     var instrumentType operations.FetchAllSavedInstrumentsInstrumentType = operations.FetchAllSavedInstrumentsInstrumentTypeCard
 
-    var xAPIVersion string = "Iranian"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "above"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.TokenVault.GetAllSavedInstruments(ctx, customerID, instrumentType, xAPIVersion, xRequestID)

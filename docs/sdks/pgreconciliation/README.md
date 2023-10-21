@@ -40,14 +40,14 @@ func main() {
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
         FetchPGReconRequest: &shared.FetchPGReconRequest{
             Filters: shared.FetchPGReconRequestFilters{
-                EndDate: "Northeast Hatchback Kia",
-                StartDate: "towards",
+                EndDate: "string",
+                StartDate: "string",
             },
             Pagination: shared.FetchPGReconRequestPagination{
-                Limit: 458049,
+                Limit: 700347,
             },
         },
-        XAPIVersion: "withdrawal Car magnetic",
+        XAPIVersion: "string",
     })
     if err != nil {
         log.Fatal(err)

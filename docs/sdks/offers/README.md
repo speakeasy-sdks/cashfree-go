@@ -37,19 +37,19 @@ func main() {
     )
 
 
-    var xAPIVersion string = "online"
+    var xAPIVersion string = "string"
 
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
-                CashbackType: shared.CashbackDetailsCashbackTypePercentage,
-                CashbackValue: "Money blue shred",
-                MaxCashbackAmount: "technology East",
+                CashbackType: shared.CashbackDetailsCashbackTypeFlat,
+                CashbackValue: "string",
+                MaxCashbackAmount: "string",
             },
             DiscountDetails: &shared.DiscountDetails{
                 DiscountType: shared.DiscountDetailsDiscountTypeFlat,
-                DiscountValue: "Northwest",
-                MaxDiscountAmount: "SUV quantify Polestar",
+                DiscountValue: "string",
+                MaxDiscountAmount: "string",
             },
             OfferType: shared.OfferDetailsOfferTypeDiscountAndCashback,
         },
@@ -67,17 +67,15 @@ func main() {
         OfferValidations: shared.OfferValidations{
             MaxAllowed: 10,
             MinAmount: cashfreego.Float64(1),
-            PaymentMethod: shared.CreateOfferValidationsPaymentMethodOfferWallet(
-                    shared.OfferWallet{
-                        App: &shared.OfferWalletWalletOffer{
-                            Provider: cashfreego.String("paytm"),
-                        },
+            PaymentMethod: shared.CreateOfferValidationsPaymentMethodOfferUPI(
+                    shared.OfferUPI{
+                        Upi: shared.OfferUPIUPIOffer{},
                     },
             ),
         },
     }
 
-    var xRequestID *string = "physical"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
@@ -134,11 +132,11 @@ func main() {
     )
 
 
-    var offerID string = "female"
+    var offerID string = "string"
 
-    var xAPIVersion string = "program"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "transmit"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)

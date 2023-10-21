@@ -34,7 +34,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "Gasoline"
+    var xAPIVersion string = "string"
 
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Filters: &shared.OfferFilters{
@@ -48,7 +48,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = "Southwest"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
@@ -105,7 +105,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "protocol"
+    var xAPIVersion string = "string"
 
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
@@ -117,7 +117,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = "navigate"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetCardlessEMI(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
@@ -174,7 +174,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "visualize"
+    var xAPIVersion string = "string"
 
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
@@ -186,7 +186,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = "concept"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Eligibility.GetPaylaterMethods(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)

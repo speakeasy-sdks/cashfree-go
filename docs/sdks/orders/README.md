@@ -42,12 +42,12 @@ func main() {
     )
 
 
-    var xAPIVersion string = "online"
+    var xAPIVersion string = "string"
 
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
-            CustomerID: "Extended South",
-            CustomerPhone: "grey technology East",
+            CustomerID: "string",
+            CustomerPhone: "string",
         },
         OrderAmount: 10.15,
         OrderCurrency: "INR",
@@ -62,15 +62,15 @@ func main() {
             "shipping_address": "123 Main St",
         },
         Terminal: &shared.TerminalDetails{
-            TerminalID: "evolve",
-            TerminalPhoneNo: "fuchsia Gasoline Screen",
-            TerminalType: "physical Ameliorated",
+            TerminalID: "string",
+            TerminalPhoneNo: "string",
+            TerminalType: "string",
         },
     }
 
-    var xIdempotencyKey *string = "after"
+    var xIdempotencyKey *string = "string"
 
-    var xRequestID *string = "overriding"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
@@ -133,11 +133,11 @@ func main() {
     )
 
 
-    var orderID string = "female"
+    var orderID string = "string"
 
-    var xAPIVersion string = "program"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "transmit"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)

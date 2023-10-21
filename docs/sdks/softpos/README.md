@@ -37,11 +37,11 @@ func main() {
     )
 
 
-    var terminalPhoneNo string = "Account"
+    var terminalPhoneNo string = "string"
 
-    var xAPIVersion string = "blockchains"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "Steel"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.SoftPOS.TerminalStatus(ctx, terminalPhoneNo, xAPIVersion, xRequestID)
@@ -98,16 +98,16 @@ func main() {
     )
 
 
-    var xAPIVersion string = "yet"
+    var xAPIVersion string = "string"
 
     createTerminalRequest := &shared.CreateTerminalRequest{
-        TerminalName: "generating Internal",
-        TerminalPhoneNo: "Fantastic Factors male",
+        TerminalName: "string",
+        TerminalPhoneNo: "string",
     }
 
-    var xIdempotencyKey *string = "SUV Smart Reggae"
+    var xIdempotencyKey *string = "string"
 
-    var xRequestID *string = "Wintheiser"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.SoftPOS.CreateTerminals(ctx, xAPIVersion, createTerminalRequest, xIdempotencyKey, xRequestID)

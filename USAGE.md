@@ -21,7 +21,7 @@ func main() {
 		}),
 	)
 
-	var xAPIVersion string = "Gasoline"
+	var xAPIVersion string = "string"
 
 	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
 		Filters: &shared.OfferFilters{
@@ -35,7 +35,7 @@ func main() {
 		},
 	}
 
-	var xRequestID *string = "Southwest"
+	var xRequestID *string = "string"
 
 	ctx := context.Background()
 	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)

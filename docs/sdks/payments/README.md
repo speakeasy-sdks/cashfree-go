@@ -42,11 +42,11 @@ func main() {
 
     var cfPaymentID int64 = 158773
 
-    var orderID string = "mobile"
+    var orderID string = "string"
 
-    var xAPIVersion string = "Avon"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "Solutions"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Payments.Payment(ctx, cfPaymentID, orderID, xAPIVersion, xRequestID)
@@ -104,11 +104,11 @@ func main() {
     )
 
 
-    var orderID string = "Garden"
+    var orderID string = "string"
 
-    var xAPIVersion string = "ADP"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "Specialist"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Payments.GetforOrder(ctx, orderID, xAPIVersion, xRequestID)
@@ -170,22 +170,19 @@ func main() {
     )
 
 
-    var xAPIVersion string = "brown"
+    var xAPIVersion string = "string"
 
     orderPayRequest := &shared.OrderPayRequest{
         OfferID: cashfreego.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
-        PaymentMethod: shared.CreateOrderPayRequestPaymentMethodUPIPaymentMethod(
-                shared.UPIPaymentMethod{
-                    Upi: shared.Upi{
-                        Authorization: &shared.UPIAuthorizeDetails{},
-                        Channel: shared.UpiChannelQrcode,
-                    },
+        PaymentMethod: shared.CreateOrderPayRequestPaymentMethodPaylaterPaymentMethod(
+                shared.PaylaterPaymentMethod{
+                    Paylater: shared.Paylater{},
                 },
         ),
         PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
     }
 
-    var xRequestID *string = "Bicycle"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Payments.PayOrder(ctx, xAPIVersion, orderPayRequest, xRequestID)
@@ -245,8 +242,8 @@ func main() {
     ctx := context.Background()
     res, err := s.Payments.PreauthorizeOrder(ctx, operations.CapturePreauthorizationRequest{
         AuthorizationRequest: &shared.AuthorizationRequest{},
-        OrderID: "maiores",
-        XAPIVersion: "Avon",
+        OrderID: "string",
+        XAPIVersion: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -299,16 +296,16 @@ func main() {
     )
 
 
-    var paymentID string = "sad"
+    var paymentID string = "string"
 
-    var xAPIVersion string = "challenge"
+    var xAPIVersion string = "string"
 
     otpRequest := &shared.OTPRequest{
-        Action: shared.OTPRequestActionSubmitOtp,
-        Otp: "Oriental Gasoline",
+        Action: shared.OTPRequestActionResendOtp,
+        Otp: "string",
     }
 
-    var xRequestID *string = "seriously"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Payments.Submit(ctx, paymentID, xAPIVersion, otpRequest, xRequestID)

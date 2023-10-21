@@ -39,13 +39,13 @@ func main() {
     )
 
 
-    var linkID string = "Clifton"
+    var linkID string = "string"
 
-    var xAPIVersion string = "powder"
+    var xAPIVersion string = "string"
 
-    var xIdempotencyKey *string = "Avon teal"
+    var xIdempotencyKey *string = "string"
 
-    var xRequestID *string = "Northwest"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Cancel(ctx, linkID, xAPIVersion, xIdempotencyKey, xRequestID)
@@ -103,27 +103,27 @@ func main() {
     )
 
 
-    var xAPIVersion string = "online"
+    var xAPIVersion string = "string"
 
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
-            CustomerPhone: "Extended South",
+            CustomerPhone: "string",
         },
-        LinkAmount: 9967.06,
-        LinkCurrency: "abnormally deposit evolve",
-        LinkID: "fuchsia Gasoline Screen",
+        LinkAmount: 4865.89,
+        LinkCurrency: "string",
+        LinkID: "string",
         LinkMeta: &shared.LinkMetaEntity{},
         LinkNotes: map[string]string{
             "key_1": "value_1",
             "key_2": "value_2",
         },
         LinkNotify: &shared.LinkNotifyEntity{},
-        LinkPurpose: "physical Ameliorated",
+        LinkPurpose: "string",
     }
 
-    var xIdempotencyKey *string = "after"
+    var xIdempotencyKey *string = "string"
 
-    var xRequestID *string = "overriding"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Create(ctx, xAPIVersion, createLinkRequest, xIdempotencyKey, xRequestID)
@@ -181,11 +181,11 @@ func main() {
     )
 
 
-    var linkID string = "grateful"
+    var linkID string = "string"
 
-    var xAPIVersion string = "tomorrow"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "Account"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Fetch(ctx, linkID, xAPIVersion, xRequestID)
@@ -242,11 +242,11 @@ func main() {
     )
 
 
-    var linkID string = "violet"
+    var linkID string = "string"
 
-    var xAPIVersion string = "delicious"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "Account"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.PaymentLinks.GetOrders(ctx, linkID, xAPIVersion, xRequestID)

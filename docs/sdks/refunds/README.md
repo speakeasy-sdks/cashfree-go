@@ -42,13 +42,13 @@ func main() {
     res, err := s.Refunds.Create(ctx, operations.CreateRefundRequest{
         CreateRefundRequest: &shared.CreateRefundRequest{
             RefundAmount: 4865.89,
-            RefundID: "Configuration Money",
+            RefundID: "string",
             RefundSplits: []shared.VendorSplit{
                 shared.VendorSplit{},
             },
         },
-        OrderID: "Cambridgeshire grey technology",
-        XAPIVersion: "deposit",
+        OrderID: "string",
+        XAPIVersion: "string",
     })
     if err != nil {
         log.Fatal(err)
@@ -101,13 +101,13 @@ func main() {
     )
 
 
-    var orderID string = "female"
+    var orderID string = "string"
 
-    var refundID string = "program"
+    var refundID string = "string"
 
-    var xAPIVersion string = "transmit"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "protocol"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Refunds.Get(ctx, orderID, refundID, xAPIVersion, xRequestID)
@@ -165,11 +165,11 @@ func main() {
     )
 
 
-    var orderID string = "Borders"
+    var orderID string = "string"
 
-    var xAPIVersion string = "Brand"
+    var xAPIVersion string = "string"
 
-    var xRequestID *string = "bandwidth"
+    var xRequestID *string = "string"
 
     ctx := context.Background()
     res, err := s.Refunds.GetAllforOrder(ctx, orderID, xAPIVersion, xRequestID)
