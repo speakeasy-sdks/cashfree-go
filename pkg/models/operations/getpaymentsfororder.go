@@ -73,9 +73,9 @@ func CreateGetPaymentsforOrder200ApplicationJSONPaymentsEntity(paymentsEntity sh
 
 func (u *GetPaymentsforOrder200ApplicationJSON) UnmarshalJSON(data []byte) error {
 
-	paymentsEntity := new(shared.PaymentsEntity)
+	paymentsEntity := shared.PaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentsEntity, "", true, true); err == nil {
-		u.PaymentsEntity = paymentsEntity
+		u.PaymentsEntity = &paymentsEntity
 		u.Type = GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
 		return nil
 	}

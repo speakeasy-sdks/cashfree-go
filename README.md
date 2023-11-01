@@ -155,6 +155,265 @@ Here's an example of one such pagination call:
 
 <!-- End Go Types -->
 
+
+
+<!-- Start Error Handling -->
+# Error Handling
+
+Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+
+## Example
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option1: &shared.SecurityOption1{
+				XClientID:     "",
+				XClientSecret: "",
+			},
+		}),
+	)
+
+	var xAPIVersion string = "string"
+
+	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
+		Filters: &shared.OfferFilters{
+			OfferType: []shared.OfferType{
+				shared.OfferTypeNoCostEmi,
+			},
+		},
+		Queries: shared.OfferQueries{
+			Amount:  cashfreego.Float64(100),
+			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+		},
+	}
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	if err != nil {
+
+		var e *BadRequestError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *AuthenticationError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *ApiError404
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *ApiError409
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *IdempotencyError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *RateLimitError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *ApiError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *ApiError502
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+	}
+}
+
+```
+<!-- End Error Handling -->
+
+
+
+<!-- Start Server Selection -->
+# Server Selection
+
+## Select Server by Index
+
+You can override the default server globally using the `WithServerIndex` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
+
+| # | Server | Variables |
+| - | ------ | --------- |
+| 0 | `https://sandbox.cashfree.com/pg` | None |
+| 1 | `https://api.cashfree.com/pg` | None |
+
+For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option1: &shared.SecurityOption1{
+				XClientID:     "",
+				XClientSecret: "",
+			},
+		}),
+		cashfreego.WithServerIndex(1),
+	)
+
+	var xAPIVersion string = "string"
+
+	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
+		Filters: &shared.OfferFilters{
+			OfferType: []shared.OfferType{
+				shared.OfferTypeNoCostEmi,
+			},
+		},
+		Queries: shared.OfferQueries{
+			Amount:  cashfreego.Float64(100),
+			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+		},
+	}
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.EligibleOffersEntities != nil {
+		// handle response
+	}
+}
+
+```
+
+
+## Override Server URL Per-Client
+
+The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
+
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option1: &shared.SecurityOption1{
+				XClientID:     "",
+				XClientSecret: "",
+			},
+		}),
+		cashfreego.WithServerURL("https://sandbox.cashfree.com/pg"),
+	)
+
+	var xAPIVersion string = "string"
+
+	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
+		Filters: &shared.OfferFilters{
+			OfferType: []shared.OfferType{
+				shared.OfferTypeNoCostEmi,
+			},
+		},
+		Queries: shared.OfferQueries{
+			Amount:  cashfreego.Float64(100),
+			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
+		},
+	}
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.EligibleOffersEntities != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Server Selection -->
+
+
+
+<!-- Start Custom HTTP Client -->
+# Custom HTTP Client
+
+The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
+
+```go
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+```
+
+The built-in `net/http` client satisfies this interface and a default client based on the built-in is provided by default. To replace this default with a client of your own, you can implement this interface yourself or provide your own client configured as desired. Here's a simple example, which adds a client with a 30 second timeout.
+
+```go
+import (
+	"net/http"
+	"time"
+	"github.com/myorg/your-go-sdk"
+)
+
+var (
+	httpClient = &http.Client{Timeout: 30 * time.Second}
+	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+)
+```
+
+This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
+<!-- End Custom HTTP Client -->
+
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
 

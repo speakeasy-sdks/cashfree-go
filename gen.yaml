@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
   docVersion: "2022-09-01"
-  speakeasyVersion: 1.104.0
-  generationVersion: 2.169.0
+  speakeasyVersion: 1.109.2
+  generationVersion: 2.173.0
 generation:
   comments:
     disableComments: false
@@ -22,9 +22,9 @@ features:
     globalServerURLs: 2.82.0
     nameOverrides: 2.81.1
     retries: 2.82.1
-    unions: 2.84.0
+    unions: 2.84.1
 go:
-  version: 0.8.0
+  version: 0.8.1
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   installationURL: https://github.com/speakeasy-sdks/cashfree-go

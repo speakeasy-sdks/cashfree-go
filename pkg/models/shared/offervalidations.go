@@ -96,51 +96,51 @@ func CreateOfferValidationsPaymentMethodOfferEMI(offerEMI OfferEMI) OfferValidat
 
 func (u *OfferValidationsPaymentMethod) UnmarshalJSON(data []byte) error {
 
-	offerAll := new(OfferAll)
+	offerAll := OfferAll{}
 	if err := utils.UnmarshalJSON(data, &offerAll, "", true, true); err == nil {
-		u.OfferAll = offerAll
+		u.OfferAll = &offerAll
 		u.Type = OfferValidationsPaymentMethodTypeOfferAll
 		return nil
 	}
 
-	offerCard := new(OfferCard)
+	offerCard := OfferCard{}
 	if err := utils.UnmarshalJSON(data, &offerCard, "", true, true); err == nil {
-		u.OfferCard = offerCard
+		u.OfferCard = &offerCard
 		u.Type = OfferValidationsPaymentMethodTypeOfferCard
 		return nil
 	}
 
-	offerNB := new(OfferNB)
+	offerNB := OfferNB{}
 	if err := utils.UnmarshalJSON(data, &offerNB, "", true, true); err == nil {
-		u.OfferNB = offerNB
+		u.OfferNB = &offerNB
 		u.Type = OfferValidationsPaymentMethodTypeOfferNB
 		return nil
 	}
 
-	offerWallet := new(OfferWallet)
+	offerWallet := OfferWallet{}
 	if err := utils.UnmarshalJSON(data, &offerWallet, "", true, true); err == nil {
-		u.OfferWallet = offerWallet
+		u.OfferWallet = &offerWallet
 		u.Type = OfferValidationsPaymentMethodTypeOfferWallet
 		return nil
 	}
 
-	offerUPI := new(OfferUPI)
+	offerUPI := OfferUPI{}
 	if err := utils.UnmarshalJSON(data, &offerUPI, "", true, true); err == nil {
-		u.OfferUPI = offerUPI
+		u.OfferUPI = &offerUPI
 		u.Type = OfferValidationsPaymentMethodTypeOfferUPI
 		return nil
 	}
 
-	offerPaylater := new(OfferPaylater)
+	offerPaylater := OfferPaylater{}
 	if err := utils.UnmarshalJSON(data, &offerPaylater, "", true, true); err == nil {
-		u.OfferPaylater = offerPaylater
+		u.OfferPaylater = &offerPaylater
 		u.Type = OfferValidationsPaymentMethodTypeOfferPaylater
 		return nil
 	}
 
-	offerEMI := new(OfferEMI)
+	offerEMI := OfferEMI{}
 	if err := utils.UnmarshalJSON(data, &offerEMI, "", true, true); err == nil {
-		u.OfferEMI = offerEMI
+		u.OfferEMI = &offerEMI
 		u.Type = OfferValidationsPaymentMethodTypeOfferEMI
 		return nil
 	}

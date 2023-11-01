@@ -85,44 +85,44 @@ func CreatePaymentMethodInPaymentsEntityPaymentMethodPaymentMethodPaylaterInPaym
 
 func (u *PaymentMethodInPaymentsEntityPaymentMethod) UnmarshalJSON(data []byte) error {
 
-	paymentMethodUPIInPaymentsEntity := new(PaymentMethodUPIInPaymentsEntity)
+	paymentMethodUPIInPaymentsEntity := PaymentMethodUPIInPaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodUPIInPaymentsEntity, "", true, true); err == nil {
-		u.PaymentMethodUPIInPaymentsEntity = paymentMethodUPIInPaymentsEntity
+		u.PaymentMethodUPIInPaymentsEntity = &paymentMethodUPIInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodUPIInPaymentsEntity
 		return nil
 	}
 
-	paymentMethodNetBankingInPaymentsEntity := new(PaymentMethodNetBankingInPaymentsEntity)
+	paymentMethodNetBankingInPaymentsEntity := PaymentMethodNetBankingInPaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodNetBankingInPaymentsEntity, "", true, true); err == nil {
-		u.PaymentMethodNetBankingInPaymentsEntity = paymentMethodNetBankingInPaymentsEntity
+		u.PaymentMethodNetBankingInPaymentsEntity = &paymentMethodNetBankingInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodNetBankingInPaymentsEntity
 		return nil
 	}
 
-	paymentMethodAppInPaymentsEntity := new(PaymentMethodAppInPaymentsEntity)
+	paymentMethodAppInPaymentsEntity := PaymentMethodAppInPaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodAppInPaymentsEntity, "", true, true); err == nil {
-		u.PaymentMethodAppInPaymentsEntity = paymentMethodAppInPaymentsEntity
+		u.PaymentMethodAppInPaymentsEntity = &paymentMethodAppInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodAppInPaymentsEntity
 		return nil
 	}
 
-	paymentMethodCardlessEMIInPaymentsEntity := new(PaymentMethodCardlessEMIInPaymentsEntity)
+	paymentMethodCardlessEMIInPaymentsEntity := PaymentMethodCardlessEMIInPaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodCardlessEMIInPaymentsEntity, "", true, true); err == nil {
-		u.PaymentMethodCardlessEMIInPaymentsEntity = paymentMethodCardlessEMIInPaymentsEntity
+		u.PaymentMethodCardlessEMIInPaymentsEntity = &paymentMethodCardlessEMIInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodCardlessEMIInPaymentsEntity
 		return nil
 	}
 
-	paymentMethodPaylaterInPaymentsEntity := new(PaymentMethodPaylaterInPaymentsEntity)
+	paymentMethodPaylaterInPaymentsEntity := PaymentMethodPaylaterInPaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodPaylaterInPaymentsEntity, "", true, true); err == nil {
-		u.PaymentMethodPaylaterInPaymentsEntity = paymentMethodPaylaterInPaymentsEntity
+		u.PaymentMethodPaylaterInPaymentsEntity = &paymentMethodPaylaterInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodPaylaterInPaymentsEntity
 		return nil
 	}
 
-	paymentMethodCardInPaymentsEntity := new(PaymentMethodCardInPaymentsEntity)
+	paymentMethodCardInPaymentsEntity := PaymentMethodCardInPaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodCardInPaymentsEntity, "", true, true); err == nil {
-		u.PaymentMethodCardInPaymentsEntity = paymentMethodCardInPaymentsEntity
+		u.PaymentMethodCardInPaymentsEntity = &paymentMethodCardInPaymentsEntity
 		u.Type = PaymentMethodInPaymentsEntityPaymentMethodTypePaymentMethodCardInPaymentsEntity
 		return nil
 	}

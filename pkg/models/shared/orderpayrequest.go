@@ -96,51 +96,51 @@ func CreateOrderPayRequestPaymentMethodPaylaterPaymentMethod(paylaterPaymentMeth
 
 func (u *OrderPayRequestPaymentMethod) UnmarshalJSON(data []byte) error {
 
-	cardPaymentMethod := new(CardPaymentMethod)
+	cardPaymentMethod := CardPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &cardPaymentMethod, "", true, true); err == nil {
-		u.CardPaymentMethod = cardPaymentMethod
+		u.CardPaymentMethod = &cardPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypeCardPaymentMethod
 		return nil
 	}
 
-	upiPaymentMethod := new(UPIPaymentMethod)
+	upiPaymentMethod := UPIPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &upiPaymentMethod, "", true, true); err == nil {
-		u.UPIPaymentMethod = upiPaymentMethod
+		u.UPIPaymentMethod = &upiPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypeUPIPaymentMethod
 		return nil
 	}
 
-	netBankingPaymentMethod := new(NetBankingPaymentMethod)
+	netBankingPaymentMethod := NetBankingPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &netBankingPaymentMethod, "", true, true); err == nil {
-		u.NetBankingPaymentMethod = netBankingPaymentMethod
+		u.NetBankingPaymentMethod = &netBankingPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypeNetBankingPaymentMethod
 		return nil
 	}
 
-	appPaymentMethod := new(AppPaymentMethod)
+	appPaymentMethod := AppPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &appPaymentMethod, "", true, true); err == nil {
-		u.AppPaymentMethod = appPaymentMethod
+		u.AppPaymentMethod = &appPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypeAppPaymentMethod
 		return nil
 	}
 
-	cardEMIPaymentMethod := new(CardEMIPaymentMethod)
+	cardEMIPaymentMethod := CardEMIPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &cardEMIPaymentMethod, "", true, true); err == nil {
-		u.CardEMIPaymentMethod = cardEMIPaymentMethod
+		u.CardEMIPaymentMethod = &cardEMIPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypeCardEMIPaymentMethod
 		return nil
 	}
 
-	cardlessEMIPaymentMethod := new(CardlessEMIPaymentMethod)
+	cardlessEMIPaymentMethod := CardlessEMIPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &cardlessEMIPaymentMethod, "", true, true); err == nil {
-		u.CardlessEMIPaymentMethod = cardlessEMIPaymentMethod
+		u.CardlessEMIPaymentMethod = &cardlessEMIPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypeCardlessEMIPaymentMethod
 		return nil
 	}
 
-	paylaterPaymentMethod := new(PaylaterPaymentMethod)
+	paylaterPaymentMethod := PaylaterPaymentMethod{}
 	if err := utils.UnmarshalJSON(data, &paylaterPaymentMethod, "", true, true); err == nil {
-		u.PaylaterPaymentMethod = paylaterPaymentMethod
+		u.PaylaterPaymentMethod = &paylaterPaymentMethod
 		u.Type = OrderPayRequestPaymentMethodTypePaylaterPaymentMethod
 		return nil
 	}
