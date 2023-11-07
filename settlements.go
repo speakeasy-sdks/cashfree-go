@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// settlements - Collection of APIs handle settlements.
-type settlements struct {
+// Settlements - Collection of APIs handle settlements.
+type Settlements struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newSettlements(sdkConfig sdkConfiguration) *settlements {
-	return &settlements{
+func newSettlements(sdkConfig sdkConfiguration) *Settlements {
+	return &Settlements{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Fetch - Settlement Reconciliation
 // Use this API to get settlement reconciliation details using Settlement ID, settlement UTR or date range.
-func (s *settlements) Fetch(ctx context.Context, request operations.GetSettlementReconciliationRequest, opts ...operations.Option) (*operations.GetSettlementReconciliationResponse, error) {
+func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlementReconciliationRequest, opts ...operations.Option) (*operations.GetSettlementReconciliationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -226,7 +226,7 @@ func (s *settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 
 // GetAll - Get All Settlements
 // Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
-func (s *settlements) GetAll(ctx context.Context, request operations.GetSettlementsRequest, opts ...operations.Option) (*operations.GetSettlementsResponse, error) {
+func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettlementsRequest, opts ...operations.Option) (*operations.GetSettlementsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -424,7 +424,7 @@ func (s *settlements) GetAll(ctx context.Context, request operations.GetSettleme
 
 // GetForOrder - Get Settlements by Order ID
 // Use this API to view all the settlements of a particular order.
-func (s *settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetSettlementsByOrderIDResponse, error) {
+func (s *Settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetSettlementsByOrderIDResponse, error) {
 	request := operations.GetSettlementsByOrderIDRequest{
 		OrderID:     orderID,
 		XAPIVersion: xAPIVersion,

@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// softPOS - softPOS' agent and order management system now supported by APIs
-type softPOS struct {
+// SoftPOS - softPOS' agent and order management system now supported by APIs
+type SoftPOS struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newSoftPOS(sdkConfig sdkConfiguration) *softPOS {
-	return &softPOS{
+func newSoftPOS(sdkConfig sdkConfiguration) *SoftPOS {
+	return &SoftPOS{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // TerminalStatus - Get terminal status using phone number
 // Use this API to view all details of a terminal.
-func (s *softPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetTerminalByMobileNumberResponse, error) {
+func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetTerminalByMobileNumberResponse, error) {
 	request := operations.GetTerminalByMobileNumberRequest{
 		TerminalPhoneNo: terminalPhoneNo,
 		XAPIVersion:     xAPIVersion,
@@ -228,7 +228,7 @@ func (s *softPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xA
 
 // CreateTerminals - Create Terminal
 // Use this API to create new terminals to use softPOS.
-func (s *softPOS) CreateTerminals(ctx context.Context, xAPIVersion string, createTerminalRequest *shared.CreateTerminalRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateTerminalsResponse, error) {
+func (s *SoftPOS) CreateTerminals(ctx context.Context, xAPIVersion string, createTerminalRequest *shared.CreateTerminalRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateTerminalsResponse, error) {
 	request := operations.CreateTerminalsRequest{
 		XAPIVersion:           xAPIVersion,
 		CreateTerminalRequest: createTerminalRequest,

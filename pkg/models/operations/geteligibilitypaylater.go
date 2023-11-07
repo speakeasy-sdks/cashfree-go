@@ -52,13 +52,13 @@ func (o *GetEligibilityPaylaterRequest) GetXRequestID() *string {
 type GetEligibilityPaylaterResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// OK
-	EligiblePaylaters []shared.EligiblePaylater
-	Headers           map[string][]string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.EligiblePaylater
 }
 
 func (o *GetEligibilityPaylaterResponse) GetContentType() string {
@@ -66,13 +66,6 @@ func (o *GetEligibilityPaylaterResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetEligibilityPaylaterResponse) GetEligiblePaylaters() []shared.EligiblePaylater {
-	if o == nil {
-		return nil
-	}
-	return o.EligiblePaylaters
 }
 
 func (o *GetEligibilityPaylaterResponse) GetHeaders() map[string][]string {
@@ -94,4 +87,11 @@ func (o *GetEligibilityPaylaterResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetEligibilityPaylaterResponse) GetClasses() []shared.EligiblePaylater {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

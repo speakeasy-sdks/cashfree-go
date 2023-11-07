@@ -7,24 +7,24 @@ import (
 	"fmt"
 )
 
-// PaymentsEntityPaymentStatus - The transaction status can be one of  ["SUCCESS", "NOT_ATTEMPTED", "FAILED", "USER_DROPPED", "VOID", "CANCELLED", "PENDING"]
-type PaymentsEntityPaymentStatus string
+// PaymentStatus - The transaction status can be one of  ["SUCCESS", "NOT_ATTEMPTED", "FAILED", "USER_DROPPED", "VOID", "CANCELLED", "PENDING"]
+type PaymentStatus string
 
 const (
-	PaymentsEntityPaymentStatusSuccess      PaymentsEntityPaymentStatus = "SUCCESS"
-	PaymentsEntityPaymentStatusNotAttempted PaymentsEntityPaymentStatus = "NOT_ATTEMPTED"
-	PaymentsEntityPaymentStatusFailed       PaymentsEntityPaymentStatus = "FAILED"
-	PaymentsEntityPaymentStatusUserDropped  PaymentsEntityPaymentStatus = "USER_DROPPED"
-	PaymentsEntityPaymentStatusVoid         PaymentsEntityPaymentStatus = "VOID"
-	PaymentsEntityPaymentStatusCancelled    PaymentsEntityPaymentStatus = "CANCELLED"
-	PaymentsEntityPaymentStatusPending      PaymentsEntityPaymentStatus = "PENDING"
+	PaymentStatusSuccess      PaymentStatus = "SUCCESS"
+	PaymentStatusNotAttempted PaymentStatus = "NOT_ATTEMPTED"
+	PaymentStatusFailed       PaymentStatus = "FAILED"
+	PaymentStatusUserDropped  PaymentStatus = "USER_DROPPED"
+	PaymentStatusVoid         PaymentStatus = "VOID"
+	PaymentStatusCancelled    PaymentStatus = "CANCELLED"
+	PaymentStatusPending      PaymentStatus = "PENDING"
 )
 
-func (e PaymentsEntityPaymentStatus) ToPointer() *PaymentsEntityPaymentStatus {
+func (e PaymentStatus) ToPointer() *PaymentStatus {
 	return &e
 }
 
-func (e *PaymentsEntityPaymentStatus) UnmarshalJSON(data []byte) error {
+func (e *PaymentStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -43,10 +43,10 @@ func (e *PaymentsEntityPaymentStatus) UnmarshalJSON(data []byte) error {
 	case "CANCELLED":
 		fallthrough
 	case "PENDING":
-		*e = PaymentsEntityPaymentStatus(v)
+		*e = PaymentStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for PaymentsEntityPaymentStatus: %v", v)
+		return fmt.Errorf("invalid value for PaymentStatus: %v", v)
 	}
 }
 
@@ -72,7 +72,7 @@ type PaymentsEntity struct {
 	PaymentMessage *string                        `json:"payment_message,omitempty"`
 	PaymentMethod  *PaymentMethodInPaymentsEntity `json:"payment_method,omitempty"`
 	// The transaction status can be one of  ["SUCCESS", "NOT_ATTEMPTED", "FAILED", "USER_DROPPED", "VOID", "CANCELLED", "PENDING"]
-	PaymentStatus *PaymentsEntityPaymentStatus `json:"payment_status,omitempty"`
+	PaymentStatus *PaymentStatus `json:"payment_status,omitempty"`
 	// This is the time when the payment was initiated
 	PaymentTime *string `json:"payment_time,omitempty"`
 }
@@ -182,7 +182,7 @@ func (o *PaymentsEntity) GetPaymentMethod() *PaymentMethodInPaymentsEntity {
 	return o.PaymentMethod
 }
 
-func (o *PaymentsEntity) GetPaymentStatus() *PaymentsEntityPaymentStatus {
+func (o *PaymentsEntity) GetPaymentStatus() *PaymentStatus {
 	if o == nil {
 		return nil
 	}

@@ -2,11 +2,11 @@
 
 package shared
 
-type OfferWalletWalletOffer struct {
+type WalletOffer struct {
 	Provider *string `json:"provider,omitempty"`
 }
 
-func (o *OfferWalletWalletOffer) GetProvider() *string {
+func (o *WalletOffer) GetProvider() *string {
 	if o == nil {
 		return nil
 	}
@@ -14,10 +14,10 @@ func (o *OfferWalletWalletOffer) GetProvider() *string {
 }
 
 type OfferWallet struct {
-	App *OfferWalletWalletOffer `json:"app,omitempty"`
+	App *WalletOffer `json:"app,omitempty"`
 }
 
-func (o *OfferWallet) GetApp() *OfferWalletWalletOffer {
+func (o *OfferWallet) GetApp() *WalletOffer {
 	if o == nil {
 		return nil
 	}

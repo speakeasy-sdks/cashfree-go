@@ -2,14 +2,14 @@
 
 package shared
 
-type OrderPayDataPayload struct {
+type Payload struct {
 }
 
 type OrderPayData struct {
-	ContentType *string              `json:"content_type,omitempty"`
-	Method      *string              `json:"method,omitempty"`
-	Payload     *OrderPayDataPayload `json:"payload,omitempty"`
-	URL         *string              `json:"url,omitempty"`
+	ContentType *string  `json:"content_type,omitempty"`
+	Method      *string  `json:"method,omitempty"`
+	Payload     *Payload `json:"payload,omitempty"`
+	URL         *string  `json:"url,omitempty"`
 }
 
 func (o *OrderPayData) GetContentType() *string {
@@ -26,7 +26,7 @@ func (o *OrderPayData) GetMethod() *string {
 	return o.Method
 }
 
-func (o *OrderPayData) GetPayload() *OrderPayDataPayload {
+func (o *OrderPayData) GetPayload() *Payload {
 	if o == nil {
 		return nil
 	}

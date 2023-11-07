@@ -7,28 +7,28 @@ import (
 	"fmt"
 )
 
-// APIError409Type - invalid_request_error
-type APIError409Type string
+// SchemasType - invalid_request_error
+type SchemasType string
 
 const (
-	APIError409TypeInvalidRequestError APIError409Type = "invalid_request_error"
+	SchemasTypeInvalidRequestError SchemasType = "invalid_request_error"
 )
 
-func (e APIError409Type) ToPointer() *APIError409Type {
+func (e SchemasType) ToPointer() *SchemasType {
 	return &e
 }
 
-func (e *APIError409Type) UnmarshalJSON(data []byte) error {
+func (e *SchemasType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "invalid_request_error":
-		*e = APIError409Type(v)
+		*e = SchemasType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for APIError409Type: %v", v)
+		return fmt.Errorf("invalid value for SchemasType: %v", v)
 	}
 }
 
@@ -36,7 +36,7 @@ type APIError409 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// invalid_request_error
-	Type *APIError409Type `json:"type,omitempty"`
+	Type *SchemasType `json:"type,omitempty"`
 }
 
 var _ error = &APIError409{}

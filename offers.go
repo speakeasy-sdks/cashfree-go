@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// offers - Collection of apis to get offers applicable for an order
-type offers struct {
+// Offers - Collection of apis to get offers applicable for an order
+type Offers struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newOffers(sdkConfig sdkConfiguration) *offers {
-	return &offers{
+func newOffers(sdkConfig sdkConfiguration) *Offers {
+	return &Offers{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Create Offer
 // Use this API to create offers with Cashfree from your backend
-func (s *offers) Create(ctx context.Context, xAPIVersion string, createOfferBackendRequest *shared.CreateOfferBackendRequest, xRequestID *string, opts ...operations.Option) (*operations.CreateOfferResponse, error) {
+func (s *Offers) Create(ctx context.Context, xAPIVersion string, createOfferBackendRequest *shared.CreateOfferBackendRequest, xRequestID *string, opts ...operations.Option) (*operations.CreateOfferResponse, error) {
 	request := operations.CreateOfferRequest{
 		XAPIVersion:               xAPIVersion,
 		CreateOfferBackendRequest: createOfferBackendRequest,
@@ -232,7 +232,7 @@ func (s *offers) Create(ctx context.Context, xAPIVersion string, createOfferBack
 
 // Get Offer by ID
 // Use this API to get offer by offer_id
-func (s *offers) Get(ctx context.Context, offerID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOfferResponse, error) {
+func (s *Offers) Get(ctx context.Context, offerID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOfferResponse, error) {
 	request := operations.GetOfferRequest{
 		OfferID:     offerID,
 		XAPIVersion: xAPIVersion,

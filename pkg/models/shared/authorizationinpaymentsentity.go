@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// AuthorizationInPaymentsEntityAction - One of CAPTURE or VOID
-type AuthorizationInPaymentsEntityAction string
+// Action - One of CAPTURE or VOID
+type Action string
 
 const (
-	AuthorizationInPaymentsEntityActionCapture AuthorizationInPaymentsEntityAction = "CAPTURE"
-	AuthorizationInPaymentsEntityActionVoid    AuthorizationInPaymentsEntityAction = "VOID"
+	ActionCapture Action = "CAPTURE"
+	ActionVoid    Action = "VOID"
 )
 
-func (e AuthorizationInPaymentsEntityAction) ToPointer() *AuthorizationInPaymentsEntityAction {
+func (e Action) ToPointer() *Action {
 	return &e
 }
 
-func (e *AuthorizationInPaymentsEntityAction) UnmarshalJSON(data []byte) error {
+func (e *Action) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,26 +28,26 @@ func (e *AuthorizationInPaymentsEntityAction) UnmarshalJSON(data []byte) error {
 	case "CAPTURE":
 		fallthrough
 	case "VOID":
-		*e = AuthorizationInPaymentsEntityAction(v)
+		*e = Action(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for AuthorizationInPaymentsEntityAction: %v", v)
+		return fmt.Errorf("invalid value for Action: %v", v)
 	}
 }
 
-// AuthorizationInPaymentsEntityStatus - One of SUCCESS or PENDING
-type AuthorizationInPaymentsEntityStatus string
+// Status - One of SUCCESS or PENDING
+type Status string
 
 const (
-	AuthorizationInPaymentsEntityStatusSuccess AuthorizationInPaymentsEntityStatus = "SUCCESS"
-	AuthorizationInPaymentsEntityStatusPending AuthorizationInPaymentsEntityStatus = "PENDING"
+	StatusSuccess Status = "SUCCESS"
+	StatusPending Status = "PENDING"
 )
 
-func (e AuthorizationInPaymentsEntityStatus) ToPointer() *AuthorizationInPaymentsEntityStatus {
+func (e Status) ToPointer() *Status {
 	return &e
 }
 
-func (e *AuthorizationInPaymentsEntityStatus) UnmarshalJSON(data []byte) error {
+func (e *Status) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -56,17 +56,17 @@ func (e *AuthorizationInPaymentsEntityStatus) UnmarshalJSON(data []byte) error {
 	case "SUCCESS":
 		fallthrough
 	case "PENDING":
-		*e = AuthorizationInPaymentsEntityStatus(v)
+		*e = Status(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for AuthorizationInPaymentsEntityStatus: %v", v)
+		return fmt.Errorf("invalid value for Status: %v", v)
 	}
 }
 
 // AuthorizationInPaymentsEntity - The authorization details are present for payments which go through the preauthorization workflow. Or else this parameter will be null.
 type AuthorizationInPaymentsEntity struct {
 	// One of CAPTURE or VOID
-	Action *AuthorizationInPaymentsEntityAction `json:"action,omitempty"`
+	Action *Action `json:"action,omitempty"`
 	// CAPTURE or VOID reference number based on action
 	ActionReference *string `json:"action_reference,omitempty"`
 	// Time of action (CAPTURE or VOID)
@@ -80,10 +80,10 @@ type AuthorizationInPaymentsEntity struct {
 	// Start time of this authorization hold (only for UPI)
 	StartTime *string `json:"start_time,omitempty"`
 	// One of SUCCESS or PENDING
-	Status *AuthorizationInPaymentsEntityStatus `json:"status,omitempty"`
+	Status *Status `json:"status,omitempty"`
 }
 
-func (o *AuthorizationInPaymentsEntity) GetAction() *AuthorizationInPaymentsEntityAction {
+func (o *AuthorizationInPaymentsEntity) GetAction() *Action {
 	if o == nil {
 		return nil
 	}
@@ -132,7 +132,7 @@ func (o *AuthorizationInPaymentsEntity) GetStartTime() *string {
 	return o.StartTime
 }
 
-func (o *AuthorizationInPaymentsEntity) GetStatus() *AuthorizationInPaymentsEntityStatus {
+func (o *AuthorizationInPaymentsEntity) GetStatus() *Status {
 	if o == nil {
 		return nil
 	}

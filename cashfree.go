@@ -66,25 +66,25 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 
 // Cashfree Payment Gateway APIs: Cashfree's Payment Gateway APIs provide developers with a streamlined pathway to integrate advanced payment processing capabilities into their applications, platforms and websites.
 type Cashfree struct {
-	Eligibility *eligibility
-	// Collection of apis to get offers applicable for an order
-	Offers *offers
-	// Collection of APIs to create, accept payments and refund for an order.
-	Orders *orders
-	// Transac1tio1n reconciliation
-	PGReconciliation *pgReconciliation
-	// Collection of APIs handle payment links.
-	PaymentLinks *paymentLinks
-	// Collection of APIs handle payments.
-	Payments *payments
-	// Collection of APIs handle refunds.
-	Refunds *refunds
-	// Collection of APIs handle settlements.
-	Settlements *settlements
 	// Cashfree's token Vault helps you save cards and tokenize them in a PCI complaint manner. We support creation of network tokens which can be used across acquiring banks
-	TokenVault *tokenVault
+	TokenVault  *TokenVault
+	Eligibility *Eligibility
+	// Collection of APIs handle payment links.
+	PaymentLinks *PaymentLinks
+	// Collection of apis to get offers applicable for an order
+	Offers *Offers
+	// Collection of APIs to create, accept payments and refund for an order.
+	Orders *Orders
+	// Collection of APIs handle payments.
+	Payments *Payments
+	// Collection of APIs handle refunds.
+	Refunds *Refunds
+	// Collection of APIs handle settlements.
+	Settlements *Settlements
+	// Transac1tio1n reconciliation
+	PGReconciliation *PGReconciliation
 	// softPOS' agent and order management system now supported by APIs
-	SoftPOS *softPOS
+	SoftPOS *SoftPOS
 
 	sdkConfiguration sdkConfiguration
 }
@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Cashfree {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-09-01",
-			SDKVersion:        "0.8.1",
-			GenVersion:        "2.173.0",
-			UserAgent:         "speakeasy-sdk/go 0.8.1 2.173.0 2022-09-01 github.com/speakeasy-sdks/cashfree-go",
+			SDKVersion:        "0.9.0",
+			GenVersion:        "2.181.1",
+			UserAgent:         "speakeasy-sdk/go 0.9.0 2.181.1 2022-09-01 github.com/speakeasy-sdks/cashfree-go",
 		},
 	}
 	for _, opt := range opts {
@@ -183,15 +183,15 @@ func New(opts ...SDKOption) *Cashfree {
 		}
 	}
 
+	sdk.TokenVault = newTokenVault(sdk.sdkConfiguration)
+
 	sdk.Eligibility = newEligibility(sdk.sdkConfiguration)
+
+	sdk.PaymentLinks = newPaymentLinks(sdk.sdkConfiguration)
 
 	sdk.Offers = newOffers(sdk.sdkConfiguration)
 
 	sdk.Orders = newOrders(sdk.sdkConfiguration)
-
-	sdk.PGReconciliation = newPGReconciliation(sdk.sdkConfiguration)
-
-	sdk.PaymentLinks = newPaymentLinks(sdk.sdkConfiguration)
 
 	sdk.Payments = newPayments(sdk.sdkConfiguration)
 
@@ -199,7 +199,7 @@ func New(opts ...SDKOption) *Cashfree {
 
 	sdk.Settlements = newSettlements(sdk.sdkConfiguration)
 
-	sdk.TokenVault = newTokenVault(sdk.sdkConfiguration)
+	sdk.PGReconciliation = newPGReconciliation(sdk.sdkConfiguration)
 
 	sdk.SoftPOS = newSoftPOS(sdk.sdkConfiguration)
 

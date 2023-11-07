@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// pgReconciliation - Transac1tio1n reconciliation
-type pgReconciliation struct {
+// PGReconciliation - Transac1tio1n reconciliation
+type PGReconciliation struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newPGReconciliation(sdkConfig sdkConfiguration) *pgReconciliation {
-	return &pgReconciliation{
+func newPGReconciliation(sdkConfig sdkConfiguration) *PGReconciliation {
+	return &PGReconciliation{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get - PG Reconciliation
 // Use this API to get the payment gateway reconciliation details with date range.
-func (s *pgReconciliation) Get(ctx context.Context, request operations.GetPGReconciliationRequest, opts ...operations.Option) (*operations.GetPGReconciliationResponse, error) {
+func (s *PGReconciliation) Get(ctx context.Context, request operations.GetPGReconciliationRequest, opts ...operations.Option) (*operations.GetPGReconciliationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,

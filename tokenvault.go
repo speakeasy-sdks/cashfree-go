@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// tokenVault - Cashfree's token Vault helps you save cards and tokenize them in a PCI complaint manner. We support creation of network tokens which can be used across acquiring banks
-type tokenVault struct {
+// TokenVault - Cashfree's token Vault helps you save cards and tokenize them in a PCI complaint manner. We support creation of network tokens which can be used across acquiring banks
+type TokenVault struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newTokenVault(sdkConfig sdkConfiguration) *tokenVault {
-	return &tokenVault{
+func newTokenVault(sdkConfig sdkConfiguration) *TokenVault {
+	return &TokenVault{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // DeleteSavedInstrument - Delete Saved Instrument
 // To delete a saved instrument for a customer id and instrument id
-func (s *tokenVault) DeleteSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.DeleteSpecificSavedInstrumentResponse, error) {
+func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.DeleteSpecificSavedInstrumentResponse, error) {
 	request := operations.DeleteSpecificSavedInstrumentRequest{
 		CustomerID:   customerID,
 		InstrumentID: instrumentID,
@@ -241,7 +241,7 @@ func (s *tokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 
 // FetchSavedInstrument - Fetch Single Saved Instrument
 // To get specific saved instrument for a customer id and instrument id
-func (s *tokenVault) FetchSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchSpecificSavedInstrumentResponse, error) {
+func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchSpecificSavedInstrumentResponse, error) {
 	request := operations.FetchSpecificSavedInstrumentRequest{
 		CustomerID:   customerID,
 		InstrumentID: instrumentID,
@@ -455,7 +455,7 @@ func (s *tokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 
 // FetchSavedInstrumentCryptogram - Fetch cryptogram for saved instrument
 // To get the card network token, token expiry and cryptogram for a saved instrument using instrument id
-func (s *tokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchCryptogramResponse, error) {
+func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchCryptogramResponse, error) {
 	request := operations.FetchCryptogramRequest{
 		CustomerID:   customerID,
 		InstrumentID: instrumentID,
@@ -669,7 +669,7 @@ func (s *tokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 
 // GetAllSavedInstruments - Fetch All Saved Instruments
 // To get all saved instruments for a customer id
-func (s *tokenVault) GetAllSavedInstruments(ctx context.Context, customerID string, instrumentType operations.FetchAllSavedInstrumentsInstrumentType, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchAllSavedInstrumentsResponse, error) {
+func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID string, instrumentType operations.InstrumentType, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchAllSavedInstrumentsResponse, error) {
 	request := operations.FetchAllSavedInstrumentsRequest{
 		CustomerID:     customerID,
 		InstrumentType: instrumentType,
@@ -768,7 +768,7 @@ func (s *tokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 				return nil, err
 			}
 
-			res.FetchAllSavedInstruments = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

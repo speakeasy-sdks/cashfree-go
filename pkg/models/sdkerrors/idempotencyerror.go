@@ -7,28 +7,28 @@ import (
 	"fmt"
 )
 
-// IdempotencyErrorType - idempotency_error
-type IdempotencyErrorType string
+// SchemasIdempotencyErrorType - idempotency_error
+type SchemasIdempotencyErrorType string
 
 const (
-	IdempotencyErrorTypeIdempotencyError IdempotencyErrorType = "idempotency_error"
+	SchemasIdempotencyErrorTypeIdempotencyError SchemasIdempotencyErrorType = "idempotency_error"
 )
 
-func (e IdempotencyErrorType) ToPointer() *IdempotencyErrorType {
+func (e SchemasIdempotencyErrorType) ToPointer() *SchemasIdempotencyErrorType {
 	return &e
 }
 
-func (e *IdempotencyErrorType) UnmarshalJSON(data []byte) error {
+func (e *SchemasIdempotencyErrorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "idempotency_error":
-		*e = IdempotencyErrorType(v)
+		*e = SchemasIdempotencyErrorType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for IdempotencyErrorType: %v", v)
+		return fmt.Errorf("invalid value for SchemasIdempotencyErrorType: %v", v)
 	}
 }
 
@@ -36,7 +36,7 @@ type IdempotencyError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// idempotency_error
-	Type *IdempotencyErrorType `json:"type,omitempty"`
+	Type *SchemasIdempotencyErrorType `json:"type,omitempty"`
 }
 
 var _ error = &IdempotencyError{}

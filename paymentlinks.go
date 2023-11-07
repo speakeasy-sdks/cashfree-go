@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// paymentLinks - Collection of APIs handle payment links.
-type paymentLinks struct {
+// PaymentLinks - Collection of APIs handle payment links.
+type PaymentLinks struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newPaymentLinks(sdkConfig sdkConfiguration) *paymentLinks {
-	return &paymentLinks{
+func newPaymentLinks(sdkConfig sdkConfiguration) *PaymentLinks {
+	return &PaymentLinks{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Cancel Payment Link
 // Use this API to cancel a payment link. No further payments can be done against a cancelled link. Only a link in ACTIVE status can be cancelled.
-func (s *paymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion string, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CancelPaymentLinkResponse, error) {
+func (s *PaymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion string, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CancelPaymentLinkResponse, error) {
 	request := operations.CancelPaymentLinkRequest{
 		LinkID:          linkID,
 		XAPIVersion:     xAPIVersion,
@@ -229,7 +229,7 @@ func (s *paymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion st
 
 // Create Payment Link
 // Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.
-func (s *paymentLinks) Create(ctx context.Context, xAPIVersion string, createLinkRequest *shared.CreateLinkRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreatePaymentLinkResponse, error) {
+func (s *PaymentLinks) Create(ctx context.Context, xAPIVersion string, createLinkRequest *shared.CreateLinkRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreatePaymentLinkResponse, error) {
 	request := operations.CreatePaymentLinkRequest{
 		XAPIVersion:       xAPIVersion,
 		CreateLinkRequest: createLinkRequest,
@@ -434,7 +434,7 @@ func (s *paymentLinks) Create(ctx context.Context, xAPIVersion string, createLin
 
 // Fetch Payment Link Details
 // Use this API to view all details and status of a payment link.
-func (s *paymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchPaymentLinkDetailsResponse, error) {
+func (s *PaymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchPaymentLinkDetailsResponse, error) {
 	request := operations.FetchPaymentLinkDetailsRequest{
 		LinkID:      linkID,
 		XAPIVersion: xAPIVersion,
@@ -647,7 +647,7 @@ func (s *paymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion str
 
 // GetOrders - Get Orders for a Payment Link
 // Use this API to view all order details for a payment link.
-func (s *paymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentLinkOrdersResponse, error) {
+func (s *PaymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentLinkOrdersResponse, error) {
 	request := operations.GetPaymentLinkOrdersRequest{
 		LinkID:      linkID,
 		XAPIVersion: xAPIVersion,
@@ -741,7 +741,7 @@ func (s *paymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion
 				return nil, err
 			}
 
-			res.LinkOrdersResponses = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

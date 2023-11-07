@@ -1,5 +1,5 @@
 # PGReconciliation
-(*PGReconciliation*)
+(*.PGReconciliation*)
 
 ## Overview
 
@@ -39,11 +39,11 @@ func main() {
     ctx := context.Background()
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
         FetchPGReconRequest: &shared.FetchPGReconRequest{
-            Filters: shared.FetchPGReconRequestFilters{
+            Filters: shared.Filters{
                 EndDate: "string",
                 StartDate: "string",
             },
-            Pagination: shared.FetchPGReconRequestPagination{
+            Pagination: shared.Pagination{
                 Limit: 700347,
             },
         },

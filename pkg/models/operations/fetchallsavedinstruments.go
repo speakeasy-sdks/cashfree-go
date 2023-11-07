@@ -10,28 +10,28 @@ import (
 	"net/http"
 )
 
-// FetchAllSavedInstrumentsInstrumentType - type to instrument to query
-type FetchAllSavedInstrumentsInstrumentType string
+// InstrumentType - type to instrument to query
+type InstrumentType string
 
 const (
-	FetchAllSavedInstrumentsInstrumentTypeCard FetchAllSavedInstrumentsInstrumentType = "card"
+	InstrumentTypeCard InstrumentType = "card"
 )
 
-func (e FetchAllSavedInstrumentsInstrumentType) ToPointer() *FetchAllSavedInstrumentsInstrumentType {
+func (e InstrumentType) ToPointer() *InstrumentType {
 	return &e
 }
 
-func (e *FetchAllSavedInstrumentsInstrumentType) UnmarshalJSON(data []byte) error {
+func (e *InstrumentType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "card":
-		*e = FetchAllSavedInstrumentsInstrumentType(v)
+		*e = InstrumentType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FetchAllSavedInstrumentsInstrumentType: %v", v)
+		return fmt.Errorf("invalid value for InstrumentType: %v", v)
 	}
 }
 
@@ -39,7 +39,7 @@ type FetchAllSavedInstrumentsRequest struct {
 	// The customer_id for which all the saved cards are queried
 	CustomerID string `pathParam:"style=simple,explode=false,name=customer_id"`
 	// type to instrument to query
-	InstrumentType FetchAllSavedInstrumentsInstrumentType `queryParam:"style=form,explode=true,name=instrument_type"`
+	InstrumentType InstrumentType `queryParam:"style=form,explode=true,name=instrument_type"`
 	// API version to be used. Format is in YYYY-MM-DD
 	XAPIVersion string `default:"2022-09-01" header:"style=simple,explode=false,name=x-api-version"`
 	// Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree
@@ -64,9 +64,9 @@ func (o *FetchAllSavedInstrumentsRequest) GetCustomerID() string {
 	return o.CustomerID
 }
 
-func (o *FetchAllSavedInstrumentsRequest) GetInstrumentType() FetchAllSavedInstrumentsInstrumentType {
+func (o *FetchAllSavedInstrumentsRequest) GetInstrumentType() InstrumentType {
 	if o == nil {
-		return FetchAllSavedInstrumentsInstrumentType("")
+		return InstrumentType("")
 	}
 	return o.InstrumentType
 }
@@ -88,13 +88,13 @@ func (o *FetchAllSavedInstrumentsRequest) GetXRequestID() *string {
 type FetchAllSavedInstrumentsResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// OK
-	FetchAllSavedInstruments []shared.FetchAllSavedInstruments
-	Headers                  map[string][]string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.FetchAllSavedInstruments
 }
 
 func (o *FetchAllSavedInstrumentsResponse) GetContentType() string {
@@ -102,13 +102,6 @@ func (o *FetchAllSavedInstrumentsResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *FetchAllSavedInstrumentsResponse) GetFetchAllSavedInstruments() []shared.FetchAllSavedInstruments {
-	if o == nil {
-		return nil
-	}
-	return o.FetchAllSavedInstruments
 }
 
 func (o *FetchAllSavedInstrumentsResponse) GetHeaders() map[string][]string {
@@ -130,4 +123,11 @@ func (o *FetchAllSavedInstrumentsResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *FetchAllSavedInstrumentsResponse) GetClasses() []shared.FetchAllSavedInstruments {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

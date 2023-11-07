@@ -1,5 +1,5 @@
 # Refunds
-(*Refunds*)
+(*.Refunds*)
 
 ## Overview
 
@@ -177,7 +177,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.RefundsEntities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

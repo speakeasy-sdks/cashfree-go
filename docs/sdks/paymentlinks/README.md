@@ -1,5 +1,5 @@
 # PaymentLinks
-(*PaymentLinks*)
+(*.PaymentLinks*)
 
 ## Overview
 
@@ -114,8 +114,8 @@ func main() {
         LinkID: "string",
         LinkMeta: &shared.LinkMetaEntity{},
         LinkNotes: map[string]string{
-            "key_1": "value_1",
             "key_2": "value_2",
+            "key_1": "value_1",
         },
         LinkNotify: &shared.LinkNotifyEntity{},
         LinkPurpose: "string",
@@ -254,7 +254,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.LinkOrdersResponses != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

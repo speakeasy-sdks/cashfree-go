@@ -52,13 +52,13 @@ func (o *GetEligibilityOfferRequest) GetXRequestID() *string {
 type GetEligibilityOfferResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
-	// OK
-	EligibleOffersEntities []shared.EligibleOffersEntity
-	Headers                map[string][]string
+	Headers     map[string][]string
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.EligibleOffersEntity
 }
 
 func (o *GetEligibilityOfferResponse) GetContentType() string {
@@ -66,13 +66,6 @@ func (o *GetEligibilityOfferResponse) GetContentType() string {
 		return ""
 	}
 	return o.ContentType
-}
-
-func (o *GetEligibilityOfferResponse) GetEligibleOffersEntities() []shared.EligibleOffersEntity {
-	if o == nil {
-		return nil
-	}
-	return o.EligibleOffersEntities
 }
 
 func (o *GetEligibilityOfferResponse) GetHeaders() map[string][]string {
@@ -94,4 +87,11 @@ func (o *GetEligibilityOfferResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetEligibilityOfferResponse) GetClasses() []shared.EligibleOffersEntity {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

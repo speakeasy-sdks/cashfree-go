@@ -50,40 +50,40 @@ func (o *GetPaymentsforOrderRequest) GetXRequestID() *string {
 	return o.XRequestID
 }
 
-type GetPaymentsforOrder200ApplicationJSONType string
+type GetPaymentsforOrderResponseBodyType string
 
 const (
-	GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity GetPaymentsforOrder200ApplicationJSONType = "PaymentsEntity"
+	GetPaymentsforOrderResponseBodyTypePaymentsEntity GetPaymentsforOrderResponseBodyType = "PaymentsEntity"
 )
 
-type GetPaymentsforOrder200ApplicationJSON struct {
+type GetPaymentsforOrderResponseBody struct {
 	PaymentsEntity *shared.PaymentsEntity
 
-	Type GetPaymentsforOrder200ApplicationJSONType
+	Type GetPaymentsforOrderResponseBodyType
 }
 
-func CreateGetPaymentsforOrder200ApplicationJSONPaymentsEntity(paymentsEntity shared.PaymentsEntity) GetPaymentsforOrder200ApplicationJSON {
-	typ := GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
+func CreateGetPaymentsforOrderResponseBodyPaymentsEntity(paymentsEntity shared.PaymentsEntity) GetPaymentsforOrderResponseBody {
+	typ := GetPaymentsforOrderResponseBodyTypePaymentsEntity
 
-	return GetPaymentsforOrder200ApplicationJSON{
+	return GetPaymentsforOrderResponseBody{
 		PaymentsEntity: &paymentsEntity,
 		Type:           typ,
 	}
 }
 
-func (u *GetPaymentsforOrder200ApplicationJSON) UnmarshalJSON(data []byte) error {
+func (u *GetPaymentsforOrderResponseBody) UnmarshalJSON(data []byte) error {
 
 	paymentsEntity := shared.PaymentsEntity{}
 	if err := utils.UnmarshalJSON(data, &paymentsEntity, "", true, true); err == nil {
 		u.PaymentsEntity = &paymentsEntity
-		u.Type = GetPaymentsforOrder200ApplicationJSONTypePaymentsEntity
+		u.Type = GetPaymentsforOrderResponseBodyTypePaymentsEntity
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u GetPaymentsforOrder200ApplicationJSON) MarshalJSON() ([]byte, error) {
+func (u GetPaymentsforOrderResponseBody) MarshalJSON() ([]byte, error) {
 	if u.PaymentsEntity != nil {
 		return utils.MarshalJSON(u.PaymentsEntity, "", true)
 	}
@@ -100,7 +100,7 @@ type GetPaymentsforOrderResponse struct {
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
 	// OK
-	GetPaymentsforOrder200ApplicationJSONOneOf *GetPaymentsforOrder200ApplicationJSON
+	OneOf *GetPaymentsforOrderResponseBody
 }
 
 func (o *GetPaymentsforOrderResponse) GetContentType() string {
@@ -131,9 +131,9 @@ func (o *GetPaymentsforOrderResponse) GetRawResponse() *http.Response {
 	return o.RawResponse
 }
 
-func (o *GetPaymentsforOrderResponse) GetGetPaymentsforOrder200ApplicationJSONOneOf() *GetPaymentsforOrder200ApplicationJSON {
+func (o *GetPaymentsforOrderResponse) GetOneOf() *GetPaymentsforOrderResponseBody {
 	if o == nil {
 		return nil
 	}
-	return o.GetPaymentsforOrder200ApplicationJSONOneOf
+	return o.OneOf
 }

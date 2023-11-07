@@ -53,12 +53,12 @@ type GetAllRefundsForOrderResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	Headers     map[string][]string
-	// OK
-	RefundsEntities []shared.RefundsEntity
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.RefundsEntity
 }
 
 func (o *GetAllRefundsForOrderResponse) GetContentType() string {
@@ -75,13 +75,6 @@ func (o *GetAllRefundsForOrderResponse) GetHeaders() map[string][]string {
 	return o.Headers
 }
 
-func (o *GetAllRefundsForOrderResponse) GetRefundsEntities() []shared.RefundsEntity {
-	if o == nil {
-		return nil
-	}
-	return o.RefundsEntities
-}
-
 func (o *GetAllRefundsForOrderResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -94,4 +87,11 @@ func (o *GetAllRefundsForOrderResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetAllRefundsForOrderResponse) GetClasses() []shared.RefundsEntity {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

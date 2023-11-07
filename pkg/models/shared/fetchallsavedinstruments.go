@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// FetchAllSavedInstrumentsInstrumentStatus - Status of the saved instrument.
-type FetchAllSavedInstrumentsInstrumentStatus string
+// InstrumentStatus - Status of the saved instrument.
+type InstrumentStatus string
 
 const (
-	FetchAllSavedInstrumentsInstrumentStatusActive   FetchAllSavedInstrumentsInstrumentStatus = "ACTIVE"
-	FetchAllSavedInstrumentsInstrumentStatusInactive FetchAllSavedInstrumentsInstrumentStatus = "INACTIVE"
+	InstrumentStatusActive   InstrumentStatus = "ACTIVE"
+	InstrumentStatusInactive InstrumentStatus = "INACTIVE"
 )
 
-func (e FetchAllSavedInstrumentsInstrumentStatus) ToPointer() *FetchAllSavedInstrumentsInstrumentStatus {
+func (e InstrumentStatus) ToPointer() *InstrumentStatus {
 	return &e
 }
 
-func (e *FetchAllSavedInstrumentsInstrumentStatus) UnmarshalJSON(data []byte) error {
+func (e *InstrumentStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,35 +28,35 @@ func (e *FetchAllSavedInstrumentsInstrumentStatus) UnmarshalJSON(data []byte) er
 	case "ACTIVE":
 		fallthrough
 	case "INACTIVE":
-		*e = FetchAllSavedInstrumentsInstrumentStatus(v)
+		*e = InstrumentStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FetchAllSavedInstrumentsInstrumentStatus: %v", v)
+		return fmt.Errorf("invalid value for InstrumentStatus: %v", v)
 	}
 }
 
-// FetchAllSavedInstrumentsInstrumentType - Type of the saved instrument
-type FetchAllSavedInstrumentsInstrumentType string
+// InstrumentType - Type of the saved instrument
+type InstrumentType string
 
 const (
-	FetchAllSavedInstrumentsInstrumentTypeCard FetchAllSavedInstrumentsInstrumentType = "card"
+	InstrumentTypeCard InstrumentType = "card"
 )
 
-func (e FetchAllSavedInstrumentsInstrumentType) ToPointer() *FetchAllSavedInstrumentsInstrumentType {
+func (e InstrumentType) ToPointer() *InstrumentType {
 	return &e
 }
 
-func (e *FetchAllSavedInstrumentsInstrumentType) UnmarshalJSON(data []byte) error {
+func (e *InstrumentType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "card":
-		*e = FetchAllSavedInstrumentsInstrumentType(v)
+		*e = InstrumentType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for FetchAllSavedInstrumentsInstrumentType: %v", v)
+		return fmt.Errorf("invalid value for InstrumentType: %v", v)
 	}
 }
 
@@ -73,9 +73,9 @@ type FetchAllSavedInstruments struct {
 	InstrumentID   *string              `json:"instrument_id,omitempty"`
 	InstrumentMeta *SavedInstrumentMeta `json:"instrument_meta,omitempty"`
 	// Status of the saved instrument.
-	InstrumentStatus *FetchAllSavedInstrumentsInstrumentStatus `json:"instrument_status,omitempty"`
+	InstrumentStatus *InstrumentStatus `json:"instrument_status,omitempty"`
 	// Type of the saved instrument
-	InstrumentType *FetchAllSavedInstrumentsInstrumentType `json:"instrument_type,omitempty"`
+	InstrumentType *InstrumentType `json:"instrument_type,omitempty"`
 	// Unique id for the saved instrument
 	InstrumentUID *string `json:"instrument_uid,omitempty"`
 }
@@ -122,14 +122,14 @@ func (o *FetchAllSavedInstruments) GetInstrumentMeta() *SavedInstrumentMeta {
 	return o.InstrumentMeta
 }
 
-func (o *FetchAllSavedInstruments) GetInstrumentStatus() *FetchAllSavedInstrumentsInstrumentStatus {
+func (o *FetchAllSavedInstruments) GetInstrumentStatus() *InstrumentStatus {
 	if o == nil {
 		return nil
 	}
 	return o.InstrumentStatus
 }
 
-func (o *FetchAllSavedInstruments) GetInstrumentType() *FetchAllSavedInstrumentsInstrumentType {
+func (o *FetchAllSavedInstruments) GetInstrumentType() *InstrumentType {
 	if o == nil {
 		return nil
 	}

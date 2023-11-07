@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// OfferTncOfferTncType - TnC Type for the Offer. It can be either `text` or `link`
-type OfferTncOfferTncType string
+// OfferTncType - TnC Type for the Offer. It can be either `text` or `link`
+type OfferTncType string
 
 const (
-	OfferTncOfferTncTypeText OfferTncOfferTncType = "text"
-	OfferTncOfferTncTypeLink OfferTncOfferTncType = "link"
+	OfferTncTypeText OfferTncType = "text"
+	OfferTncTypeLink OfferTncType = "link"
 )
 
-func (e OfferTncOfferTncType) ToPointer() *OfferTncOfferTncType {
+func (e OfferTncType) ToPointer() *OfferTncType {
 	return &e
 }
 
-func (e *OfferTncOfferTncType) UnmarshalJSON(data []byte) error {
+func (e *OfferTncType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,23 +28,23 @@ func (e *OfferTncOfferTncType) UnmarshalJSON(data []byte) error {
 	case "text":
 		fallthrough
 	case "link":
-		*e = OfferTncOfferTncType(v)
+		*e = OfferTncType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OfferTncOfferTncType: %v", v)
+		return fmt.Errorf("invalid value for OfferTncType: %v", v)
 	}
 }
 
 type OfferTnc struct {
 	// TnC Type for the Offer. It can be either `text` or `link`
-	OfferTncType OfferTncOfferTncType `json:"offer_tnc_type"`
+	OfferTncType OfferTncType `json:"offer_tnc_type"`
 	// TnC for the Offer.
 	OfferTncValue string `json:"offer_tnc_value"`
 }
 
-func (o *OfferTnc) GetOfferTncType() OfferTncOfferTncType {
+func (o *OfferTnc) GetOfferTncType() OfferTncType {
 	if o == nil {
-		return OfferTncOfferTncType("")
+		return OfferTncType("")
 	}
 	return o.OfferTncType
 }

@@ -1,5 +1,5 @@
 # Offers
-(*Offers*)
+(*.Offers*)
 
 ## Overview
 
@@ -42,12 +42,12 @@ func main() {
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
-                CashbackType: shared.CashbackDetailsCashbackTypeFlat,
+                CashbackType: shared.CashbackTypeFlat,
                 CashbackValue: "string",
                 MaxCashbackAmount: "string",
             },
             DiscountDetails: &shared.DiscountDetails{
-                DiscountType: shared.DiscountDetailsDiscountTypeFlat,
+                DiscountType: shared.DiscountTypeFlat,
                 DiscountValue: "string",
                 MaxDiscountAmount: "string",
             },
@@ -61,15 +61,15 @@ func main() {
             OfferTitle: "Test Offer",
         },
         OfferTnc: shared.OfferTnc{
-            OfferTncType: shared.OfferTncOfferTncTypeText,
+            OfferTncType: shared.OfferTncTypeText,
             OfferTncValue: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         },
         OfferValidations: shared.OfferValidations{
             MaxAllowed: 10,
             MinAmount: cashfreego.Float64(1),
-            PaymentMethod: shared.CreateOfferValidationsPaymentMethodOfferUPI(
+            PaymentMethod: shared.CreatePaymentMethodOfferUPI(
                     shared.OfferUPI{
-                        Upi: shared.OfferUPIUPIOffer{},
+                        Upi: shared.UPIOffer{},
                     },
             ),
         },

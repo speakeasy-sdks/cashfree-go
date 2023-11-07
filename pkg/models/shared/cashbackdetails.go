@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// CashbackDetailsCashbackType - Type of discount
-type CashbackDetailsCashbackType string
+// CashbackType - Type of discount
+type CashbackType string
 
 const (
-	CashbackDetailsCashbackTypeFlat       CashbackDetailsCashbackType = "flat"
-	CashbackDetailsCashbackTypePercentage CashbackDetailsCashbackType = "percentage"
+	CashbackTypeFlat       CashbackType = "flat"
+	CashbackTypePercentage CashbackType = "percentage"
 )
 
-func (e CashbackDetailsCashbackType) ToPointer() *CashbackDetailsCashbackType {
+func (e CashbackType) ToPointer() *CashbackType {
 	return &e
 }
 
-func (e *CashbackDetailsCashbackType) UnmarshalJSON(data []byte) error {
+func (e *CashbackType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,25 +28,25 @@ func (e *CashbackDetailsCashbackType) UnmarshalJSON(data []byte) error {
 	case "flat":
 		fallthrough
 	case "percentage":
-		*e = CashbackDetailsCashbackType(v)
+		*e = CashbackType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for CashbackDetailsCashbackType: %v", v)
+		return fmt.Errorf("invalid value for CashbackType: %v", v)
 	}
 }
 
 type CashbackDetails struct {
 	// Type of discount
-	CashbackType CashbackDetailsCashbackType `json:"cashback_type"`
+	CashbackType CashbackType `json:"cashback_type"`
 	// Value of Discount.
 	CashbackValue string `json:"cashback_value"`
 	// Maximum Value of Cashback allowed.
 	MaxCashbackAmount string `json:"max_cashback_amount"`
 }
 
-func (o *CashbackDetails) GetCashbackType() CashbackDetailsCashbackType {
+func (o *CashbackDetails) GetCashbackType() CashbackType {
 	if o == nil {
-		return CashbackDetailsCashbackType("")
+		return CashbackType("")
 	}
 	return o.CashbackType
 }

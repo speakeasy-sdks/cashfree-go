@@ -37,29 +37,21 @@ func main() {
 		}),
 	)
 
-	var xAPIVersion string = "string"
+	var customerID string = "string"
 
-	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
-		Filters: &shared.OfferFilters{
-			OfferType: []shared.OfferType{
-				shared.OfferTypeNoCostEmi,
-			},
-		},
-		Queries: shared.OfferQueries{
-			Amount:  cashfreego.Float64(100),
-			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-		},
-	}
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
 
 	var xRequestID *string = "string"
 
 	ctx := context.Background()
-	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.EligibleOffersEntities != nil {
+	if res.FetchAllSavedInstruments != nil {
 		// handle response
 	}
 }
@@ -71,34 +63,37 @@ func main() {
 ## Available Resources and Operations
 
 
-### [Eligibility](docs/sdks/eligibility/README.md)
+### [.TokenVault](docs/sdks/tokenvault/README.md)
+
+* [DeleteSavedInstrument](docs/sdks/tokenvault/README.md#deletesavedinstrument) - Delete Saved Instrument
+* [FetchSavedInstrument](docs/sdks/tokenvault/README.md#fetchsavedinstrument) - Fetch Single Saved Instrument
+* [FetchSavedInstrumentCryptogram](docs/sdks/tokenvault/README.md#fetchsavedinstrumentcryptogram) - Fetch cryptogram for saved instrument
+* [GetAllSavedInstruments](docs/sdks/tokenvault/README.md#getallsavedinstruments) - Fetch All Saved Instruments
+
+### [.Eligibility](docs/sdks/eligibility/README.md)
 
 * [GetAllOffers](docs/sdks/eligibility/README.md#getalloffers) - Get eligible Offers
 * [GetCardlessEMI](docs/sdks/eligibility/README.md#getcardlessemi) - Get eligible Cardless EMI
 * [GetPaylaterMethods](docs/sdks/eligibility/README.md#getpaylatermethods) - Get eligible Paylater
 
-### [Offers](docs/sdks/offers/README.md)
-
-* [Create](docs/sdks/offers/README.md#create) - Create Offer
-* [Get](docs/sdks/offers/README.md#get) - Get Offer by ID
-
-### [Orders](docs/sdks/orders/README.md)
-
-* [Create](docs/sdks/orders/README.md#create) - Create Order
-* [Get](docs/sdks/orders/README.md#get) - Get Order
-
-### [PGReconciliation](docs/sdks/pgreconciliation/README.md)
-
-* [Get](docs/sdks/pgreconciliation/README.md#get) - PG Reconciliation
-
-### [PaymentLinks](docs/sdks/paymentlinks/README.md)
+### [.PaymentLinks](docs/sdks/paymentlinks/README.md)
 
 * [Cancel](docs/sdks/paymentlinks/README.md#cancel) - Cancel Payment Link
 * [Create](docs/sdks/paymentlinks/README.md#create) - Create Payment Link
 * [Fetch](docs/sdks/paymentlinks/README.md#fetch) - Fetch Payment Link Details
 * [GetOrders](docs/sdks/paymentlinks/README.md#getorders) - Get Orders for a Payment Link
 
-### [Payments](docs/sdks/payments/README.md)
+### [.Offers](docs/sdks/offers/README.md)
+
+* [Create](docs/sdks/offers/README.md#create) - Create Offer
+* [Get](docs/sdks/offers/README.md#get) - Get Offer by ID
+
+### [.Orders](docs/sdks/orders/README.md)
+
+* [Create](docs/sdks/orders/README.md#create) - Create Order
+* [Get](docs/sdks/orders/README.md#get) - Get Order
+
+### [.Payments](docs/sdks/payments/README.md)
 
 * [Payment](docs/sdks/payments/README.md#payment) - Get Payment by ID
 * [GetforOrder](docs/sdks/payments/README.md#getfororder) - Get Payments for an Order
@@ -106,26 +101,23 @@ func main() {
 * [PreauthorizeOrder](docs/sdks/payments/README.md#preauthorizeorder) - Preauthorization
 * [Submit](docs/sdks/payments/README.md#submit) - Submit or Resend OTP
 
-### [Refunds](docs/sdks/refunds/README.md)
+### [.Refunds](docs/sdks/refunds/README.md)
 
 * [Create](docs/sdks/refunds/README.md#create) - Create Refund
 * [Get](docs/sdks/refunds/README.md#get) - Get Refund
 * [GetAllforOrder](docs/sdks/refunds/README.md#getallfororder) - Get All Refunds for an Order
 
-### [Settlements](docs/sdks/settlements/README.md)
+### [.Settlements](docs/sdks/settlements/README.md)
 
 * [Fetch](docs/sdks/settlements/README.md#fetch) - Settlement Reconciliation
 * [GetAll](docs/sdks/settlements/README.md#getall) - Get All Settlements
 * [GetForOrder](docs/sdks/settlements/README.md#getfororder) - Get Settlements by Order ID
 
-### [TokenVault](docs/sdks/tokenvault/README.md)
+### [.PGReconciliation](docs/sdks/pgreconciliation/README.md)
 
-* [DeleteSavedInstrument](docs/sdks/tokenvault/README.md#deletesavedinstrument) - Delete Saved Instrument
-* [FetchSavedInstrument](docs/sdks/tokenvault/README.md#fetchsavedinstrument) - Fetch Single Saved Instrument
-* [FetchSavedInstrumentCryptogram](docs/sdks/tokenvault/README.md#fetchsavedinstrumentcryptogram) - Fetch cryptogram for saved instrument
-* [GetAllSavedInstruments](docs/sdks/tokenvault/README.md#getallsavedinstruments) - Fetch All Saved Instruments
+* [Get](docs/sdks/pgreconciliation/README.md#get) - PG Reconciliation
 
-### [SoftPOS](docs/sdks/softpos/README.md)
+### [.SoftPOS](docs/sdks/softpos/README.md)
 
 * [TerminalStatus](docs/sdks/softpos/README.md#terminalstatus) - Get terminal status using phone number
 * [CreateTerminals](docs/sdks/softpos/README.md#createterminals) - Create Terminal
@@ -185,69 +177,61 @@ func main() {
 		}),
 	)
 
-	var xAPIVersion string = "string"
+	var customerID string = "string"
 
-	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
-		Filters: &shared.OfferFilters{
-			OfferType: []shared.OfferType{
-				shared.OfferTypeNoCostEmi,
-			},
-		},
-		Queries: shared.OfferQueries{
-			Amount:  cashfreego.Float64(100),
-			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-		},
-	}
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
 
 	var xRequestID *string = "string"
 
 	ctx := context.Background()
-	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
 	if err != nil {
 
-		var e *BadRequestError
+		var e *sdkerrors.BadRequestError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *AuthenticationError
+		var e *sdkerrors.AuthenticationError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *ApiError404
+		var e *sdkerrors.APIError404
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *ApiError409
+		var e *sdkerrors.APIError409
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *IdempotencyError
+		var e *sdkerrors.IdempotencyError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *RateLimitError
+		var e *sdkerrors.RateLimitError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *ApiError
+		var e *sdkerrors.APIError
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
 		}
 
-		var e *ApiError502
+		var e *sdkerrors.APIError502
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -275,7 +259,6 @@ You can override the default server globally using the `WithServerIndex` option 
 
 For example:
 
-
 ```go
 package main
 
@@ -288,38 +271,30 @@ import (
 
 func main() {
 	s := cashfreego.New(
+		cashfreego.WithServerIndex(1),
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
 				XClientID:     "",
 				XClientSecret: "",
 			},
 		}),
-		cashfreego.WithServerIndex(1),
 	)
 
-	var xAPIVersion string = "string"
+	var customerID string = "string"
 
-	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
-		Filters: &shared.OfferFilters{
-			OfferType: []shared.OfferType{
-				shared.OfferTypeNoCostEmi,
-			},
-		},
-		Queries: shared.OfferQueries{
-			Amount:  cashfreego.Float64(100),
-			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-		},
-	}
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
 
 	var xRequestID *string = "string"
 
 	ctx := context.Background()
-	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.EligibleOffersEntities != nil {
+	if res.FetchAllSavedInstruments != nil {
 		// handle response
 	}
 }
@@ -331,7 +306,6 @@ func main() {
 
 The default server can also be overridden globally using the `WithServerURL` option when initializing the SDK client instance. For example:
 
-
 ```go
 package main
 
@@ -344,38 +318,30 @@ import (
 
 func main() {
 	s := cashfreego.New(
+		cashfreego.WithServerURL("https://sandbox.cashfree.com/pg"),
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
 				XClientID:     "",
 				XClientSecret: "",
 			},
 		}),
-		cashfreego.WithServerURL("https://sandbox.cashfree.com/pg"),
 	)
 
-	var xAPIVersion string = "string"
+	var customerID string = "string"
 
-	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
-		Filters: &shared.OfferFilters{
-			OfferType: []shared.OfferType{
-				shared.OfferTypeNoCostEmi,
-			},
-		},
-		Queries: shared.OfferQueries{
-			Amount:  cashfreego.Float64(100),
-			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-		},
-	}
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
 
 	var xRequestID *string = "string"
 
 	ctx := context.Background()
-	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.EligibleOffersEntities != nil {
+	if res.FetchAllSavedInstruments != nil {
 		// handle response
 	}
 }
@@ -413,6 +379,350 @@ var (
 
 This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
 <!-- End Custom HTTP Client -->
+
+
+
+<!-- Start Retries -->
+# Retries
+
+Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
+
+
+## Example
+
+```go
+package main
+
+import (
+	"/pkg/models/operations"
+	"/pkg/utils"
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option1: &shared.SecurityOption1{
+				XClientID:     "",
+				XClientSecret: "",
+			},
+		}),
+	)
+
+	var customerID string = "string"
+
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID, operations.WithRetries(utils.RetryConfig{
+		Strategy: "backoff",
+		Backoff: &utils.BackoffStrategy{
+			InitialInterval: 1,
+			MaxInterval:     50,
+			Exponent:        1.1,
+			MaxElapsedTime:  100,
+		},
+		RetryConnectionErrors: false,
+	}))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.FetchAllSavedInstruments != nil {
+		// handle response
+	}
+}
+
+```
+
+If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
+
+
+## Example
+
+```go
+package main
+
+import (
+	"/pkg/models/operations"
+	"/pkg/utils"
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithRetryConfig(utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 1,
+				MaxInterval:     50,
+				Exponent:        1.1,
+				MaxElapsedTime:  100,
+			},
+			RetryConnectionErrors: false,
+		}),
+		cashfreego.WithSecurity(shared.Security{
+			Option1: &shared.SecurityOption1{
+				XClientID:     "",
+				XClientSecret: "",
+			},
+		}),
+	)
+
+	var customerID string = "string"
+
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.FetchAllSavedInstruments != nil {
+		// handle response
+	}
+}
+
+```
+
+
+<!-- End Retries -->
+
+
+
+<!-- Start Authentication -->
+
+# Authentication
+
+## Per-Client Security Schemes
+
+Your SDK supports multiple security scheme combinations globally. You can choose from one of the alternatives by using the `WithSecurity` option when initializing the SDK client instance. The selected option will be used by default to authenticate with the API for all operations that support it.
+
+### Option1
+
+All of the following schemes must be satisfied to use the `Option1` alternative:
+
+| Name            | Type            | Scheme          |
+| --------------- | --------------- | --------------- |
+| `XClientID`     | apiKey          | API key         |
+| `XClientSecret` | apiKey          | API key         |
+
+Example:
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option1: &shared.SecurityOption1{
+				XClientID:     "",
+				XClientSecret: "",
+			},
+		}),
+	)
+
+	var customerID string = "string"
+
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.FetchAllSavedInstruments != nil {
+		// handle response
+	}
+}
+
+```
+
+### Option2
+
+All of the following schemes must be satisfied to use the `Option2` alternative:
+
+| Name             | Type             | Scheme           |
+| ---------------- | ---------------- | ---------------- |
+| `XClientID`      | apiKey           | API key          |
+| `XPartnerAPIKey` | apiKey           | API key          |
+
+Example:
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option2: &shared.SecurityOption2{
+				XClientID:      "",
+				XPartnerAPIKey: "",
+			},
+		}),
+	)
+
+	var customerID string = "string"
+
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.FetchAllSavedInstruments != nil {
+		// handle response
+	}
+}
+
+```
+
+### Option3
+
+All of the following schemes must be satisfied to use the `Option3` alternative:
+
+| Name                     | Type                     | Scheme                   |
+| ------------------------ | ------------------------ | ------------------------ |
+| `XClientID`              | apiKey                   | API key                  |
+| `XClientSignatureHeader` | apiKey                   | API key                  |
+
+Example:
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option3: &shared.SecurityOption3{
+				XClientID:              "",
+				XClientSignatureHeader: "",
+			},
+		}),
+	)
+
+	var customerID string = "string"
+
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.FetchAllSavedInstruments != nil {
+		// handle response
+	}
+}
+
+```
+
+### Option4
+
+All of the following schemes must be satisfied to use the `Option4` alternative:
+
+| Name                 | Type                 | Scheme               |
+| -------------------- | -------------------- | -------------------- |
+| `XPartnerAPIKey`     | apiKey               | API key              |
+| `XPartnerMerchantID` | apiKey               | API key              |
+
+Example:
+
+```go
+package main
+
+import (
+	"context"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"log"
+)
+
+func main() {
+	s := cashfreego.New(
+		cashfreego.WithSecurity(shared.Security{
+			Option4: &shared.SecurityOption4{
+				XPartnerAPIKey:     "",
+				XPartnerMerchantID: "",
+			},
+		}),
+	)
+
+	var customerID string = "string"
+
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
+
+	var xRequestID *string = "string"
+
+	ctx := context.Background()
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if res.FetchAllSavedInstruments != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 

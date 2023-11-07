@@ -15,20 +15,20 @@ import (
 	"strings"
 )
 
-// payments - Collection of APIs handle payments.
-type payments struct {
+// Payments - Collection of APIs handle payments.
+type Payments struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newPayments(sdkConfig sdkConfiguration) *payments {
-	return &payments{
+func newPayments(sdkConfig sdkConfiguration) *Payments {
+	return &Payments{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Get Payment by ID
 // Use this API to view payment details of an order for a payment ID.
-func (s *payments) Payment(ctx context.Context, cfPaymentID int64, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentbyIDResponse, error) {
+func (s *Payments) Payment(ctx context.Context, cfPaymentID int64, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentbyIDResponse, error) {
 	request := operations.GetPaymentbyIDRequest{
 		CfPaymentID: cfPaymentID,
 		OrderID:     orderID,
@@ -242,7 +242,7 @@ func (s *payments) Payment(ctx context.Context, cfPaymentID int64, orderID strin
 
 // GetforOrder - Get Payments for an Order
 // Use this API to view all payment details for an order.
-func (s *payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentsforOrderResponse, error) {
+func (s *Payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentsforOrderResponse, error) {
 	request := operations.GetPaymentsforOrderRequest{
 		OrderID:     orderID,
 		XAPIVersion: xAPIVersion,
@@ -331,12 +331,12 @@ func (s *payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 
 		switch {
 		case utils.MatchContentType(contentType, `application/json`):
-			var out operations.GetPaymentsforOrder200ApplicationJSON
+			var out operations.GetPaymentsforOrderResponseBody
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.GetPaymentsforOrder200ApplicationJSONOneOf = &out
+			res.OneOf = &out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -459,7 +459,7 @@ func (s *payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 // Cashfree to process the payment. To use this API S2S flag needs to be enabled
 // from the backend. In case you want to use the cards payment option the PCI
 // DSS flag is required, for more information send an email to "care@cashfree.com".
-func (s *payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayRequest *shared.OrderPayRequest, xRequestID *string, opts ...operations.Option) (*operations.OrderPayResponse, error) {
+func (s *Payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayRequest *shared.OrderPayRequest, xRequestID *string, opts ...operations.Option) (*operations.OrderPayResponse, error) {
 	request := operations.OrderPayRequest{
 		XAPIVersion:     xAPIVersion,
 		OrderPayRequest: orderPayRequest,
@@ -676,7 +676,7 @@ func (s *payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayReq
 
 // PreauthorizeOrder - Preauthorization
 // Use this API to capture or void a preauthorized payment
-func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.CapturePreauthorizationRequest, opts ...operations.Option) (*operations.CapturePreauthorizationResponse, error) {
+func (s *Payments) PreauthorizeOrder(ctx context.Context, request operations.CapturePreauthorizationRequest, opts ...operations.Option) (*operations.CapturePreauthorizationResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -890,7 +890,7 @@ func (s *payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 
 // Submit or Resend OTP
 // If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.
-func (s *payments) Submit(ctx context.Context, paymentID string, xAPIVersion string, otpRequest *shared.OTPRequest, xRequestID *string, opts ...operations.Option) (*operations.SubmitOTPRequestResponse, error) {
+func (s *Payments) Submit(ctx context.Context, paymentID string, xAPIVersion string, otpRequest *shared.OTPRequest, xRequestID *string, opts ...operations.Option) (*operations.SubmitOTPRequestResponse, error) {
 	request := operations.SubmitOTPRequestRequest{
 		PaymentID:   paymentID,
 		XAPIVersion: xAPIVersion,

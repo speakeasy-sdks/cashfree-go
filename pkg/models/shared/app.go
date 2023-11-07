@@ -7,26 +7,26 @@ import (
 	"fmt"
 )
 
-// AppProvider - Specify the provider through which the payment must be processed.
-type AppProvider string
+// Provider - Specify the provider through which the payment must be processed.
+type Provider string
 
 const (
-	AppProviderGpay       AppProvider = "gpay"
-	AppProviderPhonepe    AppProvider = "phonepe"
-	AppProviderOla        AppProvider = "ola"
-	AppProviderPaytm      AppProvider = "paytm"
-	AppProviderAmazon     AppProvider = "amazon"
-	AppProviderAirtel     AppProvider = "airtel"
-	AppProviderFreecharge AppProvider = "freecharge"
-	AppProviderMobikwik   AppProvider = "mobikwik"
-	AppProviderJio        AppProvider = "jio"
+	ProviderGpay       Provider = "gpay"
+	ProviderPhonepe    Provider = "phonepe"
+	ProviderOla        Provider = "ola"
+	ProviderPaytm      Provider = "paytm"
+	ProviderAmazon     Provider = "amazon"
+	ProviderAirtel     Provider = "airtel"
+	ProviderFreecharge Provider = "freecharge"
+	ProviderMobikwik   Provider = "mobikwik"
+	ProviderJio        Provider = "jio"
 )
 
-func (e AppProvider) ToPointer() *AppProvider {
+func (e Provider) ToPointer() *Provider {
 	return &e
 }
 
-func (e *AppProvider) UnmarshalJSON(data []byte) error {
+func (e *Provider) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -49,10 +49,10 @@ func (e *AppProvider) UnmarshalJSON(data []byte) error {
 	case "mobikwik":
 		fallthrough
 	case "jio":
-		*e = AppProvider(v)
+		*e = Provider(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for AppProvider: %v", v)
+		return fmt.Errorf("invalid value for Provider: %v", v)
 	}
 }
 
@@ -62,7 +62,7 @@ type App struct {
 	// Customer phone number associated with a wallet for payment.
 	Phone string `json:"phone"`
 	// Specify the provider through which the payment must be processed.
-	Provider AppProvider `json:"provider"`
+	Provider Provider `json:"provider"`
 }
 
 func (o *App) GetChannel() string {
@@ -79,9 +79,9 @@ func (o *App) GetPhone() string {
 	return o.Phone
 }
 
-func (o *App) GetProvider() AppProvider {
+func (o *App) GetProvider() Provider {
 	if o == nil {
-		return AppProvider("")
+		return Provider("")
 	}
 	return o.Provider
 }

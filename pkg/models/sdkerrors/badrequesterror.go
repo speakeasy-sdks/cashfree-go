@@ -7,34 +7,34 @@ import (
 	"fmt"
 )
 
-type BadRequestErrorType string
+type SchemasBadRequestErrorType string
 
 const (
-	BadRequestErrorTypeInvalidRequestError BadRequestErrorType = "invalid_request_error"
+	SchemasBadRequestErrorTypeInvalidRequestError SchemasBadRequestErrorType = "invalid_request_error"
 )
 
-func (e BadRequestErrorType) ToPointer() *BadRequestErrorType {
+func (e SchemasBadRequestErrorType) ToPointer() *SchemasBadRequestErrorType {
 	return &e
 }
 
-func (e *BadRequestErrorType) UnmarshalJSON(data []byte) error {
+func (e *SchemasBadRequestErrorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "invalid_request_error":
-		*e = BadRequestErrorType(v)
+		*e = SchemasBadRequestErrorType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for BadRequestErrorType: %v", v)
+		return fmt.Errorf("invalid value for SchemasBadRequestErrorType: %v", v)
 	}
 }
 
 type BadRequestError struct {
-	Code    *string              `json:"code,omitempty"`
-	Message *string              `json:"message,omitempty"`
-	Type    *BadRequestErrorType `json:"type,omitempty"`
+	Code    *string                     `json:"code,omitempty"`
+	Message *string                     `json:"message,omitempty"`
+	Type    *SchemasBadRequestErrorType `json:"type,omitempty"`
 }
 
 var _ error = &BadRequestError{}

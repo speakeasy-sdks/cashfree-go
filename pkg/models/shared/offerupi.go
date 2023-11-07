@@ -2,16 +2,16 @@
 
 package shared
 
-type OfferUPIUPIOffer struct {
+type UPIOffer struct {
 }
 
 type OfferUPI struct {
-	Upi OfferUPIUPIOffer `json:"upi"`
+	Upi UPIOffer `json:"upi"`
 }
 
-func (o *OfferUPI) GetUpi() OfferUPIUPIOffer {
+func (o *OfferUPI) GetUpi() UPIOffer {
 	if o == nil {
-		return OfferUPIUPIOffer{}
+		return UPIOffer{}
 	}
 	return o.Upi
 }

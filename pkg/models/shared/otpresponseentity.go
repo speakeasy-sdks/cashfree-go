@@ -35,19 +35,19 @@ func (e *OTPResponseEntityAction) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// OTPResponseEntityAuthenticateStatus - Status of the is action. Will be either failed or successful. If the action is successful, you should still call the authorization status to verify the final payment status.
-type OTPResponseEntityAuthenticateStatus string
+// AuthenticateStatus - Status of the is action. Will be either failed or successful. If the action is successful, you should still call the authorization status to verify the final payment status.
+type AuthenticateStatus string
 
 const (
-	OTPResponseEntityAuthenticateStatusFailed  OTPResponseEntityAuthenticateStatus = "FAILED"
-	OTPResponseEntityAuthenticateStatusSuccess OTPResponseEntityAuthenticateStatus = "SUCCESS"
+	AuthenticateStatusFailed  AuthenticateStatus = "FAILED"
+	AuthenticateStatusSuccess AuthenticateStatus = "SUCCESS"
 )
 
-func (e OTPResponseEntityAuthenticateStatus) ToPointer() *OTPResponseEntityAuthenticateStatus {
+func (e AuthenticateStatus) ToPointer() *AuthenticateStatus {
 	return &e
 }
 
-func (e *OTPResponseEntityAuthenticateStatus) UnmarshalJSON(data []byte) error {
+func (e *AuthenticateStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -56,10 +56,10 @@ func (e *OTPResponseEntityAuthenticateStatus) UnmarshalJSON(data []byte) error {
 	case "FAILED":
 		fallthrough
 	case "SUCCESS":
-		*e = OTPResponseEntityAuthenticateStatus(v)
+		*e = AuthenticateStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OTPResponseEntityAuthenticateStatus: %v", v)
+		return fmt.Errorf("invalid value for AuthenticateStatus: %v", v)
 	}
 }
 
@@ -68,7 +68,7 @@ type OTPResponseEntity struct {
 	// The action that was invoked for this request.
 	Action *OTPResponseEntityAction `json:"action,omitempty"`
 	// Status of the is action. Will be either failed or successful. If the action is successful, you should still call the authorization status to verify the final payment status.
-	AuthenticateStatus *OTPResponseEntityAuthenticateStatus `json:"authenticate_status,omitempty"`
+	AuthenticateStatus *AuthenticateStatus `json:"authenticate_status,omitempty"`
 	// The payment id for which this request was sent
 	CfPaymentID *float64 `json:"cf_payment_id,omitempty"`
 	// Human readable message which describes the status in more detail
@@ -82,7 +82,7 @@ func (o *OTPResponseEntity) GetAction() *OTPResponseEntityAction {
 	return o.Action
 }
 
-func (o *OTPResponseEntity) GetAuthenticateStatus() *OTPResponseEntityAuthenticateStatus {
+func (o *OTPResponseEntity) GetAuthenticateStatus() *AuthenticateStatus {
 	if o == nil {
 		return nil
 	}

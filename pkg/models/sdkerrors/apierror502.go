@@ -7,28 +7,28 @@ import (
 	"fmt"
 )
 
-// APIError502Type - api_error
-type APIError502Type string
+// SchemasAPIError502Type - api_error
+type SchemasAPIError502Type string
 
 const (
-	APIError502TypeAPIError APIError502Type = "api_error"
+	SchemasAPIError502TypeAPIError SchemasAPIError502Type = "api_error"
 )
 
-func (e APIError502Type) ToPointer() *APIError502Type {
+func (e SchemasAPIError502Type) ToPointer() *SchemasAPIError502Type {
 	return &e
 }
 
-func (e *APIError502Type) UnmarshalJSON(data []byte) error {
+func (e *SchemasAPIError502Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "api_error":
-		*e = APIError502Type(v)
+		*e = SchemasAPIError502Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for APIError502Type: %v", v)
+		return fmt.Errorf("invalid value for SchemasAPIError502Type: %v", v)
 	}
 }
 
@@ -38,7 +38,7 @@ type APIError502 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// api_error
-	Type *APIError502Type `json:"type,omitempty"`
+	Type *SchemasAPIError502Type `json:"type,omitempty"`
 }
 
 var _ error = &APIError502{}

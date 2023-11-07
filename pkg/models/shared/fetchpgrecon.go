@@ -2,7 +2,7 @@
 
 package shared
 
-type FetchPGReconData struct {
+type Data struct {
 	// Amount that is adjusted from the settlement amount because of any credit/debit event such as refund, refund_reverse etc.
 	Adjustment *float64 `json:"adjustment,omitempty"`
 	// Other adjustment remarks.
@@ -99,329 +99,329 @@ type FetchPGReconData struct {
 	VendorCommission *float64 `json:"vendor_commission,omitempty"`
 }
 
-func (o *FetchPGReconData) GetAdjustment() *float64 {
+func (o *Data) GetAdjustment() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.Adjustment
 }
 
-func (o *FetchPGReconData) GetAdjustmentRemarks() *string {
+func (o *Data) GetAdjustmentRemarks() *string {
 	if o == nil {
 		return nil
 	}
 	return o.AdjustmentRemarks
 }
 
-func (o *FetchPGReconData) GetAmountSettled() *float64 {
+func (o *Data) GetAmountSettled() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.AmountSettled
 }
 
-func (o *FetchPGReconData) GetCfPaymentID() *int64 {
+func (o *Data) GetCfPaymentID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.CfPaymentID
 }
 
-func (o *FetchPGReconData) GetCfSettlementID() *int64 {
+func (o *Data) GetCfSettlementID() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.CfSettlementID
 }
 
-func (o *FetchPGReconData) GetClosedInFavorOf() *string {
+func (o *Data) GetClosedInFavorOf() *string {
 	if o == nil {
 		return nil
 	}
 	return o.ClosedInFavorOf
 }
 
-func (o *FetchPGReconData) GetCustomerEmail() *string {
+func (o *Data) GetCustomerEmail() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CustomerEmail
 }
 
-func (o *FetchPGReconData) GetCustomerName() *string {
+func (o *Data) GetCustomerName() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CustomerName
 }
 
-func (o *FetchPGReconData) GetCustomerPhone() *string {
+func (o *Data) GetCustomerPhone() *string {
 	if o == nil {
 		return nil
 	}
 	return o.CustomerPhone
 }
 
-func (o *FetchPGReconData) GetDisputeCategory() *string {
+func (o *Data) GetDisputeCategory() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DisputeCategory
 }
 
-func (o *FetchPGReconData) GetDisputeNote() *string {
+func (o *Data) GetDisputeNote() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DisputeNote
 }
 
-func (o *FetchPGReconData) GetDisputeResolvedOn() *string {
+func (o *Data) GetDisputeResolvedOn() *string {
 	if o == nil {
 		return nil
 	}
 	return o.DisputeResolvedOn
 }
 
-func (o *FetchPGReconData) GetEntity() *string {
+func (o *Data) GetEntity() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Entity
 }
 
-func (o *FetchPGReconData) GetEventAmount() *float64 {
+func (o *Data) GetEventAmount() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.EventAmount
 }
 
-func (o *FetchPGReconData) GetEventCurrency() *string {
+func (o *Data) GetEventCurrency() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EventCurrency
 }
 
-func (o *FetchPGReconData) GetEventID() *string {
+func (o *Data) GetEventID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EventID
 }
 
-func (o *FetchPGReconData) GetEventSettlementAmount() *float64 {
+func (o *Data) GetEventSettlementAmount() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.EventSettlementAmount
 }
 
-func (o *FetchPGReconData) GetEventStatus() *string {
+func (o *Data) GetEventStatus() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EventStatus
 }
 
-func (o *FetchPGReconData) GetEventTime() *string {
+func (o *Data) GetEventTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EventTime
 }
 
-func (o *FetchPGReconData) GetEventType() *string {
+func (o *Data) GetEventType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.EventType
 }
 
-func (o *FetchPGReconData) GetOrderAmount() *float64 {
+func (o *Data) GetOrderAmount() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.OrderAmount
 }
 
-func (o *FetchPGReconData) GetOrderID() *string {
+func (o *Data) GetOrderID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.OrderID
 }
 
-func (o *FetchPGReconData) GetPaymentAmount() *float64 {
+func (o *Data) GetPaymentAmount() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentAmount
 }
 
-func (o *FetchPGReconData) GetPaymentFrom() *string {
+func (o *Data) GetPaymentFrom() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentFrom
 }
 
-func (o *FetchPGReconData) GetPaymentServiceCharge() *float64 {
+func (o *Data) GetPaymentServiceCharge() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentServiceCharge
 }
 
-func (o *FetchPGReconData) GetPaymentServiceTax() *float64 {
+func (o *Data) GetPaymentServiceTax() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentServiceTax
 }
 
-func (o *FetchPGReconData) GetPaymentTill() *string {
+func (o *Data) GetPaymentTill() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentTill
 }
 
-func (o *FetchPGReconData) GetPaymentTime() *string {
+func (o *Data) GetPaymentTime() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentTime
 }
 
-func (o *FetchPGReconData) GetPaymentUtr() *string {
+func (o *Data) GetPaymentUtr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.PaymentUtr
 }
 
-func (o *FetchPGReconData) GetReason() *string {
+func (o *Data) GetReason() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Reason
 }
 
-func (o *FetchPGReconData) GetRefundArn() *string {
+func (o *Data) GetRefundArn() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RefundArn
 }
 
-func (o *FetchPGReconData) GetRefundID() *string {
+func (o *Data) GetRefundID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RefundID
 }
 
-func (o *FetchPGReconData) GetRefundNote() *string {
+func (o *Data) GetRefundNote() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RefundNote
 }
 
-func (o *FetchPGReconData) GetRefundProcessedAt() *string {
+func (o *Data) GetRefundProcessedAt() *string {
 	if o == nil {
 		return nil
 	}
 	return o.RefundProcessedAt
 }
 
-func (o *FetchPGReconData) GetRemarks() *string {
+func (o *Data) GetRemarks() *string {
 	if o == nil {
 		return nil
 	}
 	return o.Remarks
 }
 
-func (o *FetchPGReconData) GetSaleType() *string {
+func (o *Data) GetSaleType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.SaleType
 }
 
-func (o *FetchPGReconData) GetServiceCharge() *float64 {
+func (o *Data) GetServiceCharge() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.ServiceCharge
 }
 
-func (o *FetchPGReconData) GetServiceTax() *float64 {
+func (o *Data) GetServiceTax() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.ServiceTax
 }
 
-func (o *FetchPGReconData) GetSettlementCharge() *float64 {
+func (o *Data) GetSettlementCharge() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.SettlementCharge
 }
 
-func (o *FetchPGReconData) GetSettlementDate() *string {
+func (o *Data) GetSettlementDate() *string {
 	if o == nil {
 		return nil
 	}
 	return o.SettlementDate
 }
 
-func (o *FetchPGReconData) GetSettlementInitiatedOn() *string {
+func (o *Data) GetSettlementInitiatedOn() *string {
 	if o == nil {
 		return nil
 	}
 	return o.SettlementInitiatedOn
 }
 
-func (o *FetchPGReconData) GetSettlementTax() *float64 {
+func (o *Data) GetSettlementTax() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.SettlementTax
 }
 
-func (o *FetchPGReconData) GetSettlementType() *string {
+func (o *Data) GetSettlementType() *string {
 	if o == nil {
 		return nil
 	}
 	return o.SettlementType
 }
 
-func (o *FetchPGReconData) GetSettlementUtr() *string {
+func (o *Data) GetSettlementUtr() *string {
 	if o == nil {
 		return nil
 	}
 	return o.SettlementUtr
 }
 
-func (o *FetchPGReconData) GetSplitServiceCharge() *float64 {
+func (o *Data) GetSplitServiceCharge() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.SplitServiceCharge
 }
 
-func (o *FetchPGReconData) GetSplitServiceTax() *float64 {
+func (o *Data) GetSplitServiceTax() *float64 {
 	if o == nil {
 		return nil
 	}
 	return o.SplitServiceTax
 }
 
-func (o *FetchPGReconData) GetVendorCommission() *float64 {
+func (o *Data) GetVendorCommission() *float64 {
 	if o == nil {
 		return nil
 	}
@@ -430,8 +430,8 @@ func (o *FetchPGReconData) GetVendorCommission() *float64 {
 
 type FetchPGRecon struct {
 	// Specifies from where the next set of settlement details should be fetched.
-	Cursor *string            `json:"cursor,omitempty"`
-	Data   []FetchPGReconData `json:"data,omitempty"`
+	Cursor *string `json:"cursor,omitempty"`
+	Data   []Data  `json:"data,omitempty"`
 	// Number of settlements you want to fetch in the next iteration.
 	Limit *int64 `json:"limit,omitempty"`
 }
@@ -443,7 +443,7 @@ func (o *FetchPGRecon) GetCursor() *string {
 	return o.Cursor
 }
 
-func (o *FetchPGRecon) GetData() []FetchPGReconData {
+func (o *FetchPGRecon) GetData() []Data {
 	if o == nil {
 		return nil
 	}

@@ -7,48 +7,48 @@ import (
 	"fmt"
 )
 
-// RefundsEntityEntity - Type of object
-type RefundsEntityEntity string
+// Entity - Type of object
+type Entity string
 
 const (
-	RefundsEntityEntityRefund RefundsEntityEntity = "refund"
+	EntityRefund Entity = "refund"
 )
 
-func (e RefundsEntityEntity) ToPointer() *RefundsEntityEntity {
+func (e Entity) ToPointer() *Entity {
 	return &e
 }
 
-func (e *RefundsEntityEntity) UnmarshalJSON(data []byte) error {
+func (e *Entity) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "refund":
-		*e = RefundsEntityEntity(v)
+		*e = Entity(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RefundsEntityEntity: %v", v)
+		return fmt.Errorf("invalid value for Entity: %v", v)
 	}
 }
 
-// RefundsEntityMetadata - Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs
-type RefundsEntityMetadata struct {
+// Metadata - Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs
+type Metadata struct {
 }
 
-// RefundsEntityRefundMode - Method or speed of processing refund
-type RefundsEntityRefundMode string
+// RefundMode - Method or speed of processing refund
+type RefundMode string
 
 const (
-	RefundsEntityRefundModeStandard RefundsEntityRefundMode = "STANDARD"
-	RefundsEntityRefundModeInstant  RefundsEntityRefundMode = "INSTANT"
+	RefundModeStandard RefundMode = "STANDARD"
+	RefundModeInstant  RefundMode = "INSTANT"
 )
 
-func (e RefundsEntityRefundMode) ToPointer() *RefundsEntityRefundMode {
+func (e RefundMode) ToPointer() *RefundMode {
 	return &e
 }
 
-func (e *RefundsEntityRefundMode) UnmarshalJSON(data []byte) error {
+func (e *RefundMode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -57,28 +57,28 @@ func (e *RefundsEntityRefundMode) UnmarshalJSON(data []byte) error {
 	case "STANDARD":
 		fallthrough
 	case "INSTANT":
-		*e = RefundsEntityRefundMode(v)
+		*e = RefundMode(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RefundsEntityRefundMode: %v", v)
+		return fmt.Errorf("invalid value for RefundMode: %v", v)
 	}
 }
 
-// RefundsEntityRefundStatus - This can be one of ["SUCCESS", "PENDING", "CANCELLED", "ONHOLD", "FAILED"]
-type RefundsEntityRefundStatus string
+// RefundStatus - This can be one of ["SUCCESS", "PENDING", "CANCELLED", "ONHOLD", "FAILED"]
+type RefundStatus string
 
 const (
-	RefundsEntityRefundStatusSuccess   RefundsEntityRefundStatus = "SUCCESS"
-	RefundsEntityRefundStatusPending   RefundsEntityRefundStatus = "PENDING"
-	RefundsEntityRefundStatusCancelled RefundsEntityRefundStatus = "CANCELLED"
-	RefundsEntityRefundStatusOnhold    RefundsEntityRefundStatus = "ONHOLD"
+	RefundStatusSuccess   RefundStatus = "SUCCESS"
+	RefundStatusPending   RefundStatus = "PENDING"
+	RefundStatusCancelled RefundStatus = "CANCELLED"
+	RefundStatusOnhold    RefundStatus = "ONHOLD"
 )
 
-func (e RefundsEntityRefundStatus) ToPointer() *RefundsEntityRefundStatus {
+func (e RefundStatus) ToPointer() *RefundStatus {
 	return &e
 }
 
-func (e *RefundsEntityRefundStatus) UnmarshalJSON(data []byte) error {
+func (e *RefundStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -91,27 +91,27 @@ func (e *RefundsEntityRefundStatus) UnmarshalJSON(data []byte) error {
 	case "CANCELLED":
 		fallthrough
 	case "ONHOLD":
-		*e = RefundsEntityRefundStatus(v)
+		*e = RefundStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RefundsEntityRefundStatus: %v", v)
+		return fmt.Errorf("invalid value for RefundStatus: %v", v)
 	}
 }
 
-// RefundsEntityRefundType - This can be one of ["PAYMENT_AUTO_REFUND", "MERCHANT_INITIATED", "UNRECONCILED_AUTO_REFUND"]
-type RefundsEntityRefundType string
+// RefundType - This can be one of ["PAYMENT_AUTO_REFUND", "MERCHANT_INITIATED", "UNRECONCILED_AUTO_REFUND"]
+type RefundType string
 
 const (
-	RefundsEntityRefundTypePaymentAutoRefund      RefundsEntityRefundType = "PAYMENT_AUTO_REFUND"
-	RefundsEntityRefundTypeMerchantInitiated      RefundsEntityRefundType = "MERCHANT_INITIATED"
-	RefundsEntityRefundTypeUnreconciledAutoRefund RefundsEntityRefundType = "UNRECONCILED_AUTO_REFUND"
+	RefundTypePaymentAutoRefund      RefundType = "PAYMENT_AUTO_REFUND"
+	RefundTypeMerchantInitiated      RefundType = "MERCHANT_INITIATED"
+	RefundTypeUnreconciledAutoRefund RefundType = "UNRECONCILED_AUTO_REFUND"
 )
 
-func (e RefundsEntityRefundType) ToPointer() *RefundsEntityRefundType {
+func (e RefundType) ToPointer() *RefundType {
 	return &e
 }
 
-func (e *RefundsEntityRefundType) UnmarshalJSON(data []byte) error {
+func (e *RefundType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -122,10 +122,10 @@ func (e *RefundsEntityRefundType) UnmarshalJSON(data []byte) error {
 	case "MERCHANT_INITIATED":
 		fallthrough
 	case "UNRECONCILED_AUTO_REFUND":
-		*e = RefundsEntityRefundType(v)
+		*e = RefundType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RefundsEntityRefundType: %v", v)
+		return fmt.Errorf("invalid value for RefundType: %v", v)
 	}
 }
 
@@ -137,9 +137,9 @@ type RefundsEntity struct {
 	// Time of refund creation
 	CreatedAt *string `json:"created_at,omitempty"`
 	// Type of object
-	Entity *RefundsEntityEntity `json:"entity,omitempty"`
+	Entity *Entity `json:"entity,omitempty"`
 	// Key-value pair that can be used to store additional information about the entity. Maximum 5 key-value pairs
-	Metadata *RefundsEntityMetadata `json:"metadata,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 	// Merchant’s order Id of the order for which refund is initiated
 	OrderID *string `json:"order_id,omitempty"`
 	// Time when refund was processed successfully
@@ -155,15 +155,15 @@ type RefundsEntity struct {
 	// Merchant’s refund ID of the refund
 	RefundID *string `json:"refund_id,omitempty"`
 	// Method or speed of processing refund
-	RefundMode *RefundsEntityRefundMode `json:"refund_mode,omitempty"`
+	RefundMode *RefundMode `json:"refund_mode,omitempty"`
 	// Note added by merchant for the refund
 	RefundNote   *string       `json:"refund_note,omitempty"`
 	RefundSpeed  *RefundSpeed  `json:"refund_speed,omitempty"`
 	RefundSplits []VendorSplit `json:"refund_splits,omitempty"`
 	// This can be one of ["SUCCESS", "PENDING", "CANCELLED", "ONHOLD", "FAILED"]
-	RefundStatus *RefundsEntityRefundStatus `json:"refund_status,omitempty"`
+	RefundStatus *RefundStatus `json:"refund_status,omitempty"`
 	// This can be one of ["PAYMENT_AUTO_REFUND", "MERCHANT_INITIATED", "UNRECONCILED_AUTO_REFUND"]
-	RefundType *RefundsEntityRefundType `json:"refund_type,omitempty"`
+	RefundType *RefundType `json:"refund_type,omitempty"`
 	// Description of refund status
 	StatusDescription *string `json:"status_description,omitempty"`
 }
@@ -189,14 +189,14 @@ func (o *RefundsEntity) GetCreatedAt() *string {
 	return o.CreatedAt
 }
 
-func (o *RefundsEntity) GetEntity() *RefundsEntityEntity {
+func (o *RefundsEntity) GetEntity() *Entity {
 	if o == nil {
 		return nil
 	}
 	return o.Entity
 }
 
-func (o *RefundsEntity) GetMetadata() *RefundsEntityMetadata {
+func (o *RefundsEntity) GetMetadata() *Metadata {
 	if o == nil {
 		return nil
 	}
@@ -252,7 +252,7 @@ func (o *RefundsEntity) GetRefundID() *string {
 	return o.RefundID
 }
 
-func (o *RefundsEntity) GetRefundMode() *RefundsEntityRefundMode {
+func (o *RefundsEntity) GetRefundMode() *RefundMode {
 	if o == nil {
 		return nil
 	}
@@ -280,14 +280,14 @@ func (o *RefundsEntity) GetRefundSplits() []VendorSplit {
 	return o.RefundSplits
 }
 
-func (o *RefundsEntity) GetRefundStatus() *RefundsEntityRefundStatus {
+func (o *RefundsEntity) GetRefundStatus() *RefundStatus {
 	if o == nil {
 		return nil
 	}
 	return o.RefundStatus
 }
 
-func (o *RefundsEntity) GetRefundType() *RefundsEntityRefundType {
+func (o *RefundsEntity) GetRefundType() *RefundType {
 	if o == nil {
 		return nil
 	}

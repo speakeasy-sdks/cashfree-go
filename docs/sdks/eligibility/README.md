@@ -1,5 +1,5 @@
 # Eligibility
-(*Eligibility*)
+(*.Eligibility*)
 
 ### Available Operations
 
@@ -56,7 +56,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.EligibleOffersEntities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -125,7 +125,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.EligibleCardlessEMIEntities != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -194,7 +194,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.EligiblePaylaters != nil {
+    if res.Classes != nil {
         // handle response
     }
 }

@@ -7,19 +7,19 @@ import (
 	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 )
 
-type OfferValidationsPaymentMethodType string
+type PaymentMethodType string
 
 const (
-	OfferValidationsPaymentMethodTypeOfferAll      OfferValidationsPaymentMethodType = "OfferAll"
-	OfferValidationsPaymentMethodTypeOfferCard     OfferValidationsPaymentMethodType = "OfferCard"
-	OfferValidationsPaymentMethodTypeOfferNB       OfferValidationsPaymentMethodType = "OfferNB"
-	OfferValidationsPaymentMethodTypeOfferWallet   OfferValidationsPaymentMethodType = "OfferWallet"
-	OfferValidationsPaymentMethodTypeOfferUPI      OfferValidationsPaymentMethodType = "OfferUPI"
-	OfferValidationsPaymentMethodTypeOfferPaylater OfferValidationsPaymentMethodType = "OfferPaylater"
-	OfferValidationsPaymentMethodTypeOfferEMI      OfferValidationsPaymentMethodType = "OfferEMI"
+	PaymentMethodTypeOfferAll      PaymentMethodType = "OfferAll"
+	PaymentMethodTypeOfferCard     PaymentMethodType = "OfferCard"
+	PaymentMethodTypeOfferNB       PaymentMethodType = "OfferNB"
+	PaymentMethodTypeOfferWallet   PaymentMethodType = "OfferWallet"
+	PaymentMethodTypeOfferUPI      PaymentMethodType = "OfferUPI"
+	PaymentMethodTypeOfferPaylater PaymentMethodType = "OfferPaylater"
+	PaymentMethodTypeOfferEMI      PaymentMethodType = "OfferEMI"
 )
 
-type OfferValidationsPaymentMethod struct {
+type PaymentMethod struct {
 	OfferAll      *OfferAll
 	OfferCard     *OfferCard
 	OfferNB       *OfferNB
@@ -28,127 +28,127 @@ type OfferValidationsPaymentMethod struct {
 	OfferPaylater *OfferPaylater
 	OfferEMI      *OfferEMI
 
-	Type OfferValidationsPaymentMethodType
+	Type PaymentMethodType
 }
 
-func CreateOfferValidationsPaymentMethodOfferAll(offerAll OfferAll) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferAll
+func CreatePaymentMethodOfferAll(offerAll OfferAll) PaymentMethod {
+	typ := PaymentMethodTypeOfferAll
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferAll: &offerAll,
 		Type:     typ,
 	}
 }
 
-func CreateOfferValidationsPaymentMethodOfferCard(offerCard OfferCard) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferCard
+func CreatePaymentMethodOfferCard(offerCard OfferCard) PaymentMethod {
+	typ := PaymentMethodTypeOfferCard
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferCard: &offerCard,
 		Type:      typ,
 	}
 }
 
-func CreateOfferValidationsPaymentMethodOfferNB(offerNB OfferNB) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferNB
+func CreatePaymentMethodOfferNB(offerNB OfferNB) PaymentMethod {
+	typ := PaymentMethodTypeOfferNB
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferNB: &offerNB,
 		Type:    typ,
 	}
 }
 
-func CreateOfferValidationsPaymentMethodOfferWallet(offerWallet OfferWallet) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferWallet
+func CreatePaymentMethodOfferWallet(offerWallet OfferWallet) PaymentMethod {
+	typ := PaymentMethodTypeOfferWallet
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferWallet: &offerWallet,
 		Type:        typ,
 	}
 }
 
-func CreateOfferValidationsPaymentMethodOfferUPI(offerUPI OfferUPI) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferUPI
+func CreatePaymentMethodOfferUPI(offerUPI OfferUPI) PaymentMethod {
+	typ := PaymentMethodTypeOfferUPI
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferUPI: &offerUPI,
 		Type:     typ,
 	}
 }
 
-func CreateOfferValidationsPaymentMethodOfferPaylater(offerPaylater OfferPaylater) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferPaylater
+func CreatePaymentMethodOfferPaylater(offerPaylater OfferPaylater) PaymentMethod {
+	typ := PaymentMethodTypeOfferPaylater
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferPaylater: &offerPaylater,
 		Type:          typ,
 	}
 }
 
-func CreateOfferValidationsPaymentMethodOfferEMI(offerEMI OfferEMI) OfferValidationsPaymentMethod {
-	typ := OfferValidationsPaymentMethodTypeOfferEMI
+func CreatePaymentMethodOfferEMI(offerEMI OfferEMI) PaymentMethod {
+	typ := PaymentMethodTypeOfferEMI
 
-	return OfferValidationsPaymentMethod{
+	return PaymentMethod{
 		OfferEMI: &offerEMI,
 		Type:     typ,
 	}
 }
 
-func (u *OfferValidationsPaymentMethod) UnmarshalJSON(data []byte) error {
+func (u *PaymentMethod) UnmarshalJSON(data []byte) error {
 
 	offerAll := OfferAll{}
 	if err := utils.UnmarshalJSON(data, &offerAll, "", true, true); err == nil {
 		u.OfferAll = &offerAll
-		u.Type = OfferValidationsPaymentMethodTypeOfferAll
+		u.Type = PaymentMethodTypeOfferAll
 		return nil
 	}
 
 	offerCard := OfferCard{}
 	if err := utils.UnmarshalJSON(data, &offerCard, "", true, true); err == nil {
 		u.OfferCard = &offerCard
-		u.Type = OfferValidationsPaymentMethodTypeOfferCard
+		u.Type = PaymentMethodTypeOfferCard
 		return nil
 	}
 
 	offerNB := OfferNB{}
 	if err := utils.UnmarshalJSON(data, &offerNB, "", true, true); err == nil {
 		u.OfferNB = &offerNB
-		u.Type = OfferValidationsPaymentMethodTypeOfferNB
+		u.Type = PaymentMethodTypeOfferNB
 		return nil
 	}
 
 	offerWallet := OfferWallet{}
 	if err := utils.UnmarshalJSON(data, &offerWallet, "", true, true); err == nil {
 		u.OfferWallet = &offerWallet
-		u.Type = OfferValidationsPaymentMethodTypeOfferWallet
+		u.Type = PaymentMethodTypeOfferWallet
 		return nil
 	}
 
 	offerUPI := OfferUPI{}
 	if err := utils.UnmarshalJSON(data, &offerUPI, "", true, true); err == nil {
 		u.OfferUPI = &offerUPI
-		u.Type = OfferValidationsPaymentMethodTypeOfferUPI
+		u.Type = PaymentMethodTypeOfferUPI
 		return nil
 	}
 
 	offerPaylater := OfferPaylater{}
 	if err := utils.UnmarshalJSON(data, &offerPaylater, "", true, true); err == nil {
 		u.OfferPaylater = &offerPaylater
-		u.Type = OfferValidationsPaymentMethodTypeOfferPaylater
+		u.Type = PaymentMethodTypeOfferPaylater
 		return nil
 	}
 
 	offerEMI := OfferEMI{}
 	if err := utils.UnmarshalJSON(data, &offerEMI, "", true, true); err == nil {
 		u.OfferEMI = &offerEMI
-		u.Type = OfferValidationsPaymentMethodTypeOfferEMI
+		u.Type = PaymentMethodTypeOfferEMI
 		return nil
 	}
 
 	return errors.New("could not unmarshal into supported union types")
 }
 
-func (u OfferValidationsPaymentMethod) MarshalJSON() ([]byte, error) {
+func (u PaymentMethod) MarshalJSON() ([]byte, error) {
 	if u.OfferAll != nil {
 		return utils.MarshalJSON(u.OfferAll, "", true)
 	}
@@ -184,8 +184,8 @@ type OfferValidations struct {
 	// Maximum amount of Offer that can be availed.
 	MaxAllowed float64 `json:"max_allowed"`
 	// Minimum Amount for Offer to be Applicable
-	MinAmount     *float64                      `json:"min_amount,omitempty"`
-	PaymentMethod OfferValidationsPaymentMethod `json:"payment_method"`
+	MinAmount     *float64      `json:"min_amount,omitempty"`
+	PaymentMethod PaymentMethod `json:"payment_method"`
 }
 
 func (o *OfferValidations) GetMaxAllowed() float64 {
@@ -202,9 +202,9 @@ func (o *OfferValidations) GetMinAmount() *float64 {
 	return o.MinAmount
 }
 
-func (o *OfferValidations) GetPaymentMethod() OfferValidationsPaymentMethod {
+func (o *OfferValidations) GetPaymentMethod() PaymentMethod {
 	if o == nil {
-		return OfferValidationsPaymentMethod{}
+		return PaymentMethod{}
 	}
 	return o.PaymentMethod
 }

@@ -14,20 +14,20 @@ import (
 	"net/http"
 )
 
-// refunds - Collection of APIs handle refunds.
-type refunds struct {
+// Refunds - Collection of APIs handle refunds.
+type Refunds struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newRefunds(sdkConfig sdkConfiguration) *refunds {
-	return &refunds{
+func newRefunds(sdkConfig sdkConfiguration) *Refunds {
+	return &Refunds{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // Create Refund
 // Use this API to initiate refunds.
-func (s *refunds) Create(ctx context.Context, request operations.CreateRefundRequest, opts ...operations.Option) (*operations.CreateRefundResponse, error) {
+func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundRequest, opts ...operations.Option) (*operations.CreateRefundResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -241,7 +241,7 @@ func (s *refunds) Create(ctx context.Context, request operations.CreateRefundReq
 
 // Get Refund
 // Use this API to fetch a specific refund processed on your Cashfree Account.
-func (s *refunds) Get(ctx context.Context, orderID string, refundID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetRefundResponse, error) {
+func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetRefundResponse, error) {
 	request := operations.GetRefundRequest{
 		OrderID:     orderID,
 		RefundID:    refundID,
@@ -455,7 +455,7 @@ func (s *refunds) Get(ctx context.Context, orderID string, refundID string, xAPI
 
 // GetAllforOrder - Get All Refunds for an Order
 // Use this API to fetch all refunds processed against an order.
-func (s *refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetAllRefundsForOrderResponse, error) {
+func (s *Refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetAllRefundsForOrderResponse, error) {
 	request := operations.GetAllRefundsForOrderRequest{
 		OrderID:     orderID,
 		XAPIVersion: xAPIVersion,
@@ -549,7 +549,7 @@ func (s *refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersio
 				return nil, err
 			}
 
-			res.RefundsEntities = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

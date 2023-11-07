@@ -53,12 +53,12 @@ type GetPaymentLinkOrdersResponse struct {
 	// HTTP response content type for this operation
 	ContentType string
 	Headers     map[string][]string
-	// OK
-	LinkOrdersResponses []shared.LinkOrdersResponse
 	// HTTP response status code for this operation
 	StatusCode int
 	// Raw HTTP response; suitable for custom response parsing
 	RawResponse *http.Response
+	// OK
+	Classes []shared.LinkOrdersResponse
 }
 
 func (o *GetPaymentLinkOrdersResponse) GetContentType() string {
@@ -75,13 +75,6 @@ func (o *GetPaymentLinkOrdersResponse) GetHeaders() map[string][]string {
 	return o.Headers
 }
 
-func (o *GetPaymentLinkOrdersResponse) GetLinkOrdersResponses() []shared.LinkOrdersResponse {
-	if o == nil {
-		return nil
-	}
-	return o.LinkOrdersResponses
-}
-
 func (o *GetPaymentLinkOrdersResponse) GetStatusCode() int {
 	if o == nil {
 		return 0
@@ -94,4 +87,11 @@ func (o *GetPaymentLinkOrdersResponse) GetRawResponse() *http.Response {
 		return nil
 	}
 	return o.RawResponse
+}
+
+func (o *GetPaymentLinkOrdersResponse) GetClasses() []shared.LinkOrdersResponse {
+	if o == nil {
+		return nil
+	}
+	return o.Classes
 }

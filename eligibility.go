@@ -15,19 +15,19 @@ import (
 	"strings"
 )
 
-type eligibility struct {
+type Eligibility struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newEligibility(sdkConfig sdkConfiguration) *eligibility {
-	return &eligibility{
+func newEligibility(sdkConfig sdkConfiguration) *Eligibility {
+	return &Eligibility{
 		sdkConfiguration: sdkConfig,
 	}
 }
 
 // GetAllOffers - Get eligible Offers
 // Use this API to get eligible offers for an order or amount.
-func (s *eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, eligibilityOffersRequest *shared.EligibilityOffersRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityOfferResponse, error) {
+func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, eligibilityOffersRequest *shared.EligibilityOffersRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityOfferResponse, error) {
 	request := operations.GetEligibilityOfferRequest{
 		XAPIVersion:              xAPIVersion,
 		EligibilityOffersRequest: eligibilityOffersRequest,
@@ -125,7 +125,7 @@ func (s *eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 				return nil, err
 			}
 
-			res.EligibleOffersEntities = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -244,7 +244,7 @@ func (s *eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 
 // GetCardlessEMI - Get eligible Cardless EMI
 // Use this API to get eligible Cardless EMI Payment Methods for a customer on an order.
-func (s *eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityCardlessEMIResponse, error) {
+func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityCardlessEMIResponse, error) {
 	request := operations.GetEligibilityCardlessEMIRequest{
 		XAPIVersion:                   xAPIVersion,
 		EligibilityCardlessEMIRequest: eligibilityCardlessEMIRequest,
@@ -342,7 +342,7 @@ func (s *eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 				return nil, err
 			}
 
-			res.EligibleCardlessEMIEntities = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}
@@ -461,7 +461,7 @@ func (s *eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 
 // GetPaylaterMethods - Get eligible Paylater
 // Use this API to get eligible Paylater Payment Methods for a customer on an order.
-func (s *eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityPaylaterResponse, error) {
+func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityPaylaterResponse, error) {
 	request := operations.GetEligibilityPaylaterRequest{
 		XAPIVersion:                   xAPIVersion,
 		EligibilityCardlessEMIRequest: eligibilityCardlessEMIRequest,
@@ -559,7 +559,7 @@ func (s *eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 				return nil, err
 			}
 
-			res.EligiblePaylaters = out
+			res.Classes = out
 		default:
 			return nil, sdkerrors.NewSDKError(fmt.Sprintf("unknown content-type received: %s", contentType), httpRes.StatusCode, string(rawBody), httpRes)
 		}

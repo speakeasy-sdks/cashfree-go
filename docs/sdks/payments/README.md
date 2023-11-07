@@ -1,5 +1,5 @@
 # Payments
-(*Payments*)
+(*.Payments*)
 
 ## Overview
 
@@ -116,7 +116,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.GetPaymentsforOrder200ApplicationJSONOneOf != nil {
+    if res.OneOf != nil {
         // handle response
     }
 }

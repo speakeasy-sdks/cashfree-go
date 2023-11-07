@@ -2,28 +2,28 @@
 
 package shared
 
-type OfferCardCardOffer struct {
+type CardOffer struct {
 	// Bank Name of Card.
 	BankName   string   `json:"bank_name"`
 	SchemeName []string `json:"scheme_name"`
 	Type       []string `json:"type"`
 }
 
-func (o *OfferCardCardOffer) GetBankName() string {
+func (o *CardOffer) GetBankName() string {
 	if o == nil {
 		return ""
 	}
 	return o.BankName
 }
 
-func (o *OfferCardCardOffer) GetSchemeName() []string {
+func (o *CardOffer) GetSchemeName() []string {
 	if o == nil {
 		return []string{}
 	}
 	return o.SchemeName
 }
 
-func (o *OfferCardCardOffer) GetType() []string {
+func (o *CardOffer) GetType() []string {
 	if o == nil {
 		return []string{}
 	}
@@ -31,12 +31,12 @@ func (o *OfferCardCardOffer) GetType() []string {
 }
 
 type OfferCard struct {
-	Card OfferCardCardOffer `json:"card"`
+	Card CardOffer `json:"card"`
 }
 
-func (o *OfferCard) GetCard() OfferCardCardOffer {
+func (o *OfferCard) GetCard() CardOffer {
 	if o == nil {
-		return OfferCardCardOffer{}
+		return CardOffer{}
 	}
 	return o.Card
 }

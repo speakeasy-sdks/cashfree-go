@@ -2,11 +2,11 @@
 
 package shared
 
-type OfferPaylaterPaylaterOffer struct {
+type PaylaterOffer struct {
 	Provider *string `json:"provider,omitempty"`
 }
 
-func (o *OfferPaylaterPaylaterOffer) GetProvider() *string {
+func (o *PaylaterOffer) GetProvider() *string {
 	if o == nil {
 		return nil
 	}
@@ -14,12 +14,12 @@ func (o *OfferPaylaterPaylaterOffer) GetProvider() *string {
 }
 
 type OfferPaylater struct {
-	Paylater OfferPaylaterPaylaterOffer `json:"paylater"`
+	Paylater PaylaterOffer `json:"paylater"`
 }
 
-func (o *OfferPaylater) GetPaylater() OfferPaylaterPaylaterOffer {
+func (o *OfferPaylater) GetPaylater() PaylaterOffer {
 	if o == nil {
-		return OfferPaylaterPaylaterOffer{}
+		return PaylaterOffer{}
 	}
 	return o.Paylater
 }

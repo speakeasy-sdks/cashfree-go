@@ -1,5 +1,5 @@
 # TokenVault
-(*TokenVault*)
+(*.TokenVault*)
 
 ## Overview
 
@@ -234,7 +234,7 @@ func main() {
 
     var customerID string = "string"
 
-    var instrumentType operations.FetchAllSavedInstrumentsInstrumentType = operations.FetchAllSavedInstrumentsInstrumentTypeCard
+    var instrumentType operations.InstrumentType = operations.InstrumentTypeCard
 
     var xAPIVersion string = "string"
 
@@ -246,7 +246,7 @@ func main() {
         log.Fatal(err)
     }
 
-    if res.FetchAllSavedInstruments != nil {
+    if res.Classes != nil {
         // handle response
     }
 }
@@ -258,7 +258,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id for which all the saved cards are queried                                                                  |
-| `instrumentType`                                                                                                           | [operations.FetchAllSavedInstrumentsInstrumentType](../../models/operations/fetchallsavedinstrumentsinstrumenttype.md)     | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
+| `instrumentType`                                                                                                           | [operations.InstrumentType](../../models/operations/instrumenttype.md)                                                     | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
 | `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |

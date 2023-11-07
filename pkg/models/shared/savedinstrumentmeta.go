@@ -2,7 +2,7 @@
 
 package shared
 
-type SavedInstrumentMetaCardTokenDetails struct {
+type CardTokenDetails struct {
 }
 
 type SavedInstrumentMeta struct {
@@ -11,8 +11,8 @@ type SavedInstrumentMeta struct {
 	// Issuing country of saved card
 	CardCountry *string `json:"card_country,omitempty"`
 	// card scheme/network of the saved card
-	CardNetwork      *string                              `json:"card_network,omitempty"`
-	CardTokenDetails *SavedInstrumentMetaCardTokenDetails `json:"card_token_details,omitempty"`
+	CardNetwork      *string           `json:"card_network,omitempty"`
+	CardTokenDetails *CardTokenDetails `json:"card_token_details,omitempty"`
 	// Type of saved card
 	CardType *string `json:"card_type,omitempty"`
 }
@@ -38,7 +38,7 @@ func (o *SavedInstrumentMeta) GetCardNetwork() *string {
 	return o.CardNetwork
 }
 
-func (o *SavedInstrumentMeta) GetCardTokenDetails() *SavedInstrumentMetaCardTokenDetails {
+func (o *SavedInstrumentMeta) GetCardTokenDetails() *CardTokenDetails {
 	if o == nil {
 		return nil
 	}

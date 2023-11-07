@@ -7,28 +7,28 @@ import (
 	"fmt"
 )
 
-// APIError404Type - invalid_request_error
-type APIError404Type string
+// Type - invalid_request_error
+type Type string
 
 const (
-	APIError404TypeInvalidRequestError APIError404Type = "invalid_request_error"
+	TypeInvalidRequestError Type = "invalid_request_error"
 )
 
-func (e APIError404Type) ToPointer() *APIError404Type {
+func (e Type) ToPointer() *Type {
 	return &e
 }
 
-func (e *APIError404Type) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "invalid_request_error":
-		*e = APIError404Type(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for APIError404Type: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -37,7 +37,7 @@ type APIError404 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// invalid_request_error
-	Type *APIError404Type `json:"type,omitempty"`
+	Type *Type `json:"type,omitempty"`
 }
 
 var _ error = &APIError404{}

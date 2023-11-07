@@ -21,29 +21,21 @@ func main() {
 		}),
 	)
 
-	var xAPIVersion string = "string"
+	var customerID string = "string"
 
-	eligibilityOffersRequest := &shared.EligibilityOffersRequest{
-		Filters: &shared.OfferFilters{
-			OfferType: []shared.OfferType{
-				shared.OfferTypeNoCostEmi,
-			},
-		},
-		Queries: shared.OfferQueries{
-			Amount:  cashfreego.Float64(100),
-			OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
-		},
-	}
+	var instrumentID string = "string"
+
+	var xAPIVersion string = "string"
 
 	var xRequestID *string = "string"
 
 	ctx := context.Background()
-	res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	if res.EligibleOffersEntities != nil {
+	if res.FetchAllSavedInstruments != nil {
 		// handle response
 	}
 }

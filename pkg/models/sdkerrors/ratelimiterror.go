@@ -7,28 +7,28 @@ import (
 	"fmt"
 )
 
-// RateLimitErrorType - rate_limit_error
-type RateLimitErrorType string
+// SchemasRateLimitErrorType - rate_limit_error
+type SchemasRateLimitErrorType string
 
 const (
-	RateLimitErrorTypeRateLimitError RateLimitErrorType = "rate_limit_error"
+	SchemasRateLimitErrorTypeRateLimitError SchemasRateLimitErrorType = "rate_limit_error"
 )
 
-func (e RateLimitErrorType) ToPointer() *RateLimitErrorType {
+func (e SchemasRateLimitErrorType) ToPointer() *SchemasRateLimitErrorType {
 	return &e
 }
 
-func (e *RateLimitErrorType) UnmarshalJSON(data []byte) error {
+func (e *SchemasRateLimitErrorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "rate_limit_error":
-		*e = RateLimitErrorType(v)
+		*e = SchemasRateLimitErrorType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for RateLimitErrorType: %v", v)
+		return fmt.Errorf("invalid value for SchemasRateLimitErrorType: %v", v)
 	}
 }
 
@@ -36,7 +36,7 @@ type RateLimitError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`
 	// rate_limit_error
-	Type *RateLimitErrorType `json:"type,omitempty"`
+	Type *SchemasRateLimitErrorType `json:"type,omitempty"`
 }
 
 var _ error = &RateLimitError{}

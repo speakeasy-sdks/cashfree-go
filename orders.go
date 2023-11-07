@@ -15,13 +15,13 @@ import (
 	"strings"
 )
 
-// orders - Collection of APIs to create, accept payments and refund for an order.
-type orders struct {
+// Orders - Collection of APIs to create, accept payments and refund for an order.
+type Orders struct {
 	sdkConfiguration sdkConfiguration
 }
 
-func newOrders(sdkConfig sdkConfiguration) *orders {
-	return &orders{
+func newOrders(sdkConfig sdkConfiguration) *Orders {
+	return &Orders{
 		sdkConfiguration: sdkConfig,
 	}
 }
@@ -31,7 +31,7 @@ func newOrders(sdkConfig sdkConfiguration) *orders {
 // An order is an entity which has a amount and currency associated with it. It is something for which you want to collect payment for.
 // Use this API to create orders with Cashfree from your backend to get a `payment_sessions_id`.
 // You can use the `payment_sessions_id` to create a transaction for the order.
-func (s *orders) Create(ctx context.Context, xAPIVersion string, createOrderBackendRequest *shared.CreateOrderBackendRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateOrderResponse, error) {
+func (s *Orders) Create(ctx context.Context, xAPIVersion string, createOrderBackendRequest *shared.CreateOrderBackendRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateOrderResponse, error) {
 	request := operations.CreateOrderRequest{
 		XAPIVersion:               xAPIVersion,
 		CreateOrderBackendRequest: createOrderBackendRequest,
@@ -240,7 +240,7 @@ func (s *orders) Create(ctx context.Context, xAPIVersion string, createOrderBack
 // - To check the status of your order
 // - Once the order is PAID
 // - Once your customer returns to `return_url`
-func (s *orders) Get(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOrderResponse, error) {
+func (s *Orders) Get(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOrderResponse, error) {
 	request := operations.GetOrderRequest{
 		OrderID:     orderID,
 		XAPIVersion: xAPIVersion,

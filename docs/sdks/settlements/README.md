@@ -1,5 +1,5 @@
 # Settlements
-(*Settlements*)
+(*.Settlements*)
 
 ## Overview
 

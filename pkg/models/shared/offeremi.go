@@ -2,7 +2,7 @@
 
 package shared
 
-type OfferEMIEMIOffer struct {
+type EMIOffer struct {
 	// Bank Name
 	Issuer  string  `json:"issuer"`
 	Tenures []int64 `json:"tenures"`
@@ -10,21 +10,21 @@ type OfferEMIEMIOffer struct {
 	Type string `json:"type"`
 }
 
-func (o *OfferEMIEMIOffer) GetIssuer() string {
+func (o *EMIOffer) GetIssuer() string {
 	if o == nil {
 		return ""
 	}
 	return o.Issuer
 }
 
-func (o *OfferEMIEMIOffer) GetTenures() []int64 {
+func (o *EMIOffer) GetTenures() []int64 {
 	if o == nil {
 		return []int64{}
 	}
 	return o.Tenures
 }
 
-func (o *OfferEMIEMIOffer) GetType() string {
+func (o *EMIOffer) GetType() string {
 	if o == nil {
 		return ""
 	}
@@ -32,12 +32,12 @@ func (o *OfferEMIEMIOffer) GetType() string {
 }
 
 type OfferEMI struct {
-	Emi OfferEMIEMIOffer `json:"emi"`
+	Emi EMIOffer `json:"emi"`
 }
 
-func (o *OfferEMI) GetEmi() OfferEMIEMIOffer {
+func (o *OfferEMI) GetEmi() EMIOffer {
 	if o == nil {
-		return OfferEMIEMIOffer{}
+		return EMIOffer{}
 	}
 	return o.Emi
 }

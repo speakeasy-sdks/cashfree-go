@@ -7,19 +7,19 @@ import (
 	"fmt"
 )
 
-// DiscountDetailsDiscountType - Type of discount
-type DiscountDetailsDiscountType string
+// DiscountType - Type of discount
+type DiscountType string
 
 const (
-	DiscountDetailsDiscountTypeFlat       DiscountDetailsDiscountType = "flat"
-	DiscountDetailsDiscountTypePercentage DiscountDetailsDiscountType = "percentage"
+	DiscountTypeFlat       DiscountType = "flat"
+	DiscountTypePercentage DiscountType = "percentage"
 )
 
-func (e DiscountDetailsDiscountType) ToPointer() *DiscountDetailsDiscountType {
+func (e DiscountType) ToPointer() *DiscountType {
 	return &e
 }
 
-func (e *DiscountDetailsDiscountType) UnmarshalJSON(data []byte) error {
+func (e *DiscountType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,25 +28,25 @@ func (e *DiscountDetailsDiscountType) UnmarshalJSON(data []byte) error {
 	case "flat":
 		fallthrough
 	case "percentage":
-		*e = DiscountDetailsDiscountType(v)
+		*e = DiscountType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DiscountDetailsDiscountType: %v", v)
+		return fmt.Errorf("invalid value for DiscountType: %v", v)
 	}
 }
 
 type DiscountDetails struct {
 	// Type of discount
-	DiscountType DiscountDetailsDiscountType `json:"discount_type"`
+	DiscountType DiscountType `json:"discount_type"`
 	// Value of Discount.
 	DiscountValue string `json:"discount_value"`
 	// Maximum Value of Discount allowed.
 	MaxDiscountAmount string `json:"max_discount_amount"`
 }
 
-func (o *DiscountDetails) GetDiscountType() DiscountDetailsDiscountType {
+func (o *DiscountDetails) GetDiscountType() DiscountType {
 	if o == nil {
-		return DiscountDetailsDiscountType("")
+		return DiscountType("")
 	}
 	return o.DiscountType
 }
