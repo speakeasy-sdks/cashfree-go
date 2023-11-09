@@ -1,5 +1,5 @@
 # PGReconciliation
-(*.PGReconciliation*)
+(*PGReconciliation*)
 
 ## Overview
 
@@ -61,14 +61,23 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `request`                                                                                      | [operations.GetPGReconciliationRequest](../../models/operations/getpgreconciliationrequest.md) | :heavy_check_mark:                                                                             | The request object to use for the request.                                                     |
-| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
+| `request`                                                                                          | [operations.GetPGReconciliationRequest](../../pkg/models/operations/getpgreconciliationrequest.md) | :heavy_check_mark:                                                                                 | The request object to use for the request.                                                         |
+| `opts`                                                                                             | [][operations.Option](../../pkg/models/operations/option.md)                                       | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
 
 
 ### Response
 
-**[*operations.GetPGReconciliationResponse](../../models/operations/getpgreconciliationresponse.md), error**
-
+**[*operations.GetPGReconciliationResponse](../../pkg/models/operations/getpgreconciliationresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |

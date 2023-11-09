@@ -1,8 +1,0 @@
-# UPIPaymentMethod
-
-
-## Fields
-
-| Field                                    | Type                                     | Required                                 | Description                              |
-| ---------------------------------------- | ---------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| `Upi`                                    | [shared.Upi](../../models/shared/upi.md) | :heavy_check_mark:                       | N/A                                      |

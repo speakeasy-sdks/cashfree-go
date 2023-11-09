@@ -1,5 +1,5 @@
 # Eligibility
-(*.Eligibility*)
+(*Eligibility*)
 
 ### Available Operations
 
@@ -68,15 +68,25 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `eligibilityOffersRequest`                                                                                                 | [*shared.EligibilityOffersRequest](../../models/shared/eligibilityoffersrequest.md)                                        | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for offers                                                                           |
+| `eligibilityOffersRequest`                                                                                                 | [*shared.EligibilityOffersRequest](../../../pkg/models/shared/eligibilityoffersrequest.md)                                 | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for offers                                                                           |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetEligibilityOfferResponse](../../models/operations/geteligibilityofferresponse.md), error**
-
+**[*operations.GetEligibilityOfferResponse](../../pkg/models/operations/geteligibilityofferresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## GetCardlessEMI
 
@@ -137,15 +147,25 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `eligibilityCardlessEMIRequest`                                                                                            | [*shared.EligibilityCardlessEMIRequest](../../models/shared/eligibilitycardlessemirequest.md)                              | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for cardlessemi                                                                      |
+| `eligibilityCardlessEMIRequest`                                                                                            | [*shared.EligibilityCardlessEMIRequest](../../../pkg/models/shared/eligibilitycardlessemirequest.md)                       | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for cardlessemi                                                                      |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetEligibilityCardlessEMIResponse](../../models/operations/geteligibilitycardlessemiresponse.md), error**
-
+**[*operations.GetEligibilityCardlessEMIResponse](../../pkg/models/operations/geteligibilitycardlessemiresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## GetPaylaterMethods
 
@@ -206,12 +226,22 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `eligibilityCardlessEMIRequest`                                                                                            | [*shared.EligibilityCardlessEMIRequest](../../models/shared/eligibilitycardlessemirequest.md)                              | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for paylater                                                                         |
+| `eligibilityCardlessEMIRequest`                                                                                            | [*shared.EligibilityCardlessEMIRequest](../../../pkg/models/shared/eligibilitycardlessemirequest.md)                       | :heavy_minus_sign:                                                                                                         | Request body to check for eligibility for paylater                                                                         |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetEligibilityPaylaterResponse](../../models/operations/geteligibilitypaylaterresponse.md), error**
-
+**[*operations.GetEligibilityPaylaterResponse](../../pkg/models/operations/geteligibilitypaylaterresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |

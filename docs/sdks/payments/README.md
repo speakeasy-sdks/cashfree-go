@@ -1,5 +1,5 @@
 # Payments
-(*.Payments*)
+(*Payments*)
 
 ## Overview
 
@@ -69,13 +69,23 @@ func main() {
 | `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The order or invoice ID for which you want to view the payment details.                                                    |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetPaymentbyIDResponse](../../models/operations/getpaymentbyidresponse.md), error**
-
+**[*operations.GetPaymentbyIDResponse](../../pkg/models/operations/getpaymentbyidresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## GetforOrder
 
@@ -130,13 +140,23 @@ func main() {
 | `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Order or the invoice ID for which you want to view the payment details.                                                    |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetPaymentsforOrderResponse](../../models/operations/getpaymentsfororderresponse.md), error**
-
+**[*operations.GetPaymentsforOrderResponse](../../pkg/models/operations/getpaymentsfororderresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## PayOrder
 
@@ -202,15 +222,25 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `orderPayRequest`                                                                                                          | [*shared.OrderPayRequest](../../models/shared/orderpayrequest.md)                                                          | :heavy_minus_sign:                                                                                                         | Request body to create a transaction at cashfree using `payment_session_id`                                                |
+| `orderPayRequest`                                                                                                          | [*shared.OrderPayRequest](../../../pkg/models/shared/orderpayrequest.md)                                                   | :heavy_minus_sign:                                                                                                         | Request body to create a transaction at cashfree using `payment_session_id`                                                |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.OrderPayResponse](../../models/operations/orderpayresponse.md), error**
-
+**[*operations.OrderPayResponse](../../pkg/models/operations/orderpayresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## PreauthorizeOrder
 
@@ -257,17 +287,27 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                              | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
-| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                  | :heavy_check_mark:                                                                                     | The context to use for the request.                                                                    |
-| `request`                                                                                              | [operations.CapturePreauthorizationRequest](../../models/operations/capturepreauthorizationrequest.md) | :heavy_check_mark:                                                                                     | The request object to use for the request.                                                             |
-| `opts`                                                                                                 | [][operations.Option](../../models/operations/option.md)                                               | :heavy_minus_sign:                                                                                     | The options for this request.                                                                          |
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.CapturePreauthorizationRequest](../../pkg/models/operations/capturepreauthorizationrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                               | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
 
 
 ### Response
 
-**[*operations.CapturePreauthorizationResponse](../../models/operations/capturepreauthorizationresponse.md), error**
-
+**[*operations.CapturePreauthorizationResponse](../../pkg/models/operations/capturepreauthorizationresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## Submit
 
@@ -326,12 +366,22 @@ func main() {
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `paymentID`                                                                                                                | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The order or invoice ID for which you want to view the payment details.                                                    |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `otpRequest`                                                                                                               | [*shared.OTPRequest](../../models/shared/otprequest.md)                                                                    | :heavy_minus_sign:                                                                                                         | Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account       |
+| `otpRequest`                                                                                                               | [*shared.OTPRequest](../../../pkg/models/shared/otprequest.md)                                                             | :heavy_minus_sign:                                                                                                         | Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account       |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.SubmitOTPRequestResponse](../../models/operations/submitotprequestresponse.md), error**
-
+**[*operations.SubmitOTPRequestResponse](../../pkg/models/operations/submitotprequestresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |

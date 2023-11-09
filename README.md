@@ -63,37 +63,37 @@ func main() {
 ## Available Resources and Operations
 
 
-### [.TokenVault](docs/sdks/tokenvault/README.md)
+### [TokenVault](docs/sdks/tokenvault/README.md)
 
 * [DeleteSavedInstrument](docs/sdks/tokenvault/README.md#deletesavedinstrument) - Delete Saved Instrument
 * [FetchSavedInstrument](docs/sdks/tokenvault/README.md#fetchsavedinstrument) - Fetch Single Saved Instrument
 * [FetchSavedInstrumentCryptogram](docs/sdks/tokenvault/README.md#fetchsavedinstrumentcryptogram) - Fetch cryptogram for saved instrument
 * [GetAllSavedInstruments](docs/sdks/tokenvault/README.md#getallsavedinstruments) - Fetch All Saved Instruments
 
-### [.Eligibility](docs/sdks/eligibility/README.md)
+### [Eligibility](docs/sdks/eligibility/README.md)
 
 * [GetAllOffers](docs/sdks/eligibility/README.md#getalloffers) - Get eligible Offers
 * [GetCardlessEMI](docs/sdks/eligibility/README.md#getcardlessemi) - Get eligible Cardless EMI
 * [GetPaylaterMethods](docs/sdks/eligibility/README.md#getpaylatermethods) - Get eligible Paylater
 
-### [.PaymentLinks](docs/sdks/paymentlinks/README.md)
+### [PaymentLinks](docs/sdks/paymentlinks/README.md)
 
 * [Cancel](docs/sdks/paymentlinks/README.md#cancel) - Cancel Payment Link
 * [Create](docs/sdks/paymentlinks/README.md#create) - Create Payment Link
 * [Fetch](docs/sdks/paymentlinks/README.md#fetch) - Fetch Payment Link Details
 * [GetOrders](docs/sdks/paymentlinks/README.md#getorders) - Get Orders for a Payment Link
 
-### [.Offers](docs/sdks/offers/README.md)
+### [Offers](docs/sdks/offers/README.md)
 
 * [Create](docs/sdks/offers/README.md#create) - Create Offer
 * [Get](docs/sdks/offers/README.md#get) - Get Offer by ID
 
-### [.Orders](docs/sdks/orders/README.md)
+### [Orders](docs/sdks/orders/README.md)
 
 * [Create](docs/sdks/orders/README.md#create) - Create Order
 * [Get](docs/sdks/orders/README.md#get) - Get Order
 
-### [.Payments](docs/sdks/payments/README.md)
+### [Payments](docs/sdks/payments/README.md)
 
 * [Payment](docs/sdks/payments/README.md#payment) - Get Payment by ID
 * [GetforOrder](docs/sdks/payments/README.md#getfororder) - Get Payments for an Order
@@ -101,23 +101,23 @@ func main() {
 * [PreauthorizeOrder](docs/sdks/payments/README.md#preauthorizeorder) - Preauthorization
 * [Submit](docs/sdks/payments/README.md#submit) - Submit or Resend OTP
 
-### [.Refunds](docs/sdks/refunds/README.md)
+### [Refunds](docs/sdks/refunds/README.md)
 
 * [Create](docs/sdks/refunds/README.md#create) - Create Refund
 * [Get](docs/sdks/refunds/README.md#get) - Get Refund
 * [GetAllforOrder](docs/sdks/refunds/README.md#getallfororder) - Get All Refunds for an Order
 
-### [.Settlements](docs/sdks/settlements/README.md)
+### [Settlements](docs/sdks/settlements/README.md)
 
 * [Fetch](docs/sdks/settlements/README.md#fetch) - Settlement Reconciliation
 * [GetAll](docs/sdks/settlements/README.md#getall) - Get All Settlements
 * [GetForOrder](docs/sdks/settlements/README.md#getfororder) - Get Settlements by Order ID
 
-### [.PGReconciliation](docs/sdks/pgreconciliation/README.md)
+### [PGReconciliation](docs/sdks/pgreconciliation/README.md)
 
 * [Get](docs/sdks/pgreconciliation/README.md#get) - PG Reconciliation
 
-### [.SoftPOS](docs/sdks/softpos/README.md)
+### [SoftPOS](docs/sdks/softpos/README.md)
 
 * [TerminalStatus](docs/sdks/softpos/README.md#terminalstatus) - Get terminal status using phone number
 * [CreateTerminals](docs/sdks/softpos/README.md#createterminals) - Create Terminal
@@ -152,7 +152,19 @@ Here's an example of one such pagination call:
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or an error, they will never return both.  When specified by the OpenAPI spec document, the SDK will return the appropriate subclass.
+
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 
 ## Example
@@ -237,6 +249,11 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
+		var e *sdkerrors.SDKError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 	}
 }
 
@@ -396,12 +413,12 @@ To change the default retry strategy for a single API call, simply provide a ret
 package main
 
 import (
-	"/pkg/models/operations"
-	"/pkg/utils"
 	"context"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"log"
+	"pkg/models/operations"
+	"pkg/utils"
 )
 
 func main() {
@@ -453,12 +470,12 @@ If you'd like to override the default retry strategy for all operations that sup
 package main
 
 import (
-	"/pkg/models/operations"
-	"/pkg/utils"
 	"context"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"log"
+	"pkg/models/operations"
+	"pkg/utils"
 )
 
 func main() {
@@ -501,19 +518,16 @@ func main() {
 }
 
 ```
-
-
 <!-- End Retries -->
 
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports multiple security scheme combinations globally. You can choose from one of the alternatives by using the `WithSecurity` option when initializing the SDK client instance. The selected option will be used by default to authenticate with the API for all operations that support it.
+This SDK supports multiple security scheme combinations globally. You can choose from one of the alternatives by using the `WithSecurity` option when initializing the SDK client instance. The selected option will be used by default to authenticate with the API for all operations that support it.
 
 ### Option1
 

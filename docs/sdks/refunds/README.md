@@ -1,5 +1,5 @@
 # Refunds
-(*.Refunds*)
+(*Refunds*)
 
 ## Overview
 
@@ -62,17 +62,27 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [operations.CreateRefundRequest](../../models/operations/createrefundrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
-| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
+| `request`                                                                            | [operations.CreateRefundRequest](../../pkg/models/operations/createrefundrequest.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `opts`                                                                               | [][operations.Option](../../pkg/models/operations/option.md)                         | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 
 ### Response
 
-**[*operations.CreateRefundResponse](../../models/operations/createrefundresponse.md), error**
-
+**[*operations.CreateRefundResponse](../../pkg/models/operations/createrefundresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## Get
 
@@ -130,13 +140,23 @@ func main() {
 | `refundID`                                                                                                                 | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Refund Id of the refund you want to fetch.                                                                                 |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetRefundResponse](../../models/operations/getrefundresponse.md), error**
-
+**[*operations.GetRefundResponse](../../pkg/models/operations/getrefundresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## GetAllforOrder
 
@@ -191,10 +211,20 @@ func main() {
 | `orderID`                                                                                                                  | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | Order or the invoice ID for which you want to view the refund details.                                                     |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.GetAllRefundsForOrderResponse](../../models/operations/getallrefundsfororderresponse.md), error**
-
+**[*operations.GetAllRefundsForOrderResponse](../../pkg/models/operations/getallrefundsfororderresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |

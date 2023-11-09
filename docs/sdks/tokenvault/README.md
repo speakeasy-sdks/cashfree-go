@@ -1,5 +1,5 @@
 # TokenVault
-(*.TokenVault*)
+(*TokenVault*)
 
 ## Overview
 
@@ -68,13 +68,23 @@ func main() {
 | `instrumentID`                                                                                                             | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The instrument_id which needs to be deleted                                                                                |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.DeleteSpecificSavedInstrumentResponse](../../models/operations/deletespecificsavedinstrumentresponse.md), error**
-
+**[*operations.DeleteSpecificSavedInstrumentResponse](../../pkg/models/operations/deletespecificsavedinstrumentresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## FetchSavedInstrument
 
@@ -132,13 +142,23 @@ func main() {
 | `instrumentID`                                                                                                             | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The instrument_id of the saved instrument which needs to be queried                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.FetchSpecificSavedInstrumentResponse](../../models/operations/fetchspecificsavedinstrumentresponse.md), error**
-
+**[*operations.FetchSpecificSavedInstrumentResponse](../../pkg/models/operations/fetchspecificsavedinstrumentresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## FetchSavedInstrumentCryptogram
 
@@ -196,13 +216,23 @@ func main() {
 | `instrumentID`                                                                                                             | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The instrument_id of the saved instrument which needs to be queried                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.FetchCryptogramResponse](../../models/operations/fetchcryptogramresponse.md), error**
-
+**[*operations.FetchCryptogramResponse](../../pkg/models/operations/fetchcryptogramresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.APIError502         | 502                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
 
 ## GetAllSavedInstruments
 
@@ -258,13 +288,22 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `customerID`                                                                                                               | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The customer_id for which all the saved cards are queried                                                                  |
-| `instrumentType`                                                                                                           | [operations.InstrumentType](../../models/operations/instrumenttype.md)                                                     | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
+| `instrumentType`                                                                                                           | [operations.InstrumentType](../../../pkg/models/operations/instrumenttype.md)                                              | :heavy_check_mark:                                                                                                         | type to instrument to query                                                                                                |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
-| `opts`                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                   | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
+| `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
 
 ### Response
 
-**[*operations.FetchAllSavedInstrumentsResponse](../../models/operations/fetchallsavedinstrumentsresponse.md), error**
-
+**[*operations.FetchAllSavedInstrumentsResponse](../../pkg/models/operations/fetchallsavedinstrumentsresponse.md), error**
+| Error Object                  | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| sdkerrors.BadRequestError     | 400                           | application/json              |
+| sdkerrors.AuthenticationError | 401                           | application/json              |
+| sdkerrors.APIError404         | 404                           | application/json              |
+| sdkerrors.APIError409         | 409                           | application/json              |
+| sdkerrors.IdempotencyError    | 422                           | application/json              |
+| sdkerrors.RateLimitError      | 429                           | application/json              |
+| sdkerrors.APIError            | 500                           | application/json              |
+| sdkerrors.SDKError            | 400-600                       | */*                           |
