@@ -28,7 +28,6 @@ import(
 	"log"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/callbacks"
 )
 
 func main() {
@@ -58,8 +57,8 @@ func main() {
             shared.VendorSplit{},
         },
         OrderTags: map[string]string{
-            "shipping_address": "123 Main St",
             "product": "Laptop",
+            "shipping_address": "123 Main St",
         },
         Terminal: &shared.TerminalDetails{
             TerminalID: "string",
