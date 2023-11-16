@@ -70,7 +70,7 @@ func (o *GetPaymentLinkOrdersResponse) GetContentType() string {
 
 func (o *GetPaymentLinkOrdersResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

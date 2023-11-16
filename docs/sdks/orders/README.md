@@ -24,10 +24,10 @@ You can use the `payment_sessions_id` to create a transaction for the order.
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {
@@ -124,10 +124,10 @@ Use this API to fetch the order that was created at Cashfree's using the `order_
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {

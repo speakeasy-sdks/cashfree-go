@@ -22,10 +22,10 @@ To delete a saved instrument for a customer id and instrument id
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {
@@ -96,10 +96,10 @@ To get specific saved instrument for a customer id and instrument id
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {
@@ -170,10 +170,10 @@ To get the card network token, token expiry and cryptogram for a saved instrumen
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {
@@ -244,11 +244,11 @@ To get all saved instruments for a customer id
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 )
 
 func main() {

@@ -21,11 +21,11 @@ Use this API to get settlement reconciliation details using Settlement ID, settl
 package main
 
 import(
-	"context"
-	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"context"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -98,11 +98,11 @@ Use this API to get all settlement details by specifying the settlement ID, sett
 package main
 
 import(
-	"context"
-	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"context"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -175,10 +175,10 @@ Use this API to view all the settlements of a particular order.
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {

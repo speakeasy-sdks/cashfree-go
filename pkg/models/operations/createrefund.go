@@ -91,7 +91,7 @@ func (o *CreateRefundResponse) GetContentType() string {
 
 func (o *CreateRefundResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

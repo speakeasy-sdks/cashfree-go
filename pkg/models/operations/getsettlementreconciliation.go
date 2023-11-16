@@ -98,7 +98,7 @@ func (o *GetSettlementReconciliationResponse) GetFetchSettlementRecon() *shared.
 
 func (o *GetSettlementReconciliationResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

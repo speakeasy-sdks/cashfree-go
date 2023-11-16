@@ -20,10 +20,10 @@ Use this API to view all details of a terminal.
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {
@@ -90,10 +90,10 @@ Use this API to create new terminals to use softPOS.
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {

@@ -21,11 +21,11 @@ Use this API to initiate refunds.
 package main
 
 import(
-	"context"
-	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"context"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
+	"log"
 )
 
 func main() {
@@ -94,10 +94,10 @@ Use this API to fetch a specific refund processed on your Cashfree Account.
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {
@@ -168,10 +168,10 @@ Use this API to fetch all refunds processed against an order.
 package main
 
 import(
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"context"
 	"log"
-	cashfreego "github.com/speakeasy-sdks/cashfree-go"
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 )
 
 func main() {

@@ -86,7 +86,7 @@ func (o *DeleteSpecificSavedInstrumentResponse) GetFetchAllSavedInstruments() *s
 
 func (o *DeleteSpecificSavedInstrumentResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

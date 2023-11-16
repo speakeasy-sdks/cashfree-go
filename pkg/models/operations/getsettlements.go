@@ -98,7 +98,7 @@ func (o *GetSettlementsResponse) GetFetchSettlement() interface{} {
 
 func (o *GetSettlementsResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

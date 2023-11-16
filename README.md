@@ -175,7 +175,9 @@ package main
 
 import (
 	"context"
+	"errors"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"log"
 )
@@ -412,9 +414,9 @@ import (
 	"context"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"log"
 	"pkg/models/operations"
-	"pkg/utils"
 )
 
 func main() {
@@ -436,16 +438,17 @@ func main() {
 	var xRequestID *string = "string"
 
 	ctx := context.Background()
-	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID, operations.WithRetries(utils.RetryConfig{
-		Strategy: "backoff",
-		Backoff: &utils.BackoffStrategy{
-			InitialInterval: 1,
-			MaxInterval:     50,
-			Exponent:        1.1,
-			MaxElapsedTime:  100,
-		},
-		RetryConnectionErrors: false,
-	}))
+	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID, operations.WithRetries(
+		utils.RetryConfig{
+			Strategy: "backoff",
+			Backoff: &utils.BackoffStrategy{
+				InitialInterval: 1,
+				MaxInterval:     50,
+				Exponent:        1.1,
+				MaxElapsedTime:  100,
+			},
+			RetryConnectionErrors: false,
+		}))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -465,23 +468,23 @@ import (
 	"context"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"log"
-	"pkg/models/operations"
-	"pkg/utils"
 )
 
 func main() {
 	s := cashfreego.New(
-		cashfreego.WithRetryConfig(utils.RetryConfig{
-			Strategy: "backoff",
-			Backoff: &utils.BackoffStrategy{
-				InitialInterval: 1,
-				MaxInterval:     50,
-				Exponent:        1.1,
-				MaxElapsedTime:  100,
-			},
-			RetryConnectionErrors: false,
-		}),
+		cashfreego.WithRetryConfig(
+			utils.RetryConfig{
+				Strategy: "backoff",
+				Backoff: &utils.BackoffStrategy{
+					InitialInterval: 1,
+					MaxInterval:     50,
+					Exponent:        1.1,
+					MaxElapsedTime:  100,
+				},
+				RetryConnectionErrors: false,
+			}),
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
 				XClientID:     "",

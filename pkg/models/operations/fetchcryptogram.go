@@ -86,7 +86,7 @@ func (o *FetchCryptogramResponse) GetCryptogram() *shared.Cryptogram {
 
 func (o *FetchCryptogramResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

@@ -70,7 +70,7 @@ func (o *GetOrderResponse) GetContentType() string {
 
 func (o *GetOrderResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

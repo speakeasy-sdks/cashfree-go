@@ -70,7 +70,7 @@ func (o *GetAllRefundsForOrderResponse) GetContentType() string {
 
 func (o *GetAllRefundsForOrderResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

@@ -91,7 +91,7 @@ func (o *CapturePreauthorizationResponse) GetContentType() string {
 
 func (o *CapturePreauthorizationResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }

@@ -70,7 +70,7 @@ func (o *GetEligibilityOfferResponse) GetContentType() string {
 
 func (o *GetEligibilityOfferResponse) GetHeaders() map[string][]string {
 	if o == nil {
-		return nil
+		return map[string][]string{}
 	}
 	return o.Headers
 }
