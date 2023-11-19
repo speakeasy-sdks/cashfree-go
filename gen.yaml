@@ -2,8 +2,8 @@ configVersion: 1.0.0
 management:
   docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
   docVersion: "2022-09-01"
-  speakeasyVersion: 1.120.3
-  generationVersion: 2.192.1
+  speakeasyVersion: 1.121.1
+  generationVersion: 2.194.1
 generation:
   comments: {}
   sdkClassName: Cashfree
@@ -16,12 +16,12 @@ features:
     core: 3.1.5
     flattening: 2.81.1
     globalSecurity: 2.82.2
-    globalServerURLs: 2.82.0
+    globalServerURLs: 2.82.1
     nameOverrides: 2.81.1
     retries: 2.82.1
     unions: 2.85.0
 go:
-  version: 0.9.3
+  version: 0.9.4
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true
   imports:

@@ -1,5 +1,7 @@
 # RateLimitError
 
+Rate Limit Error
+
 
 ## Fields
 

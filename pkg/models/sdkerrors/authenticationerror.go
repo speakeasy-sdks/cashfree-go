@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 )
 
+// AuthenticationError - Authentication Error
 type AuthenticationError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`

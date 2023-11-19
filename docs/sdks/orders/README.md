@@ -57,8 +57,8 @@ func main() {
             shared.VendorSplit{},
         },
         OrderTags: map[string]string{
-            "product": "Laptop",
             "shipping_address": "123 Main St",
+            "product": "Laptop",
         },
         Terminal: &shared.TerminalDetails{
             TerminalID: "string",

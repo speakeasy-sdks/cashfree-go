@@ -32,6 +32,7 @@ func (e *SchemasType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// APIError409 - Resource already present
 type APIError409 struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`

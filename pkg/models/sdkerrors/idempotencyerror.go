@@ -32,6 +32,7 @@ func (e *SchemasIdempotencyErrorType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// IdempotencyError - Idempotency error
 type IdempotencyError struct {
 	Code    *string `json:"code,omitempty"`
 	Message *string `json:"message,omitempty"`

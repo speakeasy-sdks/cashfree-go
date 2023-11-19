@@ -1,5 +1,7 @@
 # AuthenticationError
 
+Authentication Error
+
 
 ## Fields
 

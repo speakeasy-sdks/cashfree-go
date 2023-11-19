@@ -162,9 +162,9 @@ func New(opts ...SDKOption) *Cashfree {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-09-01",
-			SDKVersion:        "0.9.3",
-			GenVersion:        "2.192.1",
-			UserAgent:         "speakeasy-sdk/go 0.9.3 2.192.1 2022-09-01 github.com/speakeasy-sdks/cashfree-go",
+			SDKVersion:        "0.9.4",
+			GenVersion:        "2.194.1",
+			UserAgent:         "speakeasy-sdk/go 0.9.4 2.194.1 2022-09-01 github.com/speakeasy-sdks/cashfree-go",
 		},
 	}
 	for _, opt := range opts {

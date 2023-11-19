@@ -31,6 +31,7 @@ func (e *SchemasBadRequestErrorType) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// BadRequestError - Bad request error
 type BadRequestError struct {
 	Code    *string                     `json:"code,omitempty"`
 	Message *string                     `json:"message,omitempty"`

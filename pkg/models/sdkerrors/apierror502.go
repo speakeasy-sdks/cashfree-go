@@ -32,6 +32,7 @@ func (e *SchemasAPIError502Type) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// APIError502 - Bank related Error
 type APIError502 struct {
 	// `bank_processing_failure` will be returned here to denote failure at bank.
 	//
