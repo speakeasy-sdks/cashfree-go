@@ -163,7 +163,6 @@ pkg/utils/utils.go
 /pkg/models/sdkerrors/apierror.go
 /pkg/models/sdkerrors/apierror502.go
 /pkg/models/callbacks/createorder.go
-USAGE.md
 docs/pkg/models/operations/deletespecificsavedinstrumentrequest.md
 docs/pkg/models/operations/deletespecificsavedinstrumentresponse.md
 docs/pkg/models/operations/fetchspecificsavedinstrumentrequest.md
@@ -399,5 +398,6 @@ docs/sdks/refunds/README.md
 docs/sdks/settlements/README.md
 docs/sdks/pgreconciliation/README.md
 docs/sdks/softpos/README.md
+USAGE.md
 pkg/models/operations/options.go
 .gitattributes
