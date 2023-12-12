@@ -3,7 +3,7 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        | Example            |
-| ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `XClientID`        | *string*           | :heavy_check_mark: | N/A                |                    |
-| `XClientSecret`    | *string*           | :heavy_check_mark: | N/A                |                    |
+| Field              | Type               | Required           | Description        |
+| ------------------ | ------------------ | ------------------ | ------------------ |
+| `XClientID`        | *string*           | :heavy_check_mark: | N/A                |
+| `XClientSecret`    | *string*           | :heavy_check_mark: | N/A                |

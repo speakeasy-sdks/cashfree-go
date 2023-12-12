@@ -10,4 +10,4 @@
 | `CardNetwork`      | **string*          | :heavy_minus_sign: | N/A                | visa               |
 | `CardNumber`       | **string*          | :heavy_minus_sign: | N/A                | 470613XXXXXX2123   |
 | `CardType`         | **string*          | :heavy_minus_sign: | N/A                | credit_card        |
-| `Channel`          | **string*          | :heavy_minus_sign: | N/A                | null               |
+| `Channel`          | **string*          | :heavy_minus_sign: | N/A                | <nil>              |

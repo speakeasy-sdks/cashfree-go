@@ -134,7 +134,6 @@ func withSecurity(security interface{}) func(context.Context) (interface{}, erro
 }
 
 // WithSecurity configures the SDK to use the provided security details
-
 func WithSecurity(security shared.Security) SDKOption {
 	return func(sdk *Cashfree) {
 		sdk.sdkConfiguration.Security = withSecurity(security)
@@ -162,9 +161,9 @@ func New(opts ...SDKOption) *Cashfree {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2022-09-01",
-			SDKVersion:        "0.9.5",
-			GenVersion:        "2.210.3",
-			UserAgent:         "speakeasy-sdk/go 0.9.5 2.210.3 2022-09-01 github.com/speakeasy-sdks/cashfree-go",
+			SDKVersion:        "0.10.0",
+			GenVersion:        "2.213.3",
+			UserAgent:         "speakeasy-sdk/go 0.10.0 2.213.3 2022-09-01 github.com/speakeasy-sdks/cashfree-go",
 		},
 	}
 	for _, opt := range opts {

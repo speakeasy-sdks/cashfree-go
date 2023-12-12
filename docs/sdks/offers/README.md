@@ -30,8 +30,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
@@ -95,7 +95,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `createOfferBackendRequest`                                                                                                | [*shared.CreateOfferBackendRequest](../../../pkg/models/shared/createofferbackendrequest.md)                               | :heavy_minus_sign:                                                                                                         | Request body to create an offer at Cashfree                                                                                |
+| `createOfferBackendRequest`                                                                                                | [*shared.CreateOfferBackendRequest](../../pkg/models/shared/createofferbackendrequest.md)                                  | :heavy_minus_sign:                                                                                                         | Request body to create an offer at Cashfree                                                                                |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
 | `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
@@ -134,8 +134,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )

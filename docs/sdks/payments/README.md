@@ -33,8 +33,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
@@ -107,8 +107,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
@@ -183,8 +183,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
@@ -222,7 +222,7 @@ func main() {
 | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `orderPayRequest`                                                                                                          | [*shared.OrderPayRequest](../../../pkg/models/shared/orderpayrequest.md)                                                   | :heavy_minus_sign:                                                                                                         | Request body to create a transaction at cashfree using `payment_session_id`                                                |
+| `orderPayRequest`                                                                                                          | [*shared.OrderPayRequest](../../pkg/models/shared/orderpayrequest.md)                                                      | :heavy_minus_sign:                                                                                                         | Request body to create a transaction at cashfree using `payment_session_id`                                                |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
 | `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 
@@ -263,8 +263,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
@@ -329,8 +329,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
@@ -366,7 +366,7 @@ func main() {
 | `ctx`                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                      | :heavy_check_mark:                                                                                                         | The context to use for the request.                                                                                        |
 | `paymentID`                                                                                                                | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | The order or invoice ID for which you want to view the payment details.                                                    |
 | `xAPIVersion`                                                                                                              | *string*                                                                                                                   | :heavy_check_mark:                                                                                                         | API version to be used. Format is in YYYY-MM-DD                                                                            |
-| `otpRequest`                                                                                                               | [*shared.OTPRequest](../../../pkg/models/shared/otprequest.md)                                                             | :heavy_minus_sign:                                                                                                         | Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account       |
+| `otpRequest`                                                                                                               | [*shared.OTPRequest](../../pkg/models/shared/otprequest.md)                                                                | :heavy_minus_sign:                                                                                                         | Request body to submit/resend headless OTP. To use this API make sure you have headless OTP enabled for your account       |
 | `xRequestID`                                                                                                               | **string*                                                                                                                  | :heavy_minus_sign:                                                                                                         | Request id for the API call. Can be used to resolve tech issues. Communicate this in your tech related queries to cashfree |
 | `opts`                                                                                                                     | [][operations.Option](../../pkg/models/operations/option.md)                                                               | :heavy_minus_sign:                                                                                                         | The options for this request.                                                                                              |
 

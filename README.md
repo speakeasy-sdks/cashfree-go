@@ -34,8 +34,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -174,8 +174,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -282,8 +282,8 @@ func main() {
 		cashfreego.WithServerIndex(1),
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -328,8 +328,8 @@ func main() {
 		cashfreego.WithServerURL("https://sandbox.cashfree.com/pg"),
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -411,8 +411,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -475,8 +475,8 @@ func main() {
 			}),
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -536,8 +536,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option1: &shared.SecurityOption1{
-				XClientID:     "",
-				XClientSecret: "",
+				XClientID:     "<YOUR_API_KEY_HERE>",
+				XClientSecret: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -587,8 +587,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option2: &shared.SecurityOption2{
-				XClientID:      "",
-				XPartnerAPIKey: "",
+				XClientID:      "<YOUR_API_KEY_HERE>",
+				XPartnerAPIKey: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -638,8 +638,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option3: &shared.SecurityOption3{
-				XClientID:              "",
-				XClientSignatureHeader: "",
+				XClientID:              "<YOUR_API_KEY_HERE>",
+				XClientSignatureHeader: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)
@@ -689,8 +689,8 @@ func main() {
 	s := cashfreego.New(
 		cashfreego.WithSecurity(shared.Security{
 			Option4: &shared.SecurityOption4{
-				XPartnerAPIKey:     "",
-				XPartnerMerchantID: "",
+				XPartnerAPIKey:     "<YOUR_API_KEY_HERE>",
+				XPartnerMerchantID: "<YOUR_API_KEY_HERE>",
 			},
 		}),
 	)

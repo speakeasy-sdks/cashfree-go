@@ -30,8 +30,8 @@ func main() {
     s := cashfreego.New(
         cashfreego.WithSecurity(shared.Security{
             Option1: &shared.SecurityOption1{
-                XClientID: "",
-                XClientSecret: "",
+                XClientID: "<YOUR_API_KEY_HERE>",
+                XClientSecret: "<YOUR_API_KEY_HERE>",
             },
         }),
     )
