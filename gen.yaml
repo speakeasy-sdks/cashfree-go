@@ -1,27 +1,10 @@
-configVersion: 1.0.0
-management:
-  docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
-  docVersion: "2022-09-01"
-  speakeasyVersion: 1.126.4
-  generationVersion: 2.214.10
+configVersion: 2.0.0
 generation:
-  comments: {}
   sdkClassName: Cashfree
-  repoURL: https://github.com/speakeasy-sdks/cashfree-go.git
   usageSnippets:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: false
-features:
-  go:
-    constsAndDefaults: 0.1.2
-    core: 3.2.2
-    flattening: 2.81.1
-    globalSecurity: 2.82.3
-    globalServerURLs: 2.82.1
-    nameOverrides: 2.81.1
-    retries: 2.82.1
-    unions: 2.85.2
 go:
   version: 0.10.1
   clientServerStatusCodesAsErrors: true
@@ -35,9 +18,6 @@ go:
       shared: pkg/models/shared
       webhooks: pkg/models/webhooks
   inputModelSuffix: input
-  installationURL: https://github.com/speakeasy-sdks/cashfree-go
   maxMethodParams: 4
   outputModelSuffix: output
   packageName: github.com/speakeasy-sdks/cashfree-go
-  published: true
-  repoSubDirectory: .

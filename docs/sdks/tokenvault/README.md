@@ -84,7 +84,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## FetchSavedInstrument
 
@@ -158,7 +158,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## FetchSavedInstrumentCryptogram
 
@@ -232,7 +232,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## GetAllSavedInstruments
 
@@ -306,4 +306,4 @@ func main() {
 | sdkerrors.IdempotencyError    | 422                           | application/json              |
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |

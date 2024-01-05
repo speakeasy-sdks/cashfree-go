@@ -86,7 +86,7 @@ func main() {
 | sdkerrors.IdempotencyError    | 422                           | application/json              |
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## GetAll
 
@@ -163,7 +163,7 @@ func main() {
 | sdkerrors.IdempotencyError    | 422                           | application/json              |
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## GetForOrder
 
@@ -234,4 +234,4 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |

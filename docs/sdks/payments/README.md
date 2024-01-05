@@ -85,7 +85,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## GetforOrder
 
@@ -156,7 +156,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## PayOrder
 
@@ -240,7 +240,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## PreauthorizeOrder
 
@@ -307,7 +307,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## Submit
 
@@ -384,4 +384,4 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |

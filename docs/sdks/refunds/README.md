@@ -82,7 +82,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## Get
 
@@ -156,7 +156,7 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
 
 ## GetAllforOrder
 
@@ -227,4 +227,4 @@ func main() {
 | sdkerrors.RateLimitError      | 429                           | application/json              |
 | sdkerrors.APIError            | 500                           | application/json              |
 | sdkerrors.APIError502         | 502                           | application/json              |
-| sdkerrors.SDKError            | 400-600                       | */*                           |
+| sdkerrors.SDKError            | 4xx-5xx                       | */*                           |
