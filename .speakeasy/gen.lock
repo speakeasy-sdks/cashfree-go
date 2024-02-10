@@ -4,9 +4,9 @@ management:
   docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
   docVersion: "2022-09-01"
   speakeasyVersion: internal
-  generationVersion: 2.250.2
-  releaseVersion: 0.11.0
-  configChecksum: 25cb048d4e323479131b1c1f28a38d15
+  generationVersion: 2.252.2
+  releaseVersion: 0.11.1
+  configChecksum: c884268dd5ec6254ac070e49bc4d3c66
   repoURL: https://github.com/speakeasy-sdks/cashfree-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/cashfree-go
@@ -19,8 +19,8 @@ features:
     globalSecurity: 2.82.6
     globalServerURLs: 2.82.1
     nameOverrides: 2.81.1
-    retries: 2.82.1
-    unions: 2.85.2
+    retries: 2.82.2
+    unions: 2.85.3
 generatedFiles:
   - tokenvault.go
   - eligibility.go

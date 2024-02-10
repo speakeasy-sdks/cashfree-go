@@ -88,6 +88,13 @@ func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xA
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -293,6 +300,13 @@ func (s *SoftPOS) CreateTerminals(ctx context.Context, xAPIVersion string, creat
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {

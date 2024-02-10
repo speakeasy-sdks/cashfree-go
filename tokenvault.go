@@ -88,6 +88,13 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -302,6 +309,13 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -516,6 +530,13 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -734,6 +755,13 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {

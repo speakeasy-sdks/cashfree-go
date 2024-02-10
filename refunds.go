@@ -88,6 +88,13 @@ func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundReq
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -302,6 +309,13 @@ func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPI
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -515,6 +529,13 @@ func (s *Refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersio
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {

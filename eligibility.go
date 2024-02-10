@@ -91,6 +91,13 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -308,6 +315,13 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -525,6 +539,13 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {

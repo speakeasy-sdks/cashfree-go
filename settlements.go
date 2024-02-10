@@ -86,6 +86,13 @@ func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -284,6 +291,13 @@ func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettleme
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
@@ -484,6 +498,13 @@ func (s *Settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersi
 			"4XX",
 		},
 	}, func() (*http.Response, error) {
+		if req.Body != nil {
+			copyBody, err := req.GetBody()
+			if err != nil {
+				return nil, err
+			}
+			req.Body = copyBody
+		}
 		return client.Do(req)
 	})
 	if err != nil {
