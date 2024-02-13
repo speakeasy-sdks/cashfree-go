@@ -25,7 +25,7 @@ func main() {
 
 	var xAPIVersion string = "string"
 
-	var xRequestID *string = "string"
+	var xRequestID *string = cashfreego.String("string")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)

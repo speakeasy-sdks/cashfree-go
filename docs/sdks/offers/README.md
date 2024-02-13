@@ -42,14 +42,14 @@ func main() {
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
             CashbackDetails: &shared.CashbackDetails{
-                CashbackType: shared.CashbackTypeFlat,
-                CashbackValue: "string",
-                MaxCashbackAmount: "string",
+                CashbackType: shared.CashbackTypePercentage,
+                CashbackValue: "20",
+                MaxCashbackAmount: "150",
             },
             DiscountDetails: &shared.DiscountDetails{
                 DiscountType: shared.DiscountTypeFlat,
-                DiscountValue: "string",
-                MaxDiscountAmount: "string",
+                DiscountValue: "10",
+                MaxDiscountAmount: "10",
             },
             OfferType: shared.OfferDetailsOfferTypeDiscountAndCashback,
         },
@@ -67,15 +67,13 @@ func main() {
         OfferValidations: shared.OfferValidations{
             MaxAllowed: 10,
             MinAmount: cashfreego.Float64(1),
-            PaymentMethod: shared.CreatePaymentMethodOfferUPI(
-                    shared.OfferUPI{
-                        Upi: shared.UPIOffer{},
-                    },
+            PaymentMethod: shared.CreatePaymentMethodOfferWallet(
+                    shared.OfferWallet{},
             ),
         },
     }
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
@@ -145,7 +143,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)

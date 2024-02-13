@@ -40,11 +40,12 @@ func main() {
     res, err := s.PGReconciliation.Get(ctx, operations.GetPGReconciliationRequest{
         FetchPGReconRequest: &shared.FetchPGReconRequest{
             Filters: shared.Filters{
-                EndDate: "string",
-                StartDate: "string",
+                EndDate: "2022-07-21T23:59:59Z",
+                StartDate: "2022-07-20T00:00:00Z",
             },
             Pagination: shared.Pagination{
-                Limit: 700347,
+                Cursor: cashfreego.String("eyJzZWFyY2hBZnRlciI6eyJsaXN0IjpbMTg4NjcxNDVdLCJlbXB0eSI6ZmFsc2V9LCJyZWNvbkFQSVR5cGUiOiJMRURHRVIifQ=="),
+                Limit: 10,
             },
         },
         XAPIVersion: "string",

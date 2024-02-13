@@ -43,14 +43,18 @@ func main() {
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    874373,
+                    4234233,
                 },
+                EndDate: cashfreego.String("2022-07-21T23:59:59Z"),
                 SettlementUtrs: []string{
-                    "string",
+                    "utr1",
+                    "utr2",
                 },
+                StartDate: cashfreego.String("2022-07-20T00:00:00Z"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Limit: 347223,
+                Cursor: cashfreego.String("eyJzZWFyY2hBZnRlciI6eyJsaXN0IjpbMTg4NjcxNDVdLCJlbXB0eSI6ZmFsc2V9LCJyZWNvbkFQSVR5cGUiOiJMRURHRVIifQ=="),
+                Limit: 10,
             },
         },
         XAPIVersion: "string",
@@ -120,14 +124,18 @@ func main() {
         FetchSettlementReconRequest: &shared.FetchSettlementReconRequest{
             Filters: shared.FetchSettlementReconRequestFilters{
                 CfSettlementIds: []int64{
-                    461008,
+                    4234233,
                 },
+                EndDate: cashfreego.String("2022-07-21T23:59:59Z"),
                 SettlementUtrs: []string{
-                    "string",
+                    "utr1",
+                    "utr2",
                 },
+                StartDate: cashfreego.String("2022-07-20T00:00:00Z"),
             },
             Pagination: shared.FetchSettlementReconRequestPagination{
-                Limit: 858162,
+                Cursor: cashfreego.String("eyJzZWFyY2hBZnRlciI6eyJsaXN0IjpbMTg4NjcxNDVdLCJlbXB0eSI6ZmFsc2V9LCJyZWNvbkFQSVR5cGUiOiJMRURHRVIifQ=="),
+                Limit: 10,
             },
         },
         XAPIVersion: "string",
@@ -196,7 +204,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)

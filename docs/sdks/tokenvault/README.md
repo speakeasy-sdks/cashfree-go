@@ -45,7 +45,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -119,7 +119,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -193,7 +193,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.TokenVault.FetchSavedInstrumentCryptogram(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -268,7 +268,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.TokenVault.GetAllSavedInstruments(ctx, customerID, instrumentType, xAPIVersion, xRequestID)

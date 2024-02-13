@@ -41,11 +41,10 @@ func main() {
     ctx := context.Background()
     res, err := s.Refunds.Create(ctx, operations.CreateRefundRequest{
         CreateRefundRequest: &shared.CreateRefundRequest{
-            RefundAmount: 4865.89,
-            RefundID: "string",
-            RefundSplits: []shared.VendorSplit{
-                shared.VendorSplit{},
-            },
+            RefundAmount: 1,
+            RefundID: "refund_00912",
+            RefundNote: cashfreego.String("refund note for reference"),
+            RefundSpeed: shared.CreateRefundRequestRefundSpeedStandard.ToPointer(),
         },
         OrderID: "string",
         XAPIVersion: "string",
@@ -117,7 +116,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Refunds.Get(ctx, orderID, refundID, xAPIVersion, xRequestID)
@@ -189,7 +188,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Refunds.GetAllforOrder(ctx, orderID, xAPIVersion, xRequestID)

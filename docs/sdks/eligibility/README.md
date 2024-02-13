@@ -37,18 +37,13 @@ func main() {
     var xAPIVersion string = "string"
 
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
-        Filters: &shared.OfferFilters{
-            OfferType: []shared.OfferType{
-                shared.OfferTypeNoCostEmi,
-            },
-        },
         Queries: shared.OfferQueries{
             Amount: cashfreego.Float64(100),
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
@@ -120,14 +115,11 @@ func main() {
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfreego.Float64(100),
-            CustomerDetails: &shared.CustomerDetailsCardlessEMI{
-                CustomerPhone: "9898989898",
-            },
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Eligibility.GetCardlessEMI(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
@@ -199,14 +191,11 @@ func main() {
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
             Amount: cashfreego.Float64(100),
-            CustomerDetails: &shared.CustomerDetailsCardlessEMI{
-                CustomerPhone: "9898989898",
-            },
             OrderID: cashfreego.String("order_413462PK1RI1IwYB1X69LgzUQWiSxYDF"),
         },
     }
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Eligibility.GetPaylaterMethods(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)

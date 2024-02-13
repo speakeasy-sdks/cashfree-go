@@ -45,31 +45,36 @@ func main() {
 
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
-            CustomerID: "string",
-            CustomerPhone: "string",
+            CustomerBankAccountNumber: cashfreego.String("1518121112"),
+            CustomerBankCode: cashfreego.Float64(3333),
+            CustomerBankIfsc: cashfreego.String("XITI0000001"),
+            CustomerEmail: cashfreego.String("john@cashfree.com"),
+            CustomerID: "7112AAA812234",
+            CustomerName: cashfreego.String("John Doe"),
+            CustomerPhone: "9908734801",
         },
         OrderAmount: 10.15,
         OrderCurrency: "INR",
         OrderExpiryTime: cashfreego.String("2021-07-02T10:20:12+05:30"),
-        OrderMeta: &shared.OrderMeta{},
-        OrderNote: cashfreego.String("Test order"),
-        OrderSplits: []shared.VendorSplit{
-            shared.VendorSplit{},
+        OrderMeta: &shared.OrderMeta{
+            NotifyURL: cashfreego.String("https://b8af79f41056.eu.ngrok.io/webhook.php"),
+            ReturnURL: cashfreego.String("https://b8af79f41056.eu.ngrok.io?order_id={order_id}"),
         },
+        OrderNote: cashfreego.String("Test order"),
         OrderTags: map[string]string{
             "product": "Laptop",
             "shipping_address": "123 Main St",
         },
         Terminal: &shared.TerminalDetails{
-            TerminalID: "string",
-            TerminalPhoneNo: "string",
-            TerminalType: "string",
+            TerminalID: "1",
+            TerminalPhoneNo: "6309291183",
+            TerminalType: "SPOS",
         },
     }
 
-    var xIdempotencyKey *string = "string"
+    var xIdempotencyKey *string = cashfreego.String("string")
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
@@ -145,7 +150,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)

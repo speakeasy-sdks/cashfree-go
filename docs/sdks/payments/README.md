@@ -46,7 +46,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Payments.Payment(ctx, cfPaymentID, orderID, xAPIVersion, xRequestID)
@@ -118,7 +118,7 @@ func main() {
 
     var xAPIVersion string = "string"
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Payments.GetforOrder(ctx, orderID, xAPIVersion, xRequestID)
@@ -196,13 +196,17 @@ func main() {
         OfferID: cashfreego.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
         PaymentMethod: shared.CreateOrderPayRequestPaymentMethodPaylaterPaymentMethod(
                 shared.PaylaterPaymentMethod{
-                    Paylater: shared.Paylater{},
+                    Paylater: shared.Paylater{
+                        Channel: cashfreego.String("link"),
+                        Phone: cashfreego.String("7789112345"),
+                        Provider: shared.PaylaterProviderKotak.ToPointer(),
+                    },
                 },
         ),
         PaymentSessionID: "session__CvcEmNKDkmERQrxnx39ibhJ3Ii034pjc8ZVxf3qcgEXCWlgDDlHRgz2XYZCqpajDQSXMMtCusPgOIxYP2LZx0-05p39gC2Vgmq1RAj--gcn",
     }
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Payments.PayOrder(ctx, xAPIVersion, orderPayRequest, xRequestID)
@@ -271,7 +275,10 @@ func main() {
 
     ctx := context.Background()
     res, err := s.Payments.PreauthorizeOrder(ctx, operations.CapturePreauthorizationRequest{
-        AuthorizationRequest: &shared.AuthorizationRequest{},
+        AuthorizationRequest: &shared.AuthorizationRequest{
+            Action: shared.AuthorizationRequestActionCapture.ToPointer(),
+            Amount: cashfreego.Float64(100),
+        },
         OrderID: "string",
         XAPIVersion: "string",
     })
@@ -345,7 +352,7 @@ func main() {
         Otp: "string",
     }
 
-    var xRequestID *string = "string"
+    var xRequestID *string = cashfreego.String("string")
 
     ctx := context.Background()
     res, err := s.Payments.Submit(ctx, paymentID, xAPIVersion, otpRequest, xRequestID)

@@ -4,7 +4,7 @@ management:
   docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
   docVersion: "2022-09-01"
   speakeasyVersion: internal
-  generationVersion: 2.252.2
+  generationVersion: 2.253.0
   releaseVersion: 0.11.1
   configChecksum: c884268dd5ec6254ac070e49bc4d3c66
   repoURL: https://github.com/speakeasy-sdks/cashfree-go.git
