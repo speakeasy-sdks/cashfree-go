@@ -48,7 +48,7 @@ func main() {
                 Limit: 10,
             },
         },
-        XAPIVersion: "string",
+        XAPIVersion: "<value>",
     })
     if err != nil {
         log.Fatal(err)

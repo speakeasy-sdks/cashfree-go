@@ -39,13 +39,13 @@ func main() {
     )
 
 
-    var linkID string = "string"
+    var linkID string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xIdempotencyKey *string = cashfreego.String("string")
+    var xIdempotencyKey *string = cashfreego.String("<value>")
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Cancel(ctx, linkID, xAPIVersion, xIdempotencyKey, xRequestID)
@@ -112,11 +112,11 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
-            CustomerPhone: "string",
+            CustomerPhone: "<value>",
         },
         LinkAmount: 100,
         LinkAutoReminders: cashfreego.Bool(true),
@@ -133,9 +133,9 @@ func main() {
         LinkPurpose: "Payment for PlayStation 11",
     }
 
-    var xIdempotencyKey *string = cashfreego.String("string")
+    var xIdempotencyKey *string = cashfreego.String("<value>")
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Create(ctx, xAPIVersion, createLinkRequest, xIdempotencyKey, xRequestID)
@@ -202,11 +202,11 @@ func main() {
     )
 
 
-    var linkID string = "string"
+    var linkID string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.PaymentLinks.Fetch(ctx, linkID, xAPIVersion, xRequestID)
@@ -273,11 +273,11 @@ func main() {
     )
 
 
-    var linkID string = "string"
+    var linkID string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.PaymentLinks.GetOrders(ctx, linkID, xAPIVersion, xRequestID)

@@ -57,7 +57,7 @@ func main() {
                 Limit: 10,
             },
         },
-        XAPIVersion: "string",
+        XAPIVersion: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -138,7 +138,7 @@ func main() {
                 Limit: 10,
             },
         },
-        XAPIVersion: "string",
+        XAPIVersion: "<value>",
     })
     if err != nil {
         log.Fatal(err)
@@ -200,11 +200,11 @@ func main() {
     )
 
 
-    var orderID string = "string"
+    var orderID string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Settlements.GetForOrder(ctx, orderID, xAPIVersion, xRequestID)

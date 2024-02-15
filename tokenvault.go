@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
@@ -28,6 +29,8 @@ func newTokenVault(sdkConfig sdkConfiguration) *TokenVault {
 // DeleteSavedInstrument - Delete Saved Instrument
 // To delete a saved instrument for a customer id and instrument id
 func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.DeleteSpecificSavedInstrumentResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "deleteSpecificSavedInstrument"}
+
 	request := operations.DeleteSpecificSavedInstrumentRequest{
 		CustomerID:   customerID,
 		InstrumentID: instrumentID,
@@ -46,17 +49,17 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "DELETE", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "DELETE", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
 
@@ -97,11 +100,25 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "502", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -118,6 +135,7 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -249,6 +267,8 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 // FetchSavedInstrument - Fetch Single Saved Instrument
 // To get specific saved instrument for a customer id and instrument id
 func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchSpecificSavedInstrumentResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "fetchSpecificSavedInstrument"}
+
 	request := operations.FetchSpecificSavedInstrumentRequest{
 		CustomerID:   customerID,
 		InstrumentID: instrumentID,
@@ -267,17 +287,17 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
 
@@ -318,11 +338,25 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "502", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -339,6 +373,7 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -470,6 +505,8 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 // FetchSavedInstrumentCryptogram - Fetch cryptogram for saved instrument
 // To get the card network token, token expiry and cryptogram for a saved instrument using instrument id
 func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchCryptogramResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "fetchCryptogram"}
+
 	request := operations.FetchCryptogramRequest{
 		CustomerID:   customerID,
 		InstrumentID: instrumentID,
@@ -488,17 +525,17 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}/cryptogram", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments/{instrument_id}/cryptogram", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
 
@@ -539,11 +576,25 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "502", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -560,6 +611,7 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -691,6 +743,8 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 // GetAllSavedInstruments - Fetch All Saved Instruments
 // To get all saved instruments for a customer id
 func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID string, instrumentType operations.InstrumentType, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchAllSavedInstrumentsResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "fetchAllSavedInstruments"}
+
 	request := operations.FetchAllSavedInstrumentsRequest{
 		CustomerID:     customerID,
 		InstrumentType: instrumentType,
@@ -709,17 +763,17 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/customers/{customer_id}/instruments", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
+	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
 
@@ -764,11 +818,25 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -785,6 +853,7 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header

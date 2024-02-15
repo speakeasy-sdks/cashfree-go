@@ -40,13 +40,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -180,13 +180,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -288,13 +288,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -334,13 +334,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -417,13 +417,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID, operations.WithRetries(
@@ -481,13 +481,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -542,13 +542,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -593,13 +593,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -644,13 +644,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)
@@ -695,13 +695,13 @@ func main() {
 		}),
 	)
 
-	var customerID string = "string"
+	var customerID string = "<value>"
 
-	var instrumentID string = "string"
+	var instrumentID string = "<value>"
 
-	var xAPIVersion string = "string"
+	var xAPIVersion string = "<value>"
 
-	var xRequestID *string = cashfreego.String("string")
+	var xRequestID *string = cashfreego.String("<value>")
 
 	ctx := context.Background()
 	res, err := s.TokenVault.DeleteSavedInstrument(ctx, customerID, instrumentID, xAPIVersion, xRequestID)

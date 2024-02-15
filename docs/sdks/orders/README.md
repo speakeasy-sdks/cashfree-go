@@ -41,7 +41,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     createOrderBackendRequest := &shared.CreateOrderBackendRequest{
         CustomerDetails: shared.CustomerDetails{
@@ -72,9 +72,9 @@ func main() {
         },
     }
 
-    var xIdempotencyKey *string = cashfreego.String("string")
+    var xIdempotencyKey *string = cashfreego.String("<value>")
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Orders.Create(ctx, xAPIVersion, createOrderBackendRequest, xIdempotencyKey, xRequestID)
@@ -146,11 +146,11 @@ func main() {
     )
 
 
-    var orderID string = "string"
+    var orderID string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Orders.Get(ctx, orderID, xAPIVersion, xRequestID)

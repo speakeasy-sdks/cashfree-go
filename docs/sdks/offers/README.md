@@ -37,7 +37,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
@@ -73,7 +73,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Offers.Create(ctx, xAPIVersion, createOfferBackendRequest, xRequestID)
@@ -139,11 +139,11 @@ func main() {
     )
 
 
-    var offerID string = "string"
+    var offerID string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Offers.Get(ctx, offerID, xAPIVersion, xRequestID)

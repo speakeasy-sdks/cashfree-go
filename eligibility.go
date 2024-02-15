@@ -6,13 +6,14 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/utils"
 	"io"
 	"net/http"
-	"strings"
+	"net/url"
 )
 
 type Eligibility struct {
@@ -28,6 +29,8 @@ func newEligibility(sdkConfig sdkConfiguration) *Eligibility {
 // GetAllOffers - Get eligible Offers
 // Use this API to get eligible offers for an order or amount.
 func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, eligibilityOffersRequest *shared.EligibilityOffersRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityOfferResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "getEligibilityOffer"}
+
 	request := operations.GetEligibilityOfferRequest{
 		XAPIVersion:              xAPIVersion,
 		EligibilityOffersRequest: eligibilityOffersRequest,
@@ -45,20 +48,22 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/eligibility/offers"
+	opURL, err := url.JoinPath(baseURL, "/eligibility/offers")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "EligibilityOffersRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
@@ -100,11 +105,25 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "502", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -121,6 +140,7 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -252,6 +272,8 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 // GetCardlessEMI - Get eligible Cardless EMI
 // Use this API to get eligible Cardless EMI Payment Methods for a customer on an order.
 func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityCardlessEMIResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "getEligibilityCardlessEMI"}
+
 	request := operations.GetEligibilityCardlessEMIRequest{
 		XAPIVersion:                   xAPIVersion,
 		EligibilityCardlessEMIRequest: eligibilityCardlessEMIRequest,
@@ -269,20 +291,22 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/eligibility/cardlessemi"
+	opURL, err := url.JoinPath(baseURL, "/eligibility/cardlessemi")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "EligibilityCardlessEMIRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
@@ -324,11 +348,25 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "502", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -345,6 +383,7 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header
@@ -476,6 +515,8 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 // GetPaylaterMethods - Get eligible Paylater
 // Use this API to get eligible Paylater Payment Methods for a customer on an order.
 func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityPaylaterResponse, error) {
+	hookCtx := hooks.HookContext{OperationID: "getEligibilityPaylater"}
+
 	request := operations.GetEligibilityPaylaterRequest{
 		XAPIVersion:                   xAPIVersion,
 		EligibilityCardlessEMIRequest: eligibilityCardlessEMIRequest,
@@ -493,20 +534,22 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 		}
 	}
 	baseURL := utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	url := strings.TrimSuffix(baseURL, "/") + "/eligibility/paylater"
+	opURL, err := url.JoinPath(baseURL, "/eligibility/paylater")
+	if err != nil {
+		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
 
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "EligibilityCardlessEMIRequest", "json", `request:"mediaType=application/json"`)
 	if err != nil {
-		return nil, fmt.Errorf("error serializing request body: %w", err)
+		return nil, err
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", url, bodyReader)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
-	req.Header.Set("user-agent", s.sdkConfiguration.UserAgent)
-
+	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
@@ -548,11 +591,25 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 		}
 		return client.Do(req)
 	})
-	if err != nil {
-		return nil, fmt.Errorf("error sending request: %w", err)
-	}
-	if httpRes == nil {
-		return nil, fmt.Errorf("error sending request: no response")
+	if err != nil || httpRes == nil {
+		if err != nil {
+			err = fmt.Errorf("error sending request: %w", err)
+		} else {
+			err = fmt.Errorf("error sending request: no response")
+		}
+
+		_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+		return nil, err
+	} else if utils.MatchStatusCodes([]string{"400", "401", "404", "409", "422", "429", "4XX", "500", "502", "5XX"}, httpRes.StatusCode) {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, httpRes, nil)
+		if err != nil {
+			return nil, err
+		}
+	} else {
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	contentType := httpRes.Header.Get("Content-Type")
@@ -569,6 +626,7 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 	}
 	httpRes.Body.Close()
 	httpRes.Body = io.NopCloser(bytes.NewBuffer(rawBody))
+
 	switch {
 	case httpRes.StatusCode == 200:
 		res.Headers = httpRes.Header

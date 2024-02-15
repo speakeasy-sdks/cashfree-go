@@ -34,7 +34,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Queries: shared.OfferQueries{
@@ -43,7 +43,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Eligibility.GetAllOffers(ctx, xAPIVersion, eligibilityOffersRequest, xRequestID)
@@ -110,7 +110,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
@@ -119,7 +119,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Eligibility.GetCardlessEMI(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)
@@ -186,7 +186,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
@@ -195,7 +195,7 @@ func main() {
         },
     }
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.Eligibility.GetPaylaterMethods(ctx, xAPIVersion, eligibilityCardlessEMIRequest, xRequestID)

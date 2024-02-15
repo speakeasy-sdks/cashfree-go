@@ -37,11 +37,11 @@ func main() {
     )
 
 
-    var terminalPhoneNo string = "string"
+    var terminalPhoneNo string = "<value>"
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.SoftPOS.TerminalStatus(ctx, terminalPhoneNo, xAPIVersion, xRequestID)
@@ -107,7 +107,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "string"
+    var xAPIVersion string = "<value>"
 
     createTerminalRequest := &shared.CreateTerminalRequest{
         TerminalID: cashfreego.String("1"),
@@ -115,9 +115,9 @@ func main() {
         TerminalPhoneNo: "9876543210",
     }
 
-    var xIdempotencyKey *string = cashfreego.String("string")
+    var xIdempotencyKey *string = cashfreego.String("<value>")
 
-    var xRequestID *string = cashfreego.String("string")
+    var xRequestID *string = cashfreego.String("<value>")
 
     ctx := context.Background()
     res, err := s.SoftPOS.CreateTerminals(ctx, xAPIVersion, createTerminalRequest, xIdempotencyKey, xRequestID)
