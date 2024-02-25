@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -29,7 +30,11 @@ func newEligibility(sdkConfig sdkConfiguration) *Eligibility {
 // GetAllOffers - Get eligible Offers
 // Use this API to get eligible offers for an order or amount.
 func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, eligibilityOffersRequest *shared.EligibilityOffersRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityOfferResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getEligibilityOffer"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getEligibilityOffer",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetEligibilityOfferRequest{
 		XAPIVersion:              xAPIVersion,
@@ -68,11 +73,6 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
 	client := s.sdkConfiguration.SecurityClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -109,6 +109,11 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -117,14 +122,14 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -275,7 +280,11 @@ func (s *Eligibility) GetAllOffers(ctx context.Context, xAPIVersion string, elig
 // GetCardlessEMI - Get eligible Cardless EMI
 // Use this API to get eligible Cardless EMI Payment Methods for a customer on an order.
 func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityCardlessEMIResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getEligibilityCardlessEMI"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getEligibilityCardlessEMI",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetEligibilityCardlessEMIRequest{
 		XAPIVersion:                   xAPIVersion,
@@ -314,11 +323,6 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
 	client := s.sdkConfiguration.SecurityClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -355,6 +359,11 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -363,14 +372,14 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -521,7 +530,11 @@ func (s *Eligibility) GetCardlessEMI(ctx context.Context, xAPIVersion string, el
 // GetPaylaterMethods - Get eligible Paylater
 // Use this API to get eligible Paylater Payment Methods for a customer on an order.
 func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string, eligibilityCardlessEMIRequest *shared.EligibilityCardlessEMIRequest, xRequestID *string, opts ...operations.Option) (*operations.GetEligibilityPaylaterResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getEligibilityPaylater"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getEligibilityPaylater",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetEligibilityPaylaterRequest{
 		XAPIVersion:                   xAPIVersion,
@@ -560,11 +573,6 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
 	client := s.sdkConfiguration.SecurityClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -601,6 +609,11 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -609,14 +622,14 @@ func (s *Eligibility) GetPaylaterMethods(ctx context.Context, xAPIVersion string
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

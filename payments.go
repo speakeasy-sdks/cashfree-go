@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -30,7 +31,11 @@ func newPayments(sdkConfig sdkConfiguration) *Payments {
 // Get Payment by ID
 // Use this API to view payment details of an order for a payment ID.
 func (s *Payments) Payment(ctx context.Context, cfPaymentID int64, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentbyIDResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getPaymentbyId"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getPaymentbyId",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetPaymentbyIDRequest{
 		CfPaymentID: cfPaymentID,
@@ -63,11 +68,6 @@ func (s *Payments) Payment(ctx context.Context, cfPaymentID int64, orderID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -105,6 +105,11 @@ func (s *Payments) Payment(ctx context.Context, cfPaymentID int64, orderID strin
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -113,14 +118,14 @@ func (s *Payments) Payment(ctx context.Context, cfPaymentID int64, orderID strin
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -271,7 +276,11 @@ func (s *Payments) Payment(ctx context.Context, cfPaymentID int64, orderID strin
 // GetforOrder - Get Payments for an Order
 // Use this API to view all payment details for an order.
 func (s *Payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentsforOrderResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getPaymentsforOrder"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getPaymentsforOrder",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetPaymentsforOrderRequest{
 		OrderID:     orderID,
@@ -303,11 +312,6 @@ func (s *Payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -345,6 +349,11 @@ func (s *Payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -353,14 +362,14 @@ func (s *Payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -515,7 +524,11 @@ func (s *Payments) GetforOrder(ctx context.Context, orderID string, xAPIVersion 
 // from the backend. In case you want to use the cards payment option the PCI
 // DSS flag is required, for more information send an email to "care@cashfree.com".
 func (s *Payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayRequest *shared.OrderPayRequest, xRequestID *string, opts ...operations.Option) (*operations.OrderPayResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "orderPay"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "orderPay",
+		SecuritySource: nil,
+	}
 
 	request := operations.OrderPayRequest{
 		XAPIVersion:     xAPIVersion,
@@ -554,12 +567,7 @@ func (s *Payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayReq
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -595,6 +603,11 @@ func (s *Payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayReq
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -603,14 +616,14 @@ func (s *Payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayReq
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -761,7 +774,11 @@ func (s *Payments) PayOrder(ctx context.Context, xAPIVersion string, orderPayReq
 // PreauthorizeOrder - Preauthorization
 // Use this API to capture or void a preauthorized payment
 func (s *Payments) PreauthorizeOrder(ctx context.Context, request operations.CapturePreauthorizationRequest, opts ...operations.Option) (*operations.CapturePreauthorizationResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "capturePreauthorization"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "capturePreauthorization",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -793,11 +810,6 @@ func (s *Payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -835,6 +847,11 @@ func (s *Payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -843,14 +860,14 @@ func (s *Payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -1001,7 +1018,11 @@ func (s *Payments) PreauthorizeOrder(ctx context.Context, request operations.Cap
 // Submit or Resend OTP
 // If you accept OTP on your own page, you can use the below API to send OTP to Cashfree.
 func (s *Payments) Submit(ctx context.Context, paymentID string, xAPIVersion string, otpRequest *shared.OTPRequest, xRequestID *string, opts ...operations.Option) (*operations.SubmitOTPRequestResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "submitOTPRequest"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "submitOTPRequest",
+		SecuritySource: nil,
+	}
 
 	request := operations.SubmitOTPRequestRequest{
 		PaymentID:   paymentID,
@@ -1041,12 +1062,7 @@ func (s *Payments) Submit(ctx context.Context, paymentID string, xAPIVersion str
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
-	client := s.sdkConfiguration.SecurityClient
+	client := s.sdkConfiguration.DefaultClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
 	retryConfig := o.Retries
@@ -1082,6 +1098,11 @@ func (s *Payments) Submit(ctx context.Context, paymentID string, xAPIVersion str
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -1090,14 +1111,14 @@ func (s *Payments) Submit(ctx context.Context, paymentID string, xAPIVersion str
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -29,7 +30,11 @@ func newRefunds(sdkConfig sdkConfiguration) *Refunds {
 // Create Refund
 // Use this API to initiate refunds.
 func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundRequest, opts ...operations.Option) (*operations.CreateRefundResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createRefund"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createRefund",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -61,11 +66,6 @@ func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundReq
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -103,6 +103,11 @@ func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundReq
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -111,14 +116,14 @@ func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundReq
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -269,7 +274,11 @@ func (s *Refunds) Create(ctx context.Context, request operations.CreateRefundReq
 // Get Refund
 // Use this API to fetch a specific refund processed on your Cashfree Account.
 func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetRefundResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getRefund"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getRefund",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetRefundRequest{
 		OrderID:     orderID,
@@ -302,11 +311,6 @@ func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPI
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -344,6 +348,11 @@ func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPI
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -352,14 +361,14 @@ func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPI
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -510,7 +519,11 @@ func (s *Refunds) Get(ctx context.Context, orderID string, refundID string, xAPI
 // GetAllforOrder - Get All Refunds for an Order
 // Use this API to fetch all refunds processed against an order.
 func (s *Refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetAllRefundsForOrderResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getAllRefundsForOrder"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getAllRefundsForOrder",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetAllRefundsForOrderRequest{
 		OrderID:     orderID,
@@ -542,11 +555,6 @@ func (s *Refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersio
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -584,6 +592,11 @@ func (s *Refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersio
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -592,14 +605,14 @@ func (s *Refunds) GetAllforOrder(ctx context.Context, orderID string, xAPIVersio
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

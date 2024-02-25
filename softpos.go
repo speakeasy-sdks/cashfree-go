@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -30,7 +31,11 @@ func newSoftPOS(sdkConfig sdkConfiguration) *SoftPOS {
 // TerminalStatus - Get terminal status using phone number
 // Use this API to view all details of a terminal.
 func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetTerminalByMobileNumberResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getTerminalByMobileNumber"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getTerminalByMobileNumber",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetTerminalByMobileNumberRequest{
 		TerminalPhoneNo: terminalPhoneNo,
@@ -62,11 +67,6 @@ func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xA
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -104,6 +104,11 @@ func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xA
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -112,14 +117,14 @@ func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xA
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -257,7 +262,11 @@ func (s *SoftPOS) TerminalStatus(ctx context.Context, terminalPhoneNo string, xA
 // CreateTerminals - Create Terminal
 // Use this API to create new terminals to use softPOS.
 func (s *SoftPOS) CreateTerminals(ctx context.Context, xAPIVersion string, createTerminalRequest *shared.CreateTerminalRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateTerminalsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createTerminals"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createTerminals",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateTerminalsRequest{
 		XAPIVersion:           xAPIVersion,
@@ -297,11 +306,6 @@ func (s *SoftPOS) CreateTerminals(ctx context.Context, xAPIVersion string, creat
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
 	client := s.sdkConfiguration.SecurityClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -338,6 +342,11 @@ func (s *SoftPOS) CreateTerminals(ctx context.Context, xAPIVersion string, creat
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -346,14 +355,14 @@ func (s *SoftPOS) CreateTerminals(ctx context.Context, xAPIVersion string, creat
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

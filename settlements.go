@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -30,7 +31,11 @@ func newSettlements(sdkConfig sdkConfiguration) *Settlements {
 // Fetch - Settlement Reconciliation
 // Use this API to get settlement reconciliation details using Settlement ID, settlement UTR or date range.
 func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlementReconciliationRequest, opts ...operations.Option) (*operations.GetSettlementReconciliationResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getSettlementReconciliation"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getSettlementReconciliation",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -62,11 +67,6 @@ func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -104,6 +104,11 @@ func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -112,14 +117,14 @@ func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -257,7 +262,11 @@ func (s *Settlements) Fetch(ctx context.Context, request operations.GetSettlemen
 // GetAll - Get All Settlements
 // Use this API to get all settlement details by specifying the settlement ID, settlement UTR or date range.
 func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettlementsRequest, opts ...operations.Option) (*operations.GetSettlementsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getSettlements"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getSettlements",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -289,11 +298,6 @@ func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettleme
 	req.Header.Set("Content-Type", reqContentType)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -331,6 +335,11 @@ func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettleme
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -339,14 +348,14 @@ func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettleme
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -484,7 +493,11 @@ func (s *Settlements) GetAll(ctx context.Context, request operations.GetSettleme
 // GetForOrder - Get Settlements by Order ID
 // Use this API to view all the settlements of a particular order.
 func (s *Settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetSettlementsByOrderIDResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getSettlementsByOrderId"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getSettlementsByOrderId",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetSettlementsByOrderIDRequest{
 		OrderID:     orderID,
@@ -516,11 +529,6 @@ func (s *Settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersi
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -558,6 +566,11 @@ func (s *Settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersi
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -566,14 +579,14 @@ func (s *Settlements) GetForOrder(ctx context.Context, orderID string, xAPIVersi
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

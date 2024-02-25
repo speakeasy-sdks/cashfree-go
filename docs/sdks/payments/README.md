@@ -173,21 +173,14 @@ DSS flag is required, for more information send an email to "care@cashfree.com".
 package main
 
 import(
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"context"
 	"log"
 )
 
 func main() {
-    s := cashfreego.New(
-        cashfreego.WithSecurity(shared.Security{
-            Option1: &shared.SecurityOption1{
-                XClientID: "<YOUR_API_KEY_HERE>",
-                XClientSecret: "<YOUR_API_KEY_HERE>",
-            },
-        }),
-    )
+    s := cashfreego.New()
 
 
     var xAPIVersion string = "<value>"
@@ -326,21 +319,14 @@ If you accept OTP on your own page, you can use the below API to send OTP to Cas
 package main
 
 import(
-	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	cashfreego "github.com/speakeasy-sdks/cashfree-go"
+	"github.com/speakeasy-sdks/cashfree-go/pkg/models/shared"
 	"context"
 	"log"
 )
 
 func main() {
-    s := cashfreego.New(
-        cashfreego.WithSecurity(shared.Security{
-            Option1: &shared.SecurityOption1{
-                XClientID: "<YOUR_API_KEY_HERE>",
-                XClientSecret: "<YOUR_API_KEY_HERE>",
-            },
-        }),
-    )
+    s := cashfreego.New()
 
 
     var paymentID string = "<value>"

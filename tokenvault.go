@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -29,7 +30,11 @@ func newTokenVault(sdkConfig sdkConfiguration) *TokenVault {
 // DeleteSavedInstrument - Delete Saved Instrument
 // To delete a saved instrument for a customer id and instrument id
 func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.DeleteSpecificSavedInstrumentResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "deleteSpecificSavedInstrument"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "deleteSpecificSavedInstrument",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.DeleteSpecificSavedInstrumentRequest{
 		CustomerID:   customerID,
@@ -62,11 +67,6 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -104,6 +104,11 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -112,14 +117,14 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -270,7 +275,11 @@ func (s *TokenVault) DeleteSavedInstrument(ctx context.Context, customerID strin
 // FetchSavedInstrument - Fetch Single Saved Instrument
 // To get specific saved instrument for a customer id and instrument id
 func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchSpecificSavedInstrumentResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "fetchSpecificSavedInstrument"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "fetchSpecificSavedInstrument",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.FetchSpecificSavedInstrumentRequest{
 		CustomerID:   customerID,
@@ -303,11 +312,6 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -345,6 +349,11 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -353,14 +362,14 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -511,7 +520,11 @@ func (s *TokenVault) FetchSavedInstrument(ctx context.Context, customerID string
 // FetchSavedInstrumentCryptogram - Fetch cryptogram for saved instrument
 // To get the card network token, token expiry and cryptogram for a saved instrument using instrument id
 func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, customerID string, instrumentID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchCryptogramResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "fetchCryptogram"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "fetchCryptogram",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.FetchCryptogramRequest{
 		CustomerID:   customerID,
@@ -544,11 +557,6 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -586,6 +594,11 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -594,14 +607,14 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -752,7 +765,11 @@ func (s *TokenVault) FetchSavedInstrumentCryptogram(ctx context.Context, custome
 // GetAllSavedInstruments - Fetch All Saved Instruments
 // To get all saved instruments for a customer id
 func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID string, instrumentType operations.InstrumentType, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchAllSavedInstrumentsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "fetchAllSavedInstruments"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "fetchAllSavedInstruments",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.FetchAllSavedInstrumentsRequest{
 		CustomerID:     customerID,
@@ -788,11 +805,6 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
 	}
 
 	client := s.sdkConfiguration.SecurityClient
@@ -831,6 +843,11 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -839,14 +856,14 @@ func (s *TokenVault) GetAllSavedInstruments(ctx context.Context, customerID stri
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

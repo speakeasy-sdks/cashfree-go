@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -33,7 +34,11 @@ func newOrders(sdkConfig sdkConfiguration) *Orders {
 // Use this API to create orders with Cashfree from your backend to get a `payment_sessions_id`.
 // You can use the `payment_sessions_id` to create a transaction for the order.
 func (s *Orders) Create(ctx context.Context, xAPIVersion string, createOrderBackendRequest *shared.CreateOrderBackendRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreateOrderResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createOrder"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createOrder",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreateOrderRequest{
 		XAPIVersion:               xAPIVersion,
@@ -73,11 +78,6 @@ func (s *Orders) Create(ctx context.Context, xAPIVersion string, createOrderBack
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
 	client := s.sdkConfiguration.SecurityClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -114,6 +114,11 @@ func (s *Orders) Create(ctx context.Context, xAPIVersion string, createOrderBack
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -122,14 +127,14 @@ func (s *Orders) Create(ctx context.Context, xAPIVersion string, createOrderBack
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -271,7 +276,11 @@ func (s *Orders) Create(ctx context.Context, xAPIVersion string, createOrderBack
 // - Once the order is PAID
 // - Once your customer returns to `return_url`
 func (s *Orders) Get(ctx context.Context, orderID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetOrderResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getOrder"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getOrder",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetOrderRequest{
 		OrderID:     orderID,
@@ -303,11 +312,6 @@ func (s *Orders) Get(ctx context.Context, orderID string, xAPIVersion string, xR
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -345,6 +349,11 @@ func (s *Orders) Get(ctx context.Context, orderID string, xAPIVersion string, xR
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -353,14 +362,14 @@ func (s *Orders) Get(ctx context.Context, orderID string, xAPIVersion string, xR
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}

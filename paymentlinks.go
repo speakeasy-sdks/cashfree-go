@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/cenkalti/backoff/v4"
 	"github.com/speakeasy-sdks/cashfree-go/internal/hooks"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/operations"
 	"github.com/speakeasy-sdks/cashfree-go/pkg/models/sdkerrors"
@@ -30,7 +31,11 @@ func newPaymentLinks(sdkConfig sdkConfiguration) *PaymentLinks {
 // Cancel Payment Link
 // Use this API to cancel a payment link. No further payments can be done against a cancelled link. Only a link in ACTIVE status can be cancelled.
 func (s *PaymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion string, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CancelPaymentLinkResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "cancelPaymentLink"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "cancelPaymentLink",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CancelPaymentLinkRequest{
 		LinkID:          linkID,
@@ -63,11 +68,6 @@ func (s *PaymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion st
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -105,6 +105,11 @@ func (s *PaymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion st
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -113,14 +118,14 @@ func (s *PaymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion st
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -258,7 +263,11 @@ func (s *PaymentLinks) Cancel(ctx context.Context, linkID string, xAPIVersion st
 // Create Payment Link
 // Use this API to create a new payment link. The created payment link url will be available in the API response parameter link_url.
 func (s *PaymentLinks) Create(ctx context.Context, xAPIVersion string, createLinkRequest *shared.CreateLinkRequest, xIdempotencyKey *string, xRequestID *string, opts ...operations.Option) (*operations.CreatePaymentLinkResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "createPaymentLink"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "createPaymentLink",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.CreatePaymentLinkRequest{
 		XAPIVersion:       xAPIVersion,
@@ -298,11 +307,6 @@ func (s *PaymentLinks) Create(ctx context.Context, xAPIVersion string, createLin
 
 	utils.PopulateHeaders(ctx, req, request)
 
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
-
 	client := s.sdkConfiguration.SecurityClient
 
 	globalRetryConfig := s.sdkConfiguration.RetryConfig
@@ -339,6 +343,11 @@ func (s *PaymentLinks) Create(ctx context.Context, xAPIVersion string, createLin
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -347,14 +356,14 @@ func (s *PaymentLinks) Create(ctx context.Context, xAPIVersion string, createLin
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -492,7 +501,11 @@ func (s *PaymentLinks) Create(ctx context.Context, xAPIVersion string, createLin
 // Fetch Payment Link Details
 // Use this API to view all details and status of a payment link.
 func (s *PaymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.FetchPaymentLinkDetailsResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "fetchPaymentLinkDetails"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "fetchPaymentLinkDetails",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.FetchPaymentLinkDetailsRequest{
 		LinkID:      linkID,
@@ -524,11 +537,6 @@ func (s *PaymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion str
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -566,6 +574,11 @@ func (s *PaymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion str
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -574,14 +587,14 @@ func (s *PaymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion str
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
@@ -732,7 +745,11 @@ func (s *PaymentLinks) Fetch(ctx context.Context, linkID string, xAPIVersion str
 // GetOrders - Get Orders for a Payment Link
 // Use this API to view all order details for a payment link.
 func (s *PaymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion string, xRequestID *string, opts ...operations.Option) (*operations.GetPaymentLinkOrdersResponse, error) {
-	hookCtx := hooks.HookContext{OperationID: "getPaymentLinkOrders"}
+	hookCtx := hooks.HookContext{
+		Context:        ctx,
+		OperationID:    "getPaymentLinkOrders",
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 
 	request := operations.GetPaymentLinkOrdersRequest{
 		LinkID:      linkID,
@@ -764,11 +781,6 @@ func (s *PaymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request)
-
-	req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{hookCtx}, req)
-	if err != nil {
-		return nil, err
-	}
 
 	client := s.sdkConfiguration.SecurityClient
 
@@ -806,6 +818,11 @@ func (s *PaymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion
 			req.Body = copyBody
 		}
 
+		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
+		if err != nil {
+			return nil, backoff.Permanent(err)
+		}
+
 		httpRes, err := client.Do(req)
 		if err != nil || httpRes == nil {
 			if err != nil {
@@ -814,14 +831,14 @@ func (s *PaymentLinks) GetOrders(ctx context.Context, linkID string, xAPIVersion
 				err = fmt.Errorf("error sending request: no response")
 			}
 
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{hookCtx}, nil, err)
+			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 		}
 		return httpRes, err
 	})
 	if err != nil {
 		return nil, err
 	} else {
-		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{hookCtx}, httpRes)
+		httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 		if err != nil {
 			return nil, err
 		}
