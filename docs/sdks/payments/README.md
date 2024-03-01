@@ -273,7 +273,7 @@ func main() {
             Amount: cashfreego.Float64(100),
         },
         OrderID: "<value>",
-        XAPIVersion: "<value>",
+        XAPIVersion: "2022-09-01",
     })
     if err != nil {
         log.Fatal(err)

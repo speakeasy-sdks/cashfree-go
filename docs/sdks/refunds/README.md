@@ -47,7 +47,7 @@ func main() {
             RefundSpeed: shared.CreateRefundRequestRefundSpeedStandard.ToPointer(),
         },
         OrderID: "<value>",
-        XAPIVersion: "<value>",
+        XAPIVersion: "2022-09-01",
     })
     if err != nil {
         log.Fatal(err)

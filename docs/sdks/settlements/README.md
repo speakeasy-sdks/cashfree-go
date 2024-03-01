@@ -57,7 +57,7 @@ func main() {
                 Limit: 10,
             },
         },
-        XAPIVersion: "<value>",
+        XAPIVersion: "2022-09-01",
     })
     if err != nil {
         log.Fatal(err)
@@ -138,7 +138,7 @@ func main() {
                 Limit: 10,
             },
         },
-        XAPIVersion: "<value>",
+        XAPIVersion: "2022-09-01",
     })
     if err != nil {
         log.Fatal(err)
