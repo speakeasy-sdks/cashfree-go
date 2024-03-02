@@ -37,7 +37,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     createOfferBackendRequest := &shared.CreateOfferBackendRequest{
         OfferDetails: shared.OfferDetails{
@@ -141,7 +141,7 @@ func main() {
 
     var offerID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 

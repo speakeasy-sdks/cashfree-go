@@ -43,7 +43,7 @@ func main() {
 
     var instrumentID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -117,7 +117,7 @@ func main() {
 
     var instrumentID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -191,7 +191,7 @@ func main() {
 
     var instrumentID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -266,7 +266,7 @@ func main() {
 
     var instrumentType operations.InstrumentType = operations.InstrumentTypeCard
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 

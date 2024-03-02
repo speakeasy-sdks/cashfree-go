@@ -41,7 +41,7 @@ func main() {
 
     var linkID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xIdempotencyKey *string = cashfreego.String("<value>")
 
@@ -112,7 +112,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     createLinkRequest := &shared.CreateLinkRequest{
         CustomerDetails: shared.LinkCustomerDetailsEntity{
@@ -204,7 +204,7 @@ func main() {
 
     var linkID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -275,7 +275,7 @@ func main() {
 
     var linkID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 

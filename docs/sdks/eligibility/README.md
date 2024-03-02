@@ -34,7 +34,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     eligibilityOffersRequest := &shared.EligibilityOffersRequest{
         Queries: shared.OfferQueries{
@@ -110,7 +110,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{
@@ -186,7 +186,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     eligibilityCardlessEMIRequest := &shared.EligibilityCardlessEMIRequest{
         Queries: shared.CardlessEMIQueries{

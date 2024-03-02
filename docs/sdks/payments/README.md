@@ -44,7 +44,7 @@ func main() {
 
     var orderID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -116,7 +116,7 @@ func main() {
 
     var orderID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -183,7 +183,7 @@ func main() {
     s := cashfreego.New()
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     orderPayRequest := &shared.OrderPayRequest{
         OfferID: cashfreego.String("faa6cc05-d1e2-401c-b0cf-0c9db3ff0f0b"),
@@ -331,7 +331,7 @@ func main() {
 
     var paymentID string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     otpRequest := &shared.OTPRequest{
         Action: shared.OTPRequestActionResendOtp,

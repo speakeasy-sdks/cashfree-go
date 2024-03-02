@@ -39,7 +39,7 @@ func main() {
 
     var terminalPhoneNo string = "<value>"
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     var xRequestID *string = cashfreego.String("<value>")
 
@@ -107,7 +107,7 @@ func main() {
     )
 
 
-    var xAPIVersion string = "<value>"
+    var xAPIVersion string = "2022-09-01"
 
     createTerminalRequest := &shared.CreateTerminalRequest{
         TerminalID: cashfreego.String("1"),
