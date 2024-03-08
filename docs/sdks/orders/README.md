@@ -81,7 +81,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.OrdersEntity != nil {
         // handle response
     }
@@ -157,7 +156,6 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-
     if res.OrdersEntity != nil {
         // handle response
     }
