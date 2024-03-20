@@ -3,10 +3,10 @@ id: 08fd1e45-3c05-4802-bd37-7a703bf8c854
 management:
   docChecksum: 7a78a9e9ad482e5d8cb0ac5728e5cf13
   docVersion: "2022-09-01"
-  speakeasyVersion: 1.207.1
-  generationVersion: 2.280.6
-  releaseVersion: 0.14.1
-  configChecksum: acbaf037f44cb05ba798c6e6772584b6
+  speakeasyVersion: 1.213.0
+  generationVersion: 2.283.1
+  releaseVersion: 0.14.2
+  configChecksum: dc19b17c6f2da1fe86e06add86ef9ec0
   repoURL: https://github.com/speakeasy-sdks/cashfree-go.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/cashfree-go
@@ -17,7 +17,7 @@ features:
     constsAndDefaults: 0.1.4
     core: 3.4.4
     flattening: 2.81.1
-    globalSecurity: 2.82.8
+    globalSecurity: 2.82.9
     globalServerURLs: 2.82.2
     nameOverrides: 2.81.1
     responseFormat: 0.1.0
